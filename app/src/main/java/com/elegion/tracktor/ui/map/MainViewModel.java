@@ -18,10 +18,8 @@ import javax.inject.Inject;
 public class MainViewModel extends ViewModel {
 
 
-/*
     @Inject
     RealmRepository mRealmRepository;
-*/
 
 
     private MutableLiveData<Boolean> startEnabled = new MutableLiveData<>();
@@ -33,7 +31,7 @@ public class MainViewModel extends ViewModel {
     private long mDurationRaw;
     private double mDistanceRaw;
 
-    private RealmRepository mRealmRepository;
+   // private RealmRepository mRealmRepository;
 
     public MainViewModel() {
         EventBus.getDefault().register(this);
