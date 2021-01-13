@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.inject.Inject;
+
 import io.realm.Realm;
 
 /**
@@ -17,6 +19,7 @@ public class RealmRepository implements IRepository<Track> {
 
     private static AtomicLong sPrimaryId;
 
+    @Inject
     public RealmRepository() {
         mRealm = Realm.getDefaultInstance();
         Number max = mRealm.where(Track.class).max("id");
