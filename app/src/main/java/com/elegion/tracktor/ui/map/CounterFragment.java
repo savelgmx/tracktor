@@ -2,6 +2,7 @@ package com.elegion.tracktor.ui.map;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,15 +13,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.event.StartBtnClickedEvent;
 import com.elegion.tracktor.event.StopBtnClickedEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import toothpick.Toothpick;
 
 public class CounterFragment extends Fragment {
 
@@ -33,7 +38,10 @@ public class CounterFragment extends Fragment {
     @BindView(R.id.buttonStop)
     Button buttonStop;
 
-    private MainViewModel viewModel;
+  //  private
+    @Inject
+    MainViewModel viewModel;
+
 
     @Nullable
     @Override
@@ -43,6 +51,13 @@ public class CounterFragment extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Toothpick.inject(this, App.getAppScope());
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

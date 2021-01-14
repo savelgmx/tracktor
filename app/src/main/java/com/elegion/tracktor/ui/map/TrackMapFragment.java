@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
+import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.event.AddPositionToRouteEvent;
 import com.elegion.tracktor.event.GetRouteEvent;
@@ -33,6 +34,10 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import toothpick.Toothpick;
+
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 /**
@@ -46,7 +51,9 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
 
     private GoogleMap mMap;
 
-    private MainViewModel mMainViewModel;
+    //private
+    @Inject
+    MainViewModel mMainViewModel;
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -73,6 +80,13 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
             mMap.setOnMyLocationClickListener(this);
         }
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Toothpick.inject(this, App.getAppScope());
+    }
+
 
     @Override
     public void onResume() {
