@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
 import com.elegion.tracktor.data.IRepository;
+import com.elegion.tracktor.ui.map.MainViewModel;
 import com.elegion.tracktor.ui.results.ResultsViewModel;
 
 /**
@@ -20,11 +21,20 @@ public class CustomViewModelFactory extends ViewModelProvider.NewInstanceFactory
 
     @NonNull
     @Override
+
+    //новая реализауия
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(ResultsViewModel.class)) {
+
+        if(modelClass.isAssignableFrom(ResultsViewModel.class)){
             return (T) new ResultsViewModel(mRepository);
+
+        }
+        if(modelClass.isAssignableFrom(MainViewModel.class)){
+            return (T) new MainViewModel();
         }
         throw new IllegalArgumentException("Wrong ViewModel class");
     }
+
+
 
 }
