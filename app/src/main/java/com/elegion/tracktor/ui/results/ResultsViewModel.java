@@ -3,22 +3,31 @@ package com.elegion.tracktor.ui.results;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
+import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.IRepository;
 import com.elegion.tracktor.data.model.Track;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import toothpick.Toothpick;
+
 /**
- * @author Azret Magometov
+ * ResultsViewModel. В нем также нужно сделать инжект репозитория
  */
 public class ResultsViewModel extends ViewModel {
 
-    private IRepository mRepository;
+    //private
+    @Inject
+    IRepository mRepository;
 
     private MutableLiveData<List<Track>> mTracks = new MutableLiveData<>();
 
     public ResultsViewModel(IRepository repository) {
-        mRepository = repository;
+
+        Toothpick.inject(this, App.getAppScope());
+        //mRepository = repository;
     }
 
     public void loadTracks() {
