@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
 import com.elegion.tracktor.data.IRepository;
+import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.ui.map.MainViewModel;
 import com.elegion.tracktor.ui.results.ResultsViewModel;
 
@@ -13,9 +14,9 @@ import com.elegion.tracktor.ui.results.ResultsViewModel;
  */
 public class CustomViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    private IRepository mRepository;
+    private RealmRepository mRepository;
 
-    public CustomViewModelFactory(IRepository repository) {
+    public CustomViewModelFactory(RealmRepository repository) {
         mRepository = repository;
     }
 

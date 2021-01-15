@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.IRepository;
+import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
 
 import java.util.List;
@@ -20,14 +21,14 @@ public class ResultsViewModel extends ViewModel {
 
     //private
     @Inject
-    IRepository mRepository;
+    RealmRepository mRepository;
 
     private MutableLiveData<List<Track>> mTracks = new MutableLiveData<>();
 
-    public ResultsViewModel(IRepository repository) {
+    public ResultsViewModel(RealmRepository repository) {
 
         Toothpick.inject(this, App.getAppScope());
-        //mRepository = repository;
+        mRepository = repository;
     }
 
     public void loadTracks() {
