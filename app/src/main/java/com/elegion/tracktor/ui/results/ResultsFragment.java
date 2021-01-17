@@ -16,8 +16,12 @@ import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.util.CustomViewModelFactory;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+
 
 public class ResultsFragment extends Fragment {
 
@@ -25,8 +29,11 @@ public class ResultsFragment extends Fragment {
     RecyclerView mRecyclerView;
 
     private OnItemClickListener mListener;
-    private ResultsViewModel mResultsViewModel;
+
     private ResultsAdapter mResultsAdapter;
+
+    @Inject
+    ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
 
     public ResultsFragment() {
     }
