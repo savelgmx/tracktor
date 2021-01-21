@@ -2,9 +2,9 @@ package com.elegion.tracktor.ui.results;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.graphics.drawable.Drawable;
 
 import com.elegion.tracktor.App;
-import com.elegion.tracktor.data.IRepository;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
 
@@ -24,6 +24,11 @@ public class ResultsViewModel extends ViewModel {
     RealmRepository mRepository;
 
     private MutableLiveData<List<Track>> mTracks = new MutableLiveData<>();
+    private MutableLiveData<Drawable> mImage = new MutableLiveData<>();
+
+    private long mTrackId;//передаем сюда trackID для отыскания нужного трека
+
+
 
     public ResultsViewModel(RealmRepository repository) {
 
@@ -40,4 +45,11 @@ public class ResultsViewModel extends ViewModel {
     public MutableLiveData<List<Track>> getTracks() {
         return mTracks;
     }
+
+    public MutableLiveData<Drawable> getImage(){
+        return mImage;
+    }
+
+
+
 }
