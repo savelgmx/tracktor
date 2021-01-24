@@ -1,7 +1,9 @@
 package com.elegion.tracktor.ui.results;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,6 +25,8 @@ import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -39,6 +43,10 @@ public class ResultsDetailsFragment extends Fragment {
     TextView mDistanceText;
     @BindView(R.id.ivScreenshot)
     ImageView mScreenshotImage;
+
+    @Inject
+    ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
+
 
     private Bitmap mImage;
     private RealmRepository mRealmRepository;
@@ -64,7 +72,6 @@ public class ResultsDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        mTrackId = getArguments().getLong(RESULT_ID, 0);
 
         //temporary
         mRealmRepository = new RealmRepository();
@@ -76,8 +83,12 @@ public class ResultsDetailsFragment extends Fragment {
         mTimeText.setText(time);
         mDistanceText.setText(distance);
 
-        mImage = ScreenshotMaker.fromBase64(track.getImageBase64());
-        mScreenshotImage.setImageBitmap(mImage);
+        mTrackId = getArguments().getLong(RESULT_ID, 0);
+        mResultsViewModel.getImage().observe(this,image-> mScreenshotImage.setImageBitmap(image));
+
+
+
+
     }
 
     @Override
