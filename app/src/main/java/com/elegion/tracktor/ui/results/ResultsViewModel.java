@@ -3,7 +3,6 @@ package com.elegion.tracktor.ui.results;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.RealmRepository;
@@ -26,13 +25,10 @@ public class ResultsViewModel extends ViewModel {
     RealmRepository mRepository;
 
     private MutableLiveData<List<Track>> mTracks = new MutableLiveData<>();
-    private MutableLiveData<Bitmap> mImage = new MutableLiveData<Bitmap>();
+    private MutableLiveData<Bitmap> mImage = new MutableLiveData<>();
 
 
     private Bitmap bitmapImage;
-
-    private long mTrackId;//передаем сюда trackID для отыскания нужного трека
-
 
 
     public ResultsViewModel(RealmRepository repository) {
@@ -51,27 +47,14 @@ public class ResultsViewModel extends ViewModel {
         return mTracks;
     }
 
-    public Bitmap loadImage(long mTrackId){
-        Track track=mRepository.getItem(mTrackId);
-        mImage = ScreenshotMaker.fromBase64(track.getImageBase64());
-        return mImage;
-
-    public MutableLiveData<Drawable> getImage(){
-/*
-        Track track=mRepository.getItem(mTrackId);
-        mImage = ScreenshotMaker.fromBase64(track.getImageBase64());
-*/
-        return mImage;
+    public void loadImage(long mTrackId) {
+        Track track = mRepository.getItem(mTrackId);
+        bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
+        mImage.postValue(bitmapImage);
     }
 
-
-
+    public MutableLiveData<Bitmap> getImage(){
+        return mImage;
+    }
 }
 
-    public MutableLiveData<Bitmap> getImage() {
-
-        mImage.setValue(loadImage());
-
-        return mImage;
-    }
-    }

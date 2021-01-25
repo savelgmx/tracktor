@@ -84,6 +84,8 @@ public class ResultsDetailsFragment extends Fragment {
         mDistanceText.setText(distance);
 
         mTrackId = getArguments().getLong(RESULT_ID, 0);
+
+        mResultsViewModel.loadImage(mTrackId);
         mResultsViewModel.getImage().observe(this,image-> mScreenshotImage.setImageBitmap(image));
 
 
