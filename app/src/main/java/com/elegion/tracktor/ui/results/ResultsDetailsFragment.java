@@ -1,6 +1,7 @@
 package com.elegion.tracktor.ui.results;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -19,9 +20,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
+import com.elegion.tracktor.di.ViewModelModule;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
 
@@ -29,6 +32,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import toothpick.Scope;
+import toothpick.Toothpick;
 
 import static com.elegion.tracktor.ui.results.ResultsActivity.RESULT_ID;
 
@@ -60,6 +65,15 @@ public class ResultsDetailsFragment extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Scope scope = Toothpick.openScope(ResultsDetailsFragment.class);
+                scope.installModules(new ViewModelModule(this));
+        Toothpick.inject(this, scope);
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,21 +87,13 @@ public class ResultsDetailsFragment extends Fragment {
         ButterKnife.bind(this, view);
 
 
-        //temporary
-        mRealmRepository = new RealmRepository();
-        Track track = mRealmRepository.getItem(mTrackId);
-
-        String distance = StringUtil.getDistanceText(track.getDistance());
-        String time = StringUtil.getTimeText(track.getDuration());
-
-        mTimeText.setText(time);
-        mDistanceText.setText(distance);
-
         mTrackId = getArguments().getLong(RESULT_ID, 0);
 
         mResultsViewModel.loadImage(mTrackId);
         mResultsViewModel.getImage().observe(this,image-> mScreenshotImage.setImageBitmap(image));
 
+        mResultsViewModel.getTime().observe(this, time -> mTimeText.setText(time));
+        mResultsViewModel.getDistance().observe(this, distance -> mDistanceText.setText(distance));
 
 
 

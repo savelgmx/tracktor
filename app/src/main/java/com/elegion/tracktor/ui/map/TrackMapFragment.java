@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
+import com.elegion.tracktor.di.ViewModelModule;
 import com.elegion.tracktor.event.AddPositionToRouteEvent;
 import com.elegion.tracktor.event.GetRouteEvent;
 import com.elegion.tracktor.event.StartTrackEvent;
@@ -36,6 +37,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import toothpick.Scope;
 import toothpick.Toothpick;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
@@ -63,7 +65,10 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
 
     public void configure() {
         getMapAsync(this);
-        mMainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+        Scope scope = Toothpick.openScope(CounterFragment.class);
+        scope.installModules(new ViewModelModule(this));
+
+        Toothpick.inject(this, scope);
     }
 
     @Override
@@ -84,7 +89,7 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Toothpick.inject(this, App.getAppScope());
+      //  Toothpick.inject(this, App.getAppScope());
     }
 
 

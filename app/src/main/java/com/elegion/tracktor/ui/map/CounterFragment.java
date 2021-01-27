@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
+import com.elegion.tracktor.di.ViewModelModule;
 import com.elegion.tracktor.event.StartBtnClickedEvent;
 import com.elegion.tracktor.event.StopBtnClickedEvent;
 
@@ -25,6 +26,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import toothpick.Scope;
 import toothpick.Toothpick;
 
 public class CounterFragment extends Fragment {
@@ -42,6 +44,10 @@ public class CounterFragment extends Fragment {
     @Inject
     MainViewModel viewModel;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
 
     @Nullable
     @Override
@@ -52,17 +58,16 @@ public class CounterFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Toothpick.inject(this, App.getAppScope());
-    }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+
+
+        Scope scope = Toothpick.openScope(CounterFragment.class);
+        scope.installModules(new ViewModelModule(this));
+
+        Toothpick.inject(this, scope);
 
         viewModel.getTimeText().observe(this, s -> tvTime.setText(s));
         viewModel.getDistanceText().observe(this, s -> tvDistance.setText(s));
@@ -83,5 +88,10 @@ public class CounterFragment extends Fragment {
     void onStopClick() {
         EventBus.getDefault().post(new StopBtnClickedEvent());
         viewModel.switchButtons();
+    }
+    @Override
+    public void onDestroy() {
+        Toothpick.closeScope(this);
+        super.onDestroy();
     }
 }

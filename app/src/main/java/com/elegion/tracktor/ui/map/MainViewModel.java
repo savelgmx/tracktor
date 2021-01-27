@@ -36,12 +36,14 @@ public class MainViewModel extends ViewModel {
 
    // private RealmRepository mRealmRepository;
 
+    @Inject
     public MainViewModel() {
+        Toothpick.inject(this, App.getAppScope());
         EventBus.getDefault().register(this);
         startEnabled.setValue(true);
         stopEnabled.setValue(false);
 
-        Toothpick.inject(this, App.getAppScope());
+
 
 
       //  mRealmRepository = new RealmRepository();
