@@ -2,6 +2,7 @@
     <string name="app_name">Tracktor</string>
     <string name="timeLabel">Время:</string>
     <string name="distanceLabel">Расстояние:</string>
+    <string name="averagespeedLabel">Средняя скорость:</string >
     <string name="start">Старт</string>
     <string name="end">Конец</string>
     <string name="stop">Стоп</string>
@@ -35,4 +36,13 @@
     <string name="ok">Понятно</string>
     <string name="back_off">Приложение не может работать без доступа к местоположению</string>
     <string name="notify_info">Время: %s\nРасстояние: %s "</string>
+    <string name="pref_default_value_height">170</string>
+    <string name="dialog_title_user_height" >Рост пользователя</string>
+    <string name="pref_key_height" >height</string>
+    <string name="pref_default_value_age">33</string>
+    <string name="dialog_title_user_age" >Возраст пользователя</string>
+    <string name="pref_key_age" >age</string>
+    <string name="pref_key_sex">sex</string>
+    <string name="title_sex" >Decide who you are man or woman</string>
+
 </resources>

@@ -26,5 +26,31 @@
         android:key="@string/pref_key_weight"
         android:lines="1"
         android:title="@string/dialog_title_user_weight" />
+    <ListPreference
+        android:defaultValue="1"
+        android:dialogTitle="Sex yes please"
+        android:entries="@array/entries_list_preference_sex"
+        android:entryValues="@array/entryvalues_list_preference_sex"
+        android:key="@string/pref_key_sex"
+        android:title="@string/title_sex"
+        />
+    <EditTextPreference
+        android:defaultValue="@string/pref_default_value_height"
+        android:dialogTitle="@string/dialog_title_user_height"
+        android:digits="0123456789"
+        android:inputType="numberDecimal"
+        android:key="@string/pref_key_height"
+        android:lines="1"
+        android:title="@string/dialog_title_user_height" />
+
+    <EditTextPreference
+        android:defaultValue="@string/pref_default_value_age"
+        android:dialogTitle="@string/dialog_title_user_age"
+        android:digits="0123456789"
+        android:inputType="numberDecimal"
+        android:key="@string/pref_key_age"
+        android:lines="1"
+        android:title="@string/dialog_title_user_age" />
+
 
 </PreferenceScreen>

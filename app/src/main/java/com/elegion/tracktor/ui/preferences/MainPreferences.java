@@ -50,7 +50,10 @@ public class MainPreferences extends PreferenceFragmentCompat implements SharedP
     private void configureSummaryEntries() {
         setSummaryFor(findPreference(getString(R.string.pref_key_unit)));
         setSummaryFor(findPreference(getString(R.string.pref_key_shutdown)));
+      //  setSummaryFor(findPreference(getString(R.string.pref_key_age)));
         setSummaryFor(findPreference(getString(R.string.pref_key_weight)));
+        setSummaryFor(findPreference(getString(R.string.pref_key_height)));
+        setSummaryFor(findPreference(getString(R.string.pref_key_age)));
     }
 
     private void setSummaryFor(Preference preference) {
