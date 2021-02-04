@@ -48,6 +48,8 @@ public class ResultsDetailsFragment extends Fragment {
     TextView mDistanceText;
     @BindView(R.id.ivScreenshot)
     ImageView mScreenshotImage;
+    @BindView(R.id.tvAverageSpeed)
+    TextView mAverageSpeed;
 
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment

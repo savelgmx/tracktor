@@ -15,6 +15,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     private View mView;
     private TextView mDateText;
     private TextView mDistanceText;
+    private TextView mAverageSpeed;
     private long mTrackId;
 
     public ResultHolder(View view) {
@@ -22,6 +23,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mView = view;
         mDateText = view.findViewById(R.id.tv_date);
         mDistanceText = view.findViewById(R.id.tv_distance);
+        mAverageSpeed = view.findViewById(R.id.tv_averagespeed);
     }
 
     @Override

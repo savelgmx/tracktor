@@ -31,6 +31,8 @@ public class ResultsViewModel extends ViewModel {
 
     private MutableLiveData<String> mTimeText = new MutableLiveData<>();
     private MutableLiveData<String> mDistanceText = new MutableLiveData<>();
+    private MutableLiveData<String> mAverageSpeed = new MutableLiveData<>();
+
 
 
     public ResultsViewModel() {
@@ -54,7 +56,10 @@ public class ResultsViewModel extends ViewModel {
         String distance = StringUtil.getDistanceText(track.getDistance());
         String time = StringUtil.getTimeText(track.getDuration());
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
+        String averageSpeed =StringUtil.getAverageSpeedText(distance,time);
 
+
+        mAverageSpeed.postValue(averageSpeed);
         mTimeText.postValue(time);
         mDistanceText.postValue(distance);
         mImage.postValue(bitmapImage);

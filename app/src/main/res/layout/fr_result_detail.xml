@@ -36,13 +36,16 @@
             android:layout_height="wrap_content"
             android:text="@string/distanceLabel" />
 
+
         <TextView
-            android:id="@+id/tvDistance"
+            android:id="@+id/tvAverageSpeed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingEnd="0dp"
             android:paddingStart="4dp"
-            tools:text="2412 м." />
+            tools:text="5км/ч." />
+
+
     </LinearLayout>
 
     <ImageView
