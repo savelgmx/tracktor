@@ -38,14 +38,32 @@
 
 
         <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="0dp"
+            android:paddingStart="4dp"
+            tools:text="2412 м." />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/averagespeedLabel" />
+
+
+        <TextView
             android:id="@+id/tvAverageSpeed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingEnd="0dp"
             android:paddingStart="4dp"
-            tools:text="5км/ч." />
-
-
+            tools:text="5 km/h" />
     </LinearLayout>
 
     <ImageView

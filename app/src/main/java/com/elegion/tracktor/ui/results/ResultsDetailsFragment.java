@@ -39,6 +39,7 @@ import static com.elegion.tracktor.ui.results.ResultsActivity.RESULT_ID;
 
 /**
  * @author Azret Magometov
+ * https://apptractor.ru/info/github/mvp-sample.html
  */
 public class ResultsDetailsFragment extends Fragment {
 
@@ -96,6 +97,7 @@ public class ResultsDetailsFragment extends Fragment {
 
         mResultsViewModel.getTime().observe(this, time -> mTimeText.setText(time));
         mResultsViewModel.getDistance().observe(this, distance -> mDistanceText.setText(distance));
+        mResultsViewModel.getAverigeSpeed().observe(this,averageSpeed->mAverageSpeed.setText(averageSpeed));
 
 
 

@@ -21,7 +21,7 @@ public class Track extends RealmObject {
 
 
     private String imageBase64;
-    private Double averagespeed;
+//    private Double averagespeed;
 
     public void setId(long id) {
         this.id = id;
@@ -51,10 +51,12 @@ public class Track extends RealmObject {
         return distance;
     }
 
+/*
     public Double getAverageSpeed(){
         return averagespeed;
     }
     public void setAverageSpeed(Double averagespeed){this.averagespeed=averagespeed;}
+*/
 
     public void setDistance(Double distance) {
         this.distance = distance;
@@ -69,6 +71,7 @@ public class Track extends RealmObject {
     }
 
     @Override
+/*
     public String toString() {
         return "Track{" +
                 "id=" + id +
@@ -79,6 +82,17 @@ public class Track extends RealmObject {
                 ", imageBase64=" + imageBase64 +
                 '}';
     }
+*/
+    public String toString() {
+        return "Track{" +
+                "id=" + id +
+                ", date=" + date +
+                ", duration=" + duration +
+                ", distance=" + distance +
+                 ", imageBase64=" + imageBase64 +
+                '}';
+    }
+
 }
 
 

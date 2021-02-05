@@ -23,7 +23,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mView = view;
         mDateText = view.findViewById(R.id.tv_date);
         mDistanceText = view.findViewById(R.id.tv_distance);
-        mAverageSpeed = view.findViewById(R.id.tv_averagespeed);
+    //    mAverageSpeed = view.findViewById(R.id.tv_averagespeed);
     }
 
     @Override
