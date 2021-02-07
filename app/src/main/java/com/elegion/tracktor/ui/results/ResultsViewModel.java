@@ -56,7 +56,7 @@ public class ResultsViewModel extends ViewModel {
         String distance = StringUtil.getDistanceText(track.getDistance());
         String time = StringUtil.getTimeText(track.getDuration());
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
-        String averageSpeed =StringUtil.getAverageSpeedText(distance,time);
+        String averageSpeed =StringUtil.getAverageSpeedText(track.getDistance(),track.getDuration());
 
 
         mAverageSpeed.postValue(averageSpeed);

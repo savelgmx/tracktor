@@ -21,9 +21,9 @@ public class StringUtil {
         return String.format("%." + places + "f", value);
     }
 
-    public static String getAverageSpeedText(String distance,String time){
+    public static String getAverageSpeedText(Double distance, long time){
 
-        if ((Integer.valueOf(time)>0)&(Integer.valueOf(distance)>0)){
+        if ((Integer.valueOf((int) time)>0)&(distance>0)){
             averageSpeed =(Double.valueOf(distance)/Double.valueOf(time));
         }else {averageSpeed=0.0;}
 
