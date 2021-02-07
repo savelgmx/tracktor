@@ -87,6 +87,7 @@ public class RealmRepository implements IRepository<Track> {
         track.setDuration(duration);
         track.setImageBase64(base64image);
         track.setDate(new Date());
+        track.setAverageSpeed(distanse,duration);
 //        mRealm.commitTransaction();
 //        return sPrimaryId.longValue();
 
