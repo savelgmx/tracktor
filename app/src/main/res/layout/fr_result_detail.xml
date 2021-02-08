@@ -81,10 +81,10 @@
             android:visibility="visible"
             tools:visibility="visible">
 
-        </RadioGroup>
+
 
         <RadioButton
-            android:id="@+id/bycicle"
+            android:id="@+id/rbBicycle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/rbtn_bycicle_text"
@@ -92,20 +92,20 @@
             tools:visibility="visible" />
 
         <RadioButton
-            android:id="@+id/walk"
+            android:id="@+id/rbWalk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/rbtn_walk_text"
             tools:visibility="visible" />
 
         <RadioButton
-            android:id="@+id/run"
+            android:id="@+id/rbRun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/rbtn_run_text"
             android:visibility="visible"
             tools:visibility="visible" />
-
+    </RadioGroup>
 
     </LinearLayout>
 
