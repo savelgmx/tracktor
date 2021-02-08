@@ -30,8 +30,8 @@
     </string-array>
 
     <string-array name="entryvalues_list_preference_sex">
-        <item>1</item>
-        <item>2</item>
+        <item>Man</item>
+        <item>Woman</item>
     </string-array>
 
 
