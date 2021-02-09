@@ -75,7 +75,7 @@ public class ResultsViewModel extends ViewModel {
     public MutableLiveData<String> getDistance() {
         return mDistanceText;
     }
-    public MutableLiveData<String> getAverigeSpeed(){return mAverageSpeed;}
+    public MutableLiveData<String> getAverageSpeed(){return mAverageSpeed;}
 
 
 

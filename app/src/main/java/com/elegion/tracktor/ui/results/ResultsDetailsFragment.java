@@ -1,10 +1,8 @@
 package com.elegion.tracktor.ui.results;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,13 +18,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
-import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.di.ViewModelModule;
-import com.elegion.tracktor.util.ScreenshotMaker;
-import com.elegion.tracktor.util.StringUtil;
 
 import javax.inject.Inject;
 
@@ -50,7 +44,7 @@ public class ResultsDetailsFragment extends Fragment {
     @BindView(R.id.ivScreenshot)
     ImageView mScreenshotImage;
     @BindView(R.id.tvAverageSpeed)
-    TextView mAverageSpeed;
+    TextView mAverageSpeedText;
 
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
@@ -97,7 +91,7 @@ public class ResultsDetailsFragment extends Fragment {
 
         mResultsViewModel.getTime().observe(this, time -> mTimeText.setText(time));
         mResultsViewModel.getDistance().observe(this, distance -> mDistanceText.setText(distance));
-        mResultsViewModel.getAverigeSpeed().observe(this,averageSpeed->mAverageSpeed.setText(averageSpeed));
+        mResultsViewModel.getAverageSpeed().observe(this, averageSpeed-> mAverageSpeedText.setText(averageSpeed));
 
 
 
