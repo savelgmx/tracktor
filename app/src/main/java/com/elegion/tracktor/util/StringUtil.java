@@ -28,6 +28,6 @@ public class StringUtil {
         }else {averageSpeed=0.0;}
 
 
-        return String.valueOf(averageSpeed);
+        return round(averageSpeed,0)+" м/с.";
     }
 }
