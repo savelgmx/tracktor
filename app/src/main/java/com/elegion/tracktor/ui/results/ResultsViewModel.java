@@ -1,12 +1,16 @@
 package com.elegion.tracktor.ui.results;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.preference.PreferenceManager;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.IRepository;
-import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
@@ -36,10 +40,13 @@ public class ResultsViewModel extends ViewModel {
 
 
     public ResultsViewModel() {
+        super();
 
         Toothpick.inject(this, App.getAppScope());
 
     }
+
+
 
     public void loadTracks() {
         if (mTracks.getValue() == null || mTracks.getValue().isEmpty()) {
@@ -58,6 +65,7 @@ public class ResultsViewModel extends ViewModel {
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
         String averageSpeed =StringUtil.getAverageSpeedText(track.getDistance(),track.getDuration());
 
+      //  getSharedPreferences();
 
         mAverageSpeed.postValue(averageSpeed);
         mTimeText.postValue(time);
@@ -78,6 +86,17 @@ public class ResultsViewModel extends ViewModel {
     public MutableLiveData<String> getAverageSpeed(){return mAverageSpeed;}
 
 
+    private void getSharedPreferences(){
+/*
+        Context context = getApplication().getApplicationContext();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String age = prefs.getString("age", "Default Age");
+        String passw = prefs.getString("height", "Default Height");
+
+        String listPrefs = prefs.getString("listpref", "Default list prefs");
+
+*/
+    }
 
 }
 
