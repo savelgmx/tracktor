@@ -23,13 +23,12 @@ import javax.inject.Inject;
 
 import toothpick.Toothpick;
 
-import static android.content.Context.MODE_PRIVATE;
-import static junit.runner.BaseTestRunner.getPreferences;
+
 
 /**
  * ResultsViewModel. В нем также нужно сделать инжект репозитория
  */
-public class ResultsViewModel extends ViewModel {
+public class ResultsViewModel extends AndroidViewModel {
 
     private static final String APP_PREFERENCES = "_preferences";
     //private
@@ -44,12 +43,13 @@ public class ResultsViewModel extends ViewModel {
     private MutableLiveData<String> mAverageSpeed = new MutableLiveData<>();
 
 
-    public ResultsViewModel() {
-        super();
+    public ResultsViewModel(Application mApp) {
+        super(mApp);
 
         Toothpick.inject(this, App.getAppScope());
 
     }
+
 
 
     public void loadTracks() {
@@ -98,25 +98,13 @@ public class ResultsViewModel extends ViewModel {
         return context.getPackageName() + "_preferences";
     }
 
-/*
-    private void loadSharedPreferences() {
-
-
-        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
-        String age = prefs.getString("age", "Default Age");
-        String passw = prefs.getString("height", "Default Height");
-
-        String listPrefs = prefs.getString("listpref", "Default list prefs");
-
-    }
-
-    private void displaySharedPreferences() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ResultsViewModel.this);
+    private void loadSharedPreferences()  {
+        Context context = getApplication().getApplicationContext();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String username = prefs.getString("username", "Default NickName");
         String passw = prefs.getString("password", "Default Password");
         boolean checkBox = prefs.getBoolean("checkBox", false);
         String listPrefs = prefs.getString("listpref", "Default list prefs");
     }
-*/
 }
 
