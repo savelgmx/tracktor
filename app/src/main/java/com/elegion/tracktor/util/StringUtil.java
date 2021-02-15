@@ -30,4 +30,7 @@ public class StringUtil {
 
         return round(averageSpeed,0)+" м/с.";
     }
+
+
+
 }

@@ -7,11 +7,13 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.preference.PreferenceManager;
+import android.support.v7.preference.PreferenceManager;
+import android.widget.RadioButton;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.IRepository;
 import com.elegion.tracktor.data.model.Track;
+import com.elegion.tracktor.ui.map.MainActivity;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
 
@@ -21,11 +23,15 @@ import javax.inject.Inject;
 
 import toothpick.Toothpick;
 
+import static android.content.Context.MODE_PRIVATE;
+import static junit.runner.BaseTestRunner.getPreferences;
+
 /**
  * ResultsViewModel. В нем также нужно сделать инжект репозитория
  */
 public class ResultsViewModel extends ViewModel {
 
+    private static final String APP_PREFERENCES = "_preferences";
     //private
     @Inject
     IRepository<Track> mRepository;
@@ -38,14 +44,12 @@ public class ResultsViewModel extends ViewModel {
     private MutableLiveData<String> mAverageSpeed = new MutableLiveData<>();
 
 
-
     public ResultsViewModel() {
         super();
 
         Toothpick.inject(this, App.getAppScope());
 
     }
-
 
 
     public void loadTracks() {
@@ -63,9 +67,9 @@ public class ResultsViewModel extends ViewModel {
         String distance = StringUtil.getDistanceText(track.getDistance());
         String time = StringUtil.getTimeText(track.getDuration());
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
-        String averageSpeed =StringUtil.getAverageSpeedText(track.getDistance(),track.getDuration());
+        String averageSpeed = StringUtil.getAverageSpeedText(track.getDistance(), track.getDuration());
 
-      //  getSharedPreferences();
+        //       getSharedPreferences();
 
         mAverageSpeed.postValue(averageSpeed);
         mTimeText.postValue(time);
@@ -73,30 +77,46 @@ public class ResultsViewModel extends ViewModel {
         mImage.postValue(bitmapImage);
     }
 
-    public MutableLiveData<Bitmap> getImage(){
+    public MutableLiveData<Bitmap> getImage() {
         return mImage;
     }
 
     public MutableLiveData<String> getTime() {
         return mTimeText;
     }
+
     public MutableLiveData<String> getDistance() {
         return mDistanceText;
     }
-    public MutableLiveData<String> getAverageSpeed(){return mAverageSpeed;}
+
+    public MutableLiveData<String> getAverageSpeed() {
+        return mAverageSpeed;
+    }
 
 
-    private void getSharedPreferences(){
+    private static String getDefaultSharedPreferencesName(Context context) {
+        return context.getPackageName() + "_preferences";
+    }
+
 /*
-        Context context = getApplication().getApplicationContext();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    private void loadSharedPreferences() {
+
+
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
         String age = prefs.getString("age", "Default Age");
         String passw = prefs.getString("height", "Default Height");
 
         String listPrefs = prefs.getString("listpref", "Default list prefs");
 
-*/
     }
 
+    private void displaySharedPreferences() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ResultsViewModel.this);
+        String username = prefs.getString("username", "Default NickName");
+        String passw = prefs.getString("password", "Default Password");
+        boolean checkBox = prefs.getBoolean("checkBox", false);
+        String listPrefs = prefs.getString("listpref", "Default list prefs");
+    }
+*/
 }
 
