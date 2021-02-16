@@ -45,10 +45,12 @@ Context context;
  */
 
 public class ContextModule extends Module {
+/*
 
     @Singleton
     @Named("AppContext")
     public Context provideContext(Application application) {
         return application.getApplicationContext();
     }
+*/
 }

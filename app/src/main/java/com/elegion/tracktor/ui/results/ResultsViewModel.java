@@ -14,6 +14,7 @@ import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.IRepository;
 import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.ui.map.MainActivity;
+import com.elegion.tracktor.ui.preferences.ReadPreferences;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
 
@@ -28,12 +29,16 @@ import toothpick.Toothpick;
 /**
  * ResultsViewModel. В нем также нужно сделать инжект репозитория
  */
-public class ResultsViewModel extends AndroidViewModel {
+public class ResultsViewModel extends ViewModel {
 
     private static final String APP_PREFERENCES = "_preferences";
     //private
     @Inject
     IRepository<Track> mRepository;
+
+ /*   @Inject
+    Context mContext;
+*/
 
     private MutableLiveData<List<Track>> mTracks = new MutableLiveData<>();
     private MutableLiveData<Bitmap> mImage = new MutableLiveData<>();
@@ -43,8 +48,8 @@ public class ResultsViewModel extends AndroidViewModel {
     private MutableLiveData<String> mAverageSpeed = new MutableLiveData<>();
 
 
-    public ResultsViewModel(Application mApp) {
-        super(mApp);
+    public ResultsViewModel() {
+        super();
 
         Toothpick.inject(this, App.getAppScope());
 
@@ -69,7 +74,7 @@ public class ResultsViewModel extends AndroidViewModel {
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
         String averageSpeed = StringUtil.getAverageSpeedText(track.getDistance(), track.getDuration());
 
-        //       getSharedPreferences();
+        loadSharedPreferences();
 
         mAverageSpeed.postValue(averageSpeed);
         mTimeText.postValue(time);
@@ -98,13 +103,18 @@ public class ResultsViewModel extends AndroidViewModel {
         return context.getPackageName() + "_preferences";
     }
 
-    private void loadSharedPreferences()  {
-        Context context = getApplication().getApplicationContext();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+    public void loadSharedPreferences()  {
+
+/*
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         String username = prefs.getString("username", "Default NickName");
         String passw = prefs.getString("password", "Default Password");
         boolean checkBox = prefs.getBoolean("checkBox", false);
         String listPrefs = prefs.getString("listpref", "Default list prefs");
+*/
     }
+
+
 }
 
