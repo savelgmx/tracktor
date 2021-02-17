@@ -3,6 +3,8 @@ package com.elegion.tracktor.di;
 import android.app.Application;
 import android.content.Context;
 
+import com.elegion.tracktor.App;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -45,12 +47,12 @@ Context context;
  */
 
 public class ContextModule extends Module {
-/*
 
-    @Singleton
-    @Named("AppContext")
-    public Context provideContext(Application application) {
-        return application.getApplicationContext();
+    private final Context mContext;
+
+    public ContextModule(Context mContext) {
+        this.mContext = mContext;
+        bind(Context.class).toInstance(mContext);
     }
-*/
+
 }
