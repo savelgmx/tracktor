@@ -9,9 +9,10 @@ import javax.inject.Inject;
 
 public class ReadPreferences{
     @Inject
+    static
     Context mContext;
 
-    public void loadSharedPreferences()  {
+    public static void loadSharedPreferences()  {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         String username = prefs.getString("username", "Default NickName");

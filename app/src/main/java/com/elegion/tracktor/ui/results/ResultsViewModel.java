@@ -36,7 +36,8 @@ public class ResultsViewModel extends ViewModel {
     @Inject
     IRepository<Track> mRepository;
 
- /*   @Inject
+/*
+ @Inject
     Context mContext;
 */
 
@@ -52,6 +53,7 @@ public class ResultsViewModel extends ViewModel {
         super();
 
         Toothpick.inject(this, App.getAppScope());
+
 
     }
 
@@ -74,7 +76,7 @@ public class ResultsViewModel extends ViewModel {
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
         String averageSpeed = StringUtil.getAverageSpeedText(track.getDistance(), track.getDuration());
 
-        loadSharedPreferences();
+        ReadPreferences.loadSharedPreferences();
 
         mAverageSpeed.postValue(averageSpeed);
         mTimeText.postValue(time);
@@ -96,23 +98,6 @@ public class ResultsViewModel extends ViewModel {
 
     public MutableLiveData<String> getAverageSpeed() {
         return mAverageSpeed;
-    }
-
-
-    private static String getDefaultSharedPreferencesName(Context context) {
-        return context.getPackageName() + "_preferences";
-    }
-
-
-    public void loadSharedPreferences()  {
-
-/*
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        String username = prefs.getString("username", "Default NickName");
-        String passw = prefs.getString("password", "Default Password");
-        boolean checkBox = prefs.getBoolean("checkBox", false);
-        String listPrefs = prefs.getString("listpref", "Default list prefs");
-*/
     }
 
 
