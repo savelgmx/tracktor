@@ -24,8 +24,8 @@ public class ReadPreferences{
 
     public static void loadSharedPreferences()  {
 
-
-
+//https://stackoverflow.com/questions/50613619/using-the-toothpick-di-framework-be-used-with-a-java-only-project
+//https://github.com/WarrenFaith/Toothpick-Sample
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         String username = prefs.getString("username", "Default NickName");
