@@ -14,6 +14,7 @@ import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.IRepository;
 import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.ui.map.MainActivity;
+import com.elegion.tracktor.ui.preferences.MainPreferences;
 import com.elegion.tracktor.ui.preferences.ReadPreferences;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
@@ -35,6 +36,9 @@ public class ResultsViewModel extends ViewModel {
     //private
     @Inject
     IRepository<Track> mRepository;
+
+    @Inject
+    MainPreferences mainPreferences;
 
 /*
  @Inject
@@ -76,7 +80,13 @@ public class ResultsViewModel extends ViewModel {
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
         String averageSpeed = StringUtil.getAverageSpeedText(track.getDistance(), track.getDuration());
 
-        ReadPreferences.loadSharedPreferences();
+        //ReadPreferences.loadSharedPreferences();
+
+        mainPreferences.getAgeEntrie();
+
+
+
+
 
         mAverageSpeed.postValue(averageSpeed);
         mTimeText.postValue(time);

@@ -64,4 +64,11 @@ public class MainPreferences extends PreferenceFragmentCompat implements SharedP
             Log.d(TAG, "check preferences type");
         }
     }
+
+    public String getAgeEntrie(){
+       Preference preference;
+        preference = findPreference("age");
+        String value = ((EditTextPreference) preference).getText();
+        return value;
+    }
 }
