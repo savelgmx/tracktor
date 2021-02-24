@@ -1,21 +1,13 @@
 package com.elegion.tracktor.ui.results;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.support.v7.preference.PreferenceManager;
-import android.widget.RadioButton;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.IRepository;
 import com.elegion.tracktor.data.model.Track;
-import com.elegion.tracktor.ui.map.MainActivity;
 import com.elegion.tracktor.ui.preferences.MainPreferences;
-import com.elegion.tracktor.ui.preferences.ReadPreferences;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
 
@@ -82,7 +74,7 @@ public class ResultsViewModel extends ViewModel {
 
         //ReadPreferences.loadSharedPreferences();
 
-        mainPreferences.getAgeEntrie();
+        mainPreferences.getAgeEntry();
 
 
 
