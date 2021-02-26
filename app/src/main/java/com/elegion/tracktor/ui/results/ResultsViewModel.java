@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.IRepository;
 import com.elegion.tracktor.data.model.Track;
+import com.elegion.tracktor.ui.preferences.DefaultSettings;
 import com.elegion.tracktor.ui.preferences.MainPreferences;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
@@ -71,12 +72,6 @@ public class ResultsViewModel extends ViewModel {
         String time = StringUtil.getTimeText(track.getDuration());
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
         String averageSpeed = StringUtil.getAverageSpeedText(track.getDistance(), track.getDuration());
-
-        //ReadPreferences.loadSharedPreferences();
-
-        mainPreferences.getAgeEntry();
-
-
 
 
 

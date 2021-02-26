@@ -1,26 +1,27 @@
 package com.elegion.tracktor.di;
 
-import com.elegion.tracktor.App;
-import com.elegion.tracktor.ui.preferences.MainPreferences;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import com.elegion.tracktor.ui.preferences.ReadUserPreferences;
+import com.elegion.tracktor.ui.preferences.UserRepository;
 
 import toothpick.config.Module;
 
+
+
 public class PreferenceModule extends Module {
-    private final App mApp;
 
-    public PreferenceModule(App app) {
-        this.mApp = app;
-        bind(App.class).toInstance(provideApp());
-        bind(MainPreferences.class).toInstance(providePreferences());
+    public PreferenceModule(Context context) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        bind(SharedPreferences.class).toInstance(sharedPreferences);
+        bind(UserRepository.class)
+                .to(ReadUserPreferences.class);
+
     }
 
-    private MainPreferences providePreferences() {
-        return new MainPreferences();
-    }
-
-    private App provideApp() {
-        return mApp;
-    }
 
 }
 

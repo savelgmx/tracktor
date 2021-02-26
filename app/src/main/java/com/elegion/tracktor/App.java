@@ -24,7 +24,7 @@ public class App extends Application {
 
         sAppScope = Toothpick.openScope(App.class);
         sAppScope.installModules(new RepositoryModule(this));
-        sAppScope.installModules(new PreferenceModule(this));
+        sAppScope.installModules(new PreferenceModule(getApplicationContext()));
 
         Realm.init(this);
     }
