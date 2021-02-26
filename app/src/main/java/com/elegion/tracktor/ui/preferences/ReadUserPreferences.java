@@ -22,21 +22,25 @@ public class ReadUserPreferences implements UserRepository{
 
     @Override
     public String getListPreferenceValue(Context context) {
-        return null;
+
+        return sharedPreferences.getString("sex", "");
+
     }
 
     @Override
     public String getUserWeight(Context context) {
-        return null;
+        return sharedPreferences.getString("weight", "");
     }
 
     @Override
     public String getUserHeight(Context context) {
-        return null;
+        return sharedPreferences.getString("height", "");
     }
 
     @Override
     public String getUserAge(Context context) {
-        return null;
+        return sharedPreferences.getString("age", "");
     }
+
+
 }

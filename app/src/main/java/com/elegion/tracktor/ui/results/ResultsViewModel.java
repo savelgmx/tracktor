@@ -9,6 +9,7 @@ import com.elegion.tracktor.data.IRepository;
 import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.ui.preferences.DefaultSettings;
 import com.elegion.tracktor.ui.preferences.MainPreferences;
+import com.elegion.tracktor.ui.preferences.UserRepository;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
 
@@ -26,17 +27,14 @@ import toothpick.Toothpick;
 public class ResultsViewModel extends ViewModel {
 
     private static final String APP_PREFERENCES = "_preferences";
-    //private
-    @Inject
+     @Inject
     IRepository<Track> mRepository;
 
-    @Inject
-    MainPreferences mainPreferences;
 
-/*
- @Inject
-    Context mContext;
-*/
+     @Inject
+     UserRepository mUserRepository;
+
+
 
     private MutableLiveData<List<Track>> mTracks = new MutableLiveData<>();
     private MutableLiveData<Bitmap> mImage = new MutableLiveData<>();
@@ -72,8 +70,6 @@ public class ResultsViewModel extends ViewModel {
         String time = StringUtil.getTimeText(track.getDuration());
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
         String averageSpeed = StringUtil.getAverageSpeedText(track.getDistance(), track.getDuration());
-
-
 
         mAverageSpeed.postValue(averageSpeed);
         mTimeText.postValue(time);
