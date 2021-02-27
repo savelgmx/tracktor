@@ -21,7 +21,6 @@ import android.widget.TextView;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.di.ViewModelModule;
-import com.elegion.tracktor.ui.preferences.DefaultSettings;
 
 import javax.inject.Inject;
 
@@ -85,7 +84,7 @@ public class ResultsDetailsFragment extends Fragment {
         ButterKnife.bind(this, view);
 
 
-       // DefaultSettings.getUserAge(this);
+       mResultsViewModel.loadSavedPreferences();
 
         mTrackId = getArguments().getLong(RESULT_ID, 0);
 

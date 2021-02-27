@@ -18,7 +18,8 @@ public class PreferenceModule extends Module {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         bind(SharedPreferences.class).toInstance(sharedPreferences);
         bind(UserRepository.class)
-                .to(ReadUserPreferences.class);
+                .to(ReadUserPreferences.class)
+                .singletonInScope();
 
     }
 

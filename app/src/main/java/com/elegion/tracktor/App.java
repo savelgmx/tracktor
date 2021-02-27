@@ -3,6 +3,7 @@ package com.elegion.tracktor;
 import android.app.Application;
 
 import com.elegion.tracktor.di.AppModule;
+import com.elegion.tracktor.di.ContextModule;
 import com.elegion.tracktor.di.PreferenceModule;
 import com.elegion.tracktor.di.RepositoryModule;
 
@@ -25,6 +26,7 @@ public class App extends Application {
         sAppScope = Toothpick.openScope(App.class);
         sAppScope.installModules(new RepositoryModule(this));
         sAppScope.installModules(new PreferenceModule(getApplicationContext()));
+        sAppScope.installModules(new ContextModule(this));
 
         Realm.init(this);
     }

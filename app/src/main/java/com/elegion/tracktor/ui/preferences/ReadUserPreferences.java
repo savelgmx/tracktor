@@ -13,15 +13,18 @@ import toothpick.Toothpick;
 
 public class ReadUserPreferences implements UserRepository{
 
-    private final SharedPreferences sharedPreferences;
+    private  SharedPreferences sharedPreferences;
 
     @Inject
     public ReadUserPreferences(SharedPreferences sharedPreferences) {
+
+
         this.sharedPreferences = sharedPreferences;
+
     }
 
     @Override
-    public String getListPreferenceValue(Context context) {
+    public String getListPreferenceValue() {
 
         return sharedPreferences.getString("sex", "");
 
@@ -29,16 +32,20 @@ public class ReadUserPreferences implements UserRepository{
 
     @Override
     public String getUserWeight(Context context) {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.getString("weight", "");
     }
 
     @Override
     public String getUserHeight(Context context) {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.getString("height", "");
     }
 
     @Override
     public String getUserAge(Context context) {
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.getString("age", "");
     }
 

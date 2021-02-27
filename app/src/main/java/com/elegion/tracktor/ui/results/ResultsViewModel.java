@@ -1,14 +1,17 @@
 package com.elegion.tracktor.ui.results;
 
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.IRepository;
 import com.elegion.tracktor.data.model.Track;
-import com.elegion.tracktor.ui.preferences.DefaultSettings;
-import com.elegion.tracktor.ui.preferences.MainPreferences;
+import com.elegion.tracktor.di.ContextModule;
+import com.elegion.tracktor.ui.preferences.ReadUserPreferences;
 import com.elegion.tracktor.ui.preferences.UserRepository;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
@@ -34,6 +37,8 @@ public class ResultsViewModel extends ViewModel {
      @Inject
      UserRepository mUserRepository;
 
+     @Inject
+     Context mContext;
 
 
     private MutableLiveData<List<Track>> mTracks = new MutableLiveData<>();
@@ -42,6 +47,7 @@ public class ResultsViewModel extends ViewModel {
     private MutableLiveData<String> mTimeText = new MutableLiveData<>();
     private MutableLiveData<String> mDistanceText = new MutableLiveData<>();
     private MutableLiveData<String> mAverageSpeed = new MutableLiveData<>();
+    private String TAG ="ResultsViewModel";
 
 
     public ResultsViewModel() {
@@ -76,6 +82,22 @@ public class ResultsViewModel extends ViewModel {
         mDistanceText.postValue(distance);
         mImage.postValue(bitmapImage);
     }
+
+
+    public void loadSavedPreferences(){
+
+        Log.d(TAG,"mContext="+mContext);
+
+
+        String mWeight=mUserRepository.getUserWeight(mContext);
+        String mHeight=mUserRepository.getUserHeight(mContext);
+        String mAge=mUserRepository.getUserAge(mContext);
+
+        Log.d(TAG," weight= "+mWeight+" Height= "+mHeight+ " Age= "+mAge);
+    }
+
+
+
 
     public MutableLiveData<Bitmap> getImage() {
         return mImage;
