@@ -47,6 +47,7 @@ public class ResultsViewModel extends ViewModel {
     private MutableLiveData<String> mTimeText = new MutableLiveData<>();
     private MutableLiveData<String> mDistanceText = new MutableLiveData<>();
     private MutableLiveData<String> mAverageSpeed = new MutableLiveData<>();
+    private MutableLiveData<String> mSpentCalories = new MutableLiveData<>();
 
     private String TAG =ResultsViewModel.class.getSimpleName();
 
@@ -99,6 +100,7 @@ public class ResultsViewModel extends ViewModel {
 
     public String calculateSpentCalories(){
         Double spentCalories;
+        //TODO исправить на void
 
 /*
         https://calorizator.ru/article/body/bmr-calculation
@@ -117,6 +119,8 @@ public class ResultsViewModel extends ViewModel {
                 + (6.25 * Double.valueOf(mUserRepository.getUserHeight(mContext)))
                 + (5*Double.valueOf(mUserRepository.getUserAge(mContext)))+5;
 
+
+        mSpentCalories.postValue(String.valueOf(spentCalories));
 
 
         return String.valueOf(spentCalories);
@@ -141,6 +145,9 @@ public class ResultsViewModel extends ViewModel {
         return mAverageSpeed;
     }
 
+    public MutableLiveData<String> getSpentCalories(){
+        return mSpentCalories;
+    }
 
 }
 

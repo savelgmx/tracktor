@@ -47,5 +47,6 @@
     <string name="rbtn_bycicle_text">Велосипед</string>
     <string name="rbtn_walk_text" >Ходьба</string>
     <string name="rbtn_run_text" >Бег</string>
+    <string name="spentCaloriesLabel">Затрачено калорий</string>
 
 </resources>

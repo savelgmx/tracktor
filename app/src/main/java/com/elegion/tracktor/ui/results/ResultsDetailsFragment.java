@@ -24,6 +24,8 @@ import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.di.ViewModelModule;
 import com.elegion.tracktor.ui.preferences.UserRepository;
 
+import org.w3c.dom.Text;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -47,19 +49,11 @@ public class ResultsDetailsFragment extends Fragment {
     ImageView mScreenshotImage;
     @BindView(R.id.tvAverageSpeed)
     TextView mAverageSpeedText;
+    @BindView(R.id.tvSpentCalories)
+    TextView mSpentCalories;
 
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
-
-
-/*
-    @Inject
-    UserRepository mUserRepository;
-
-    @Inject
-    Context mContext;
-*/
-
 
 
     private Bitmap mImage;
@@ -110,7 +104,7 @@ public class ResultsDetailsFragment extends Fragment {
         mResultsViewModel.getDistance().observe(this, distance -> mDistanceText.setText(distance));
         mResultsViewModel.getAverageSpeed().observe(this, averageSpeed-> mAverageSpeedText.setText(averageSpeed));
 
-
+        mResultsViewModel.getSpentCalories().observe(this,spentCalories->mSpentCalories.setText(spentCalories));
 
     }
 
