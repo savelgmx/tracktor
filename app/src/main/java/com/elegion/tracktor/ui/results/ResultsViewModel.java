@@ -47,7 +47,8 @@ public class ResultsViewModel extends ViewModel {
     private MutableLiveData<String> mTimeText = new MutableLiveData<>();
     private MutableLiveData<String> mDistanceText = new MutableLiveData<>();
     private MutableLiveData<String> mAverageSpeed = new MutableLiveData<>();
-    private String TAG ="ResultsViewModel";
+
+    private String TAG =ResultsViewModel.class.getSimpleName();
 
 
     public ResultsViewModel() {
@@ -86,14 +87,39 @@ public class ResultsViewModel extends ViewModel {
 
     public void loadSavedPreferences(){
 
-        Log.d(TAG,"mContext="+mContext);
-
 
         String mWeight=mUserRepository.getUserWeight(mContext);
         String mHeight=mUserRepository.getUserHeight(mContext);
         String mAge=mUserRepository.getUserAge(mContext);
 
         Log.d(TAG," weight= "+mWeight+" Height= "+mHeight+ " Age= "+mAge);
+    }
+
+
+
+    public String calculateSpentCalories(){
+        Double spentCalories;
+
+/*
+        https://calorizator.ru/article/body/bmr-calculation
+        Вычисляем калории согласно формуле Миффлина-Джеора
+        Эта формула появилась на свет в 1990 году.
+         Её считают одной из наиболее точных.
+                Для расчета также необходимо знать вес, рост и возраст.
+
+        Мужчины: BMR = (10 × вес в кг) + (6,25 × рост в см) - (5 × возраст) + 5
+        Женщины: BMR = (10 × вес в кг) + (6,25 × рост в см) - (5 × возраст) - 161
+*/
+
+
+
+        spentCalories= (10 * Double.valueOf(mUserRepository.getUserWeight(mContext)))
+                + (6.25 * Double.valueOf(mUserRepository.getUserHeight(mContext)))
+                + (5*Double.valueOf(mUserRepository.getUserAge(mContext)))+5;
+
+
+
+        return String.valueOf(spentCalories);
     }
 
 

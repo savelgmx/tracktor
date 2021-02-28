@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.di.ViewModelModule;
+import com.elegion.tracktor.ui.preferences.UserRepository;
 
 import javax.inject.Inject;
 
@@ -48,6 +50,16 @@ public class ResultsDetailsFragment extends Fragment {
 
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
+
+
+/*
+    @Inject
+    UserRepository mUserRepository;
+
+    @Inject
+    Context mContext;
+*/
+
 
 
     private Bitmap mImage;
@@ -85,6 +97,9 @@ public class ResultsDetailsFragment extends Fragment {
 
 
        mResultsViewModel.loadSavedPreferences();
+
+
+       Log.d("ResultsDetailFragment","spent Calories = "+mResultsViewModel.calculateSpentCalories());
 
         mTrackId = getArguments().getLong(RESULT_ID, 0);
 
@@ -125,4 +140,7 @@ public class ResultsDetailsFragment extends Fragment {
         } else
             return super.onOptionsItemSelected(item);
     }
+
+
+
 }
