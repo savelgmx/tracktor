@@ -30,15 +30,15 @@ import toothpick.Toothpick;
 public class ResultsViewModel extends ViewModel {
 
     private static final String APP_PREFERENCES = "_preferences";
-     @Inject
+    @Inject
     IRepository<Track> mRepository;
 
 
-     @Inject
-     UserRepository mUserRepository;
+    @Inject
+    UserRepository mUserRepository;
 
-     @Inject
-     Context mContext;
+    @Inject
+    Context mContext;
 
 
     private MutableLiveData<List<Track>> mTracks = new MutableLiveData<>();
@@ -50,6 +50,8 @@ public class ResultsViewModel extends ViewModel {
     private MutableLiveData<String> mSpentCalories = new MutableLiveData<>();
 
     private String TAG =ResultsViewModel.class.getSimpleName();
+
+    private Double spentCalories;
 
 
     public ResultsViewModel() {
@@ -89,9 +91,7 @@ public class ResultsViewModel extends ViewModel {
 
 
     public void calculateSpentCalories(){
-        Double spentCalories;
-        //TODO calculate calories depend on gender
-/*
+ /*
         https://calorizator.ru/article/body/bmr-calculation
         Вычисляем калории согласно формуле Миффлина-Джеора
         Эта формула появилась на свет в 1990 году.
@@ -102,12 +102,23 @@ public class ResultsViewModel extends ViewModel {
         Женщины: BMR = (10 × вес в кг) + (6,25 × рост в см) - (5 × возраст) - 161
 
 */
+        String genderValue=mUserRepository.getListPreferenceValue(mContext);
 
+        switch (genderValue){
 
+            case "Man":
+                spentCalories= (10 * Double.valueOf(mUserRepository.getUserWeight(mContext)))
+                        + (6.25 * Double.valueOf(mUserRepository.getUserHeight(mContext)))
+                        + (5*Double.valueOf(mUserRepository.getUserAge(mContext)))+5;
+                break;
+            case "Woman":
+                spentCalories= (10 * Double.valueOf(mUserRepository.getUserWeight(mContext)))
+                        + (6.25 * Double.valueOf(mUserRepository.getUserHeight(mContext)))
+                        + (5*Double.valueOf(mUserRepository.getUserAge(mContext)))-161;
+                break;
 
-        spentCalories= (10 * Double.valueOf(mUserRepository.getUserWeight(mContext)))
-                + (6.25 * Double.valueOf(mUserRepository.getUserHeight(mContext)))
-                + (5*Double.valueOf(mUserRepository.getUserAge(mContext)))+5;
+        }
+
 
 
         mSpentCalories.postValue(String.valueOf(spentCalories));
