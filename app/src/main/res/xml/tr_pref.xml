@@ -29,10 +29,10 @@
     <ListPreference
         android:defaultValue="1"
         android:dialogTitle="Sex yes please"
-        android:entries="@array/entries_list_preference_sex"
-        android:entryValues="@array/entryvalues_list_preference_sex"
-        android:key="@string/pref_key_sex"
-        android:title="@string/title_sex"
+        android:entries="@array/entries_list_preference_gender"
+        android:entryValues="@array/entryvalues_list_preference_gender"
+        android:key="@string/pref_key_gender"
+        android:title="@string/title_gender"
         />
     <EditTextPreference
         android:defaultValue="@string/pref_default_value_height"

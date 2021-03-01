@@ -24,8 +24,8 @@ public class ReadUserPreferences implements UserRepository{
     }
 
     @Override
-    public String getListPreferenceValue() {
-
+    public String getListPreferenceValue(Context context) {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.getString("sex", "");
 
     }

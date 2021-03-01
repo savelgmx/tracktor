@@ -86,22 +86,11 @@ public class ResultsViewModel extends ViewModel {
     }
 
 
-    public void loadSavedPreferences(){
 
 
-        String mWeight=mUserRepository.getUserWeight(mContext);
-        String mHeight=mUserRepository.getUserHeight(mContext);
-        String mAge=mUserRepository.getUserAge(mContext);
-
-        Log.d(TAG," weight= "+mWeight+" Height= "+mHeight+ " Age= "+mAge);
-    }
-
-
-
-    public String calculateSpentCalories(){
+    public void calculateSpentCalories(){
         Double spentCalories;
-        //TODO исправить на void
-
+        //TODO calculate calories depend on gender
 /*
         https://calorizator.ru/article/body/bmr-calculation
         Вычисляем калории согласно формуле Миффлина-Джеора
@@ -111,6 +100,7 @@ public class ResultsViewModel extends ViewModel {
 
         Мужчины: BMR = (10 × вес в кг) + (6,25 × рост в см) - (5 × возраст) + 5
         Женщины: BMR = (10 × вес в кг) + (6,25 × рост в см) - (5 × возраст) - 161
+
 */
 
 
@@ -123,7 +113,7 @@ public class ResultsViewModel extends ViewModel {
         mSpentCalories.postValue(String.valueOf(spentCalories));
 
 
-        return String.valueOf(spentCalories);
+
     }
 
 

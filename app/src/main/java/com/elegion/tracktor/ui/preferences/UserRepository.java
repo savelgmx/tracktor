@@ -4,7 +4,7 @@ import android.content.Context;
 
 public interface UserRepository {
 
-    String getListPreferenceValue();
+    String getListPreferenceValue(Context context);
 
     String getUserWeight(Context context) ; // editTextPreferece [weight]
 

@@ -24,14 +24,14 @@
         <item>1800</item>
         <item>3600</item>
     </string-array>
-    <string-array name="entries_list_preference_sex">
+    <string-array name="entries_list_preference_gender">
          <item>Man</item>
         <item>Woman</item>
     </string-array>
 
-    <string-array name="entryvalues_list_preference_sex">
-        <item>Man</item>
-        <item>Woman</item>
+    <string-array name="entryvalues_list_preference_gender">
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
 

@@ -42,8 +42,8 @@
     <string name="pref_default_value_age">33</string>
     <string name="dialog_title_user_age" >Возраст пользователя</string>
     <string name="pref_key_age" >age</string>
-    <string name="pref_key_sex">sex</string>
-    <string name="title_sex" >Decide who you are man or woman</string>
+    <string name="pref_key_gender">gender</string>
+    <string name="title_gender" >Are you man or woman?</string>
     <string name="rbtn_bycicle_text">Велосипед</string>
     <string name="rbtn_walk_text" >Ходьба</string>
     <string name="rbtn_run_text" >Бег</string>

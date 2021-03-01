@@ -89,11 +89,8 @@ public class ResultsDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        mResultsViewModel.calculateSpentCalories();
 
-       mResultsViewModel.loadSavedPreferences();
-
-
-       Log.d("ResultsDetailFragment","spent Calories = "+mResultsViewModel.calculateSpentCalories());
 
         mTrackId = getArguments().getLong(RESULT_ID, 0);
 
@@ -118,6 +115,7 @@ public class ResultsDetailsFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.actionShare) {
             String path = MediaStore.Images.Media.insertImage(requireActivity().getContentResolver(), mImage, "Мой маршрут", null);
+            //TODO check null value of the path
             Uri uri = Uri.parse(path);
 
             Intent intent = new Intent(Intent.ACTION_SEND);
