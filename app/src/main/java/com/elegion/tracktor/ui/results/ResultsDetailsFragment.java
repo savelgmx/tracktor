@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.elegion.tracktor.R;
@@ -52,9 +54,16 @@ public class ResultsDetailsFragment extends Fragment {
     @BindView(R.id.tvSpentCalories)
     TextView mSpentCalories;
 
+/*
+    @BindView(R.id.radiogroup)
+    RadioGroup mRadioGroup;
+*/
+
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
 
+    private RadioGroup mRadioGroup;
+    private int CheckedRadioButtonIndex;
 
     private Bitmap mImage;
     private RealmRepository mRealmRepository;
@@ -72,7 +81,7 @@ public class ResultsDetailsFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         Scope scope = Toothpick.openScope(ResultsDetailsFragment.class);
-                scope.installModules(new ViewModelModule(this));
+        scope.installModules(new ViewModelModule(this));
         Toothpick.inject(this, scope);
 
     }
@@ -81,7 +90,15 @@ public class ResultsDetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fr_result_detail, container, false);
+
+        View view = inflater.inflate(R.layout.fr_result_detail, container, false);
+        mRadioGroup = view.findViewById(R.id.radiogroup);
+
+
+        mRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
+
+        return view;
+
     }
 
     @Override
@@ -134,5 +151,36 @@ public class ResultsDetailsFragment extends Fragment {
     }
 
 
+    /**
+     * Listener для отслеживания выбора RadioButton
+     *
+     * checkedIndexId: 0 Велосипед
+     * checkedIndexId: 1 Ходьба
+     * checkedIndexId: 2 Бег
+     */
+    private final RadioGroup.OnCheckedChangeListener onCheckedChangeListener =
+            new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                    RadioButton checkedRadioButton = (RadioButton) mRadioGroup
+                            .findViewById(checkedId);
+                    int checkedIndex = mRadioGroup.indexOfChild(checkedRadioButton);
+
+                   // Log.i("checkedIndexId", String.valueOf(checkedIndex));
+
+
+
+
+
+                    //saveSessionId(checkedIndex, getContext());
+
+
+                }
+            };
 
 }
+
+
+
+

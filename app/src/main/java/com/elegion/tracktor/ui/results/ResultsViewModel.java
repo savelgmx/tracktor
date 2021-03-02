@@ -101,7 +101,38 @@ public class ResultsViewModel extends ViewModel {
         Мужчины: BMR = (10 × вес в кг) + (6,25 × рост в см) - (5 × возраст) + 5
         Женщины: BMR = (10 × вес в кг) + (6,25 × рост в см) - (5 × возраст) - 161
 
+        https://www.calc.ru/Formula-Mifflinasan-Zheora.html
+         Доработанный вариант формулы Миффлина-Сан Жеора, в отличие от упрощенного дает
+         более точную информацию и учитывает степень физической активности человека:
+
+        для мужчин: (10 x вес (кг) + 6.25 x рост (см) – 5 x возраст (г) + 5) x A;
+        для женщин: (10 x вес (кг) + 6.25 x рост (см) – 5 x возраст (г) – 161) x A.
+        A – это уровень активности человека, его различают обычно по пяти степеням физических нагрузок в сутки:
+
+        Минимальная активность: A = 1,2.
+        Слабая активность: A = 1,375.
+        Средняя активность: A = 1,55.
+        Высокая активность: A = 1,725.
+        Экстра-активность: A = 1,9 (под эту категорию обычно подпадают люди, занимающиеся, например,
+        тяжелой атлетикой, или другими силовыми видами спорта с ежедневными тренировками,
+        а также те, кто выполняет тяжелую физическую работу).
+
 */
+        Double levelOfActivity=0.0;
+        int checkedIndexId = 0;
+
+        switch(checkedIndexId){
+            case 0:
+                levelOfActivity=1.55;//0 Велосипед Слабая активность
+                break;
+            case 1:
+                levelOfActivity=1.375;//1 Ходьба Средняя активность:
+                break;
+            case 2:
+                levelOfActivity=1.725;//2 Бег Высокая активность
+
+        }
+
         String genderValue=mUserRepository.getListPreferenceValue(mContext);
 
         switch (genderValue){
@@ -119,36 +150,27 @@ public class ResultsViewModel extends ViewModel {
 
         }
 
-
+        spentCalories= spentCalories*levelOfActivity;
 
         mSpentCalories.postValue(String.valueOf(spentCalories));
 
 
-
     }
-
-
 
 
     public MutableLiveData<Bitmap> getImage() {
         return mImage;
     }
-
     public MutableLiveData<String> getTime() {
         return mTimeText;
     }
-
     public MutableLiveData<String> getDistance() {
         return mDistanceText;
     }
-
     public MutableLiveData<String> getAverageSpeed() {
         return mAverageSpeed;
     }
-
-    public MutableLiveData<String> getSpentCalories(){
-        return mSpentCalories;
-    }
+    public MutableLiveData<String> getSpentCalories(){ return mSpentCalories; }
 
 }
 
