@@ -31,6 +31,9 @@ public class StringUtil {
         return round(averageSpeed,0)+" м/с.";
     }
 
+    public static String  getSpentCaloriesText(Double spentCalories){
+        return round(spentCalories,2)+" калорий";
+    }
 
 
 }

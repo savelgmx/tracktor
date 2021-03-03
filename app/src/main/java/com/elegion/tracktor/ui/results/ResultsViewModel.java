@@ -152,7 +152,7 @@ public class ResultsViewModel extends ViewModel {
 
         spentCalories= spentCalories*levelOfActivity;
 
-        mSpentCalories.postValue(String.valueOf(spentCalories));
+        mSpentCalories.postValue(StringUtil.getSpentCaloriesText(spentCalories));
 
 
     }
