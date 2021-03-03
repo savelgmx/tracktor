@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.di.ViewModelModule;
+import com.elegion.tracktor.ui.preferences.ReadUserPreferences;
 import com.elegion.tracktor.ui.preferences.UserRepository;
 
 import org.w3c.dom.Text;
@@ -93,8 +94,6 @@ public class ResultsDetailsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fr_result_detail, container, false);
         mRadioGroup = view.findViewById(R.id.radiogroup);
-
-
         mRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
 
         return view;
@@ -151,6 +150,17 @@ public class ResultsDetailsFragment extends Fragment {
     }
 
 
+    /* устанавливает предпочитаемый RadioButton согласно сохраненному Id
+     */
+
+    private void SetSavedRadioButtonChecked(int savedRadioIndex) {
+        RadioButton savedCheckedRadioButton = (RadioButton) mRadioGroup
+                .getChildAt(savedRadioIndex);
+        savedCheckedRadioButton.setChecked(true);
+    }
+
+
+
     /**
      * Listener для отслеживания выбора RadioButton
      *
@@ -167,13 +177,8 @@ public class ResultsDetailsFragment extends Fragment {
                             .findViewById(checkedId);
                     int checkedIndex = mRadioGroup.indexOfChild(checkedRadioButton);
 
-                   // Log.i("checkedIndexId", String.valueOf(checkedIndex));
-
-
-
-
-
                     //saveSessionId(checkedIndex, getContext());
+                    ReadUserPreferences.saveKindOfActivityId(checkedIndex , getContext());
 
 
                 }

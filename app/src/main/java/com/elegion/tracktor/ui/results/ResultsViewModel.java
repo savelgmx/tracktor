@@ -123,10 +123,10 @@ public class ResultsViewModel extends ViewModel {
 
         switch(checkedIndexId){
             case 0:
-                levelOfActivity=1.55;//0 Велосипед Слабая активность
+                levelOfActivity=1.375;//0 Велосипед Слабая активность
                 break;
             case 1:
-                levelOfActivity=1.375;//1 Ходьба Средняя активность:
+                levelOfActivity=1.55;//1 Ходьба Средняя активность:
                 break;
             case 2:
                 levelOfActivity=1.725;//2 Бег Высокая активность

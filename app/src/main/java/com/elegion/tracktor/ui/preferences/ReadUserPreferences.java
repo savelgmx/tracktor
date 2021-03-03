@@ -14,7 +14,8 @@ import toothpick.Toothpick;
 
 public class ReadUserPreferences implements UserRepository{
 
-    private  SharedPreferences sharedPreferences;
+    private static SharedPreferences sharedPreferences;
+    //private  SharedPreferences sharedPreferences;
 
     @Inject
     public ReadUserPreferences(SharedPreferences sharedPreferences) {
@@ -51,7 +52,7 @@ public class ReadUserPreferences implements UserRepository{
     }
 
 //хранит значение выбора вида активности (бег,ходьба,велосипед) на экране результатов
-    public  boolean saveKindOfActivityId(int kindOfActivityID , Context context) {
+    public static boolean saveKindOfActivityId(int kindOfActivityID, Context context) {
         Log.i("saveSessionId", String.valueOf(kindOfActivityID));
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
