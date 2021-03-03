@@ -95,6 +95,7 @@ public class ResultsDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fr_result_detail, container, false);
         mRadioGroup = view.findViewById(R.id.radiogroup);
         mRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
+        SetSavedRadioButtonChecked(CheckedRadioButtonIndex);
 
         return view;
 
@@ -105,7 +106,7 @@ public class ResultsDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        mResultsViewModel.calculateSpentCalories();
+        mResultsViewModel.calculateSpentCalories(CheckedRadioButtonIndex);
 
 
         mTrackId = getArguments().getLong(RESULT_ID, 0);
@@ -176,9 +177,9 @@ public class ResultsDetailsFragment extends Fragment {
                     RadioButton checkedRadioButton = (RadioButton) mRadioGroup
                             .findViewById(checkedId);
                     int checkedIndex = mRadioGroup.indexOfChild(checkedRadioButton);
-
-                    //saveSessionId(checkedIndex, getContext());
                     ReadUserPreferences.saveKindOfActivityId(checkedIndex , getContext());
+
+                    mResultsViewModel.calculateSpentCalories(checkedIndex);//пересчет калорий при выборе RadioButton
 
 
                 }

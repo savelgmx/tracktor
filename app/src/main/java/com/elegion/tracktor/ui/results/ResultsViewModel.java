@@ -90,7 +90,7 @@ public class ResultsViewModel extends ViewModel {
 
 
 
-    public void calculateSpentCalories(){
+    public void calculateSpentCalories(int checkedIndexId ){
  /*
         https://calorizator.ru/article/body/bmr-calculation
         Вычисляем калории согласно формуле Миффлина-Джеора
@@ -119,7 +119,7 @@ public class ResultsViewModel extends ViewModel {
 
 */
         Double levelOfActivity=0.0;
-        int checkedIndexId = 0;
+        //int checkedIndexId = 0;
 
         switch(checkedIndexId){
             case 0:
