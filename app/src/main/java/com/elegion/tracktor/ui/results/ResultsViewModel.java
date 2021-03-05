@@ -147,9 +147,13 @@ public class ResultsViewModel extends ViewModel {
                         + (6.25 * Double.valueOf(mUserRepository.getUserHeight(mContext)))
                         + (5*Double.valueOf(mUserRepository.getUserAge(mContext)))-161;
                 break;
-
+            default:
+                spentCalories= (10 * Double.valueOf(mUserRepository.getUserWeight(mContext)))
+                        + (6.25 * Double.valueOf(mUserRepository.getUserHeight(mContext)))
+                        + (5*Double.valueOf(mUserRepository.getUserAge(mContext)))+5;
         }
 
+//TODO remove java.lang.NullPointerException: Attempt to invoke virtual method 'double java.lang.Double.doubleValue()' on a null object reference
         spentCalories= spentCalories*levelOfActivity;
 
         mSpentCalories.postValue(StringUtil.getSpentCaloriesText(spentCalories));
