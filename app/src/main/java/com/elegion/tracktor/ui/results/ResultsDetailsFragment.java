@@ -54,6 +54,8 @@ public class ResultsDetailsFragment extends Fragment {
     TextView mAverageSpeedText;
     @BindView(R.id.tvSpentCalories)
     TextView mSpentCalories;
+    @BindView(R.id.tvDate)
+    TextView mDateText;
 
 /*
     @BindView(R.id.radiogroup)
@@ -111,6 +113,8 @@ public class ResultsDetailsFragment extends Fragment {
 
         mTrackId = getArguments().getLong(RESULT_ID, 0);
 
+        mResultsViewModel.getStringDate(mTrackId);
+
         mResultsViewModel.loadImage(mTrackId);
         mResultsViewModel.getImage().observe(this,image-> mScreenshotImage.setImageBitmap(image));
 
@@ -119,6 +123,8 @@ public class ResultsDetailsFragment extends Fragment {
         mResultsViewModel.getAverageSpeed().observe(this, averageSpeed-> mAverageSpeedText.setText(averageSpeed));
 
         mResultsViewModel.getSpentCalories().observe(this,spentCalories->mSpentCalories.setText(spentCalories));
+
+        mResultsViewModel.getDate().observe(this,date->mDateText.setText(date));
 
     }
 

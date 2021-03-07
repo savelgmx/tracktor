@@ -1,5 +1,6 @@
 package com.elegion.tracktor.util;
 
+import java.util.Date;
 import java.util.Locale;
 
 public class StringUtil {
@@ -35,5 +36,8 @@ public class StringUtil {
         return round(spentCalories,2)+" калорий";
     }
 
+    public static String getDateText(Date date){
+        return String.format(String.valueOf(date), "dd.MM.yyyy");
+    }
 
 }

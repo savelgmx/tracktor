@@ -49,6 +49,8 @@ public class ResultsViewModel extends ViewModel {
     private MutableLiveData<String> mAverageSpeed = new MutableLiveData<>();
     private MutableLiveData<String> mSpentCalories = new MutableLiveData<>();
 
+    private MutableLiveData<String> mDateText = new MutableLiveData<>();
+
     private String TAG =ResultsViewModel.class.getSimpleName();
 
     private Double spentCalories;
@@ -161,6 +163,12 @@ public class ResultsViewModel extends ViewModel {
 
     }
 
+    public void getStringDate(long mTrackId){
+        Track track = mRepository.getItem(mTrackId);
+        String date = StringUtil.getDateText(track.getDate());
+        mDateText.postValue(date);
+    }
+
 
     public MutableLiveData<Bitmap> getImage() {
         return mImage;
@@ -175,6 +183,9 @@ public class ResultsViewModel extends ViewModel {
         return mAverageSpeed;
     }
     public MutableLiveData<String> getSpentCalories(){ return mSpentCalories; }
+
+    public MutableLiveData<String > getDate(){return mDateText; }
+
 
 }
 
