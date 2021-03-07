@@ -1,5 +1,7 @@
 package com.elegion.tracktor.util;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -37,7 +39,9 @@ public class StringUtil {
     }
 
     public static String getDateText(Date date){
-        return String.format(String.valueOf(date), "dd.MM.yyyy");
+        String pattern = "dd.MM.yyyy";
+        DateFormat df = new SimpleDateFormat(pattern);
+        return df.format(date);
     }
 
 }
