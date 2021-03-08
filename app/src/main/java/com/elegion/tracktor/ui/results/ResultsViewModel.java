@@ -1,17 +1,14 @@
 package com.elegion.tracktor.ui.results;
 
-import android.arch.lifecycle.AndroidViewModel;
+
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.IRepository;
 import com.elegion.tracktor.data.model.Track;
-import com.elegion.tracktor.di.ContextModule;
-import com.elegion.tracktor.ui.preferences.ReadUserPreferences;
 import com.elegion.tracktor.ui.preferences.UserRepository;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
@@ -155,7 +152,6 @@ public class ResultsViewModel extends ViewModel {
                         + (5*Double.valueOf(mUserRepository.getUserAge(mContext)))+5;
         }
 
-//TODO remove java.lang.NullPointerException: Attempt to invoke virtual method 'double java.lang.Double.doubleValue()' on a null object reference
         spentCalories= spentCalories*levelOfActivity;
 
         mSpentCalories.postValue(StringUtil.getSpentCaloriesText(spentCalories));
