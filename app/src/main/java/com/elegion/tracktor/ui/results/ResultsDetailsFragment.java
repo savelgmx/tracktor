@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -57,20 +58,18 @@ public class ResultsDetailsFragment extends Fragment {
     @BindView(R.id.tvDate)
     TextView mDateText;
 
-/*
-    @BindView(R.id.radiogroup)
-    RadioGroup mRadioGroup;
-*/
 
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
 
+    private ImageButton mIbAddComment;
     private RadioGroup mRadioGroup;
     private int CheckedRadioButtonIndex;
 
     private Bitmap mImage;
     private RealmRepository mRealmRepository;
     private long mTrackId;
+
 
     public static ResultsDetailsFragment newInstance(long trackId) {
         Bundle bundle = new Bundle();
@@ -99,6 +98,10 @@ public class ResultsDetailsFragment extends Fragment {
         mRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
         SetSavedRadioButtonChecked(CheckedRadioButtonIndex);
 
+        mIbAddComment = view.findViewById(R.id.ibAddComment);
+        mIbAddComment.setOnClickListener(mOnClickListener);
+
+
         return view;
 
     }
@@ -116,15 +119,15 @@ public class ResultsDetailsFragment extends Fragment {
         mResultsViewModel.getStringDate(mTrackId);
 
         mResultsViewModel.loadImage(mTrackId);
-        mResultsViewModel.getImage().observe(this,image-> mScreenshotImage.setImageBitmap(image));
+        mResultsViewModel.getImage().observe(this, image -> mScreenshotImage.setImageBitmap(image));
 
         mResultsViewModel.getTime().observe(this, time -> mTimeText.setText(time));
         mResultsViewModel.getDistance().observe(this, distance -> mDistanceText.setText(distance));
-        mResultsViewModel.getAverageSpeed().observe(this, averageSpeed-> mAverageSpeedText.setText(averageSpeed));
+        mResultsViewModel.getAverageSpeed().observe(this, averageSpeed -> mAverageSpeedText.setText(averageSpeed));
 
-        mResultsViewModel.getSpentCalories().observe(this,spentCalories->mSpentCalories.setText(spentCalories));
+        mResultsViewModel.getSpentCalories().observe(this, spentCalories -> mSpentCalories.setText(spentCalories));
 
-        mResultsViewModel.getDate().observe(this,date->mDateText.setText(date));
+        mResultsViewModel.getDate().observe(this, date -> mDateText.setText(date));
 
     }
 
@@ -167,10 +170,9 @@ public class ResultsDetailsFragment extends Fragment {
     }
 
 
-
     /**
      * Listener для отслеживания выбора RadioButton
-     *
+     * <p>
      * checkedIndexId: 0 Велосипед
      * checkedIndexId: 1 Ходьба
      * checkedIndexId: 2 Бег
@@ -183,7 +185,7 @@ public class ResultsDetailsFragment extends Fragment {
                     RadioButton checkedRadioButton = (RadioButton) mRadioGroup
                             .findViewById(checkedId);
                     int checkedIndex = mRadioGroup.indexOfChild(checkedRadioButton);
-                    ReadUserPreferences.saveKindOfActivityId(checkedIndex , getContext());
+                    ReadUserPreferences.saveKindOfActivityId(checkedIndex, getContext());
 
                     mResultsViewModel.calculateSpentCalories(checkedIndex);//пересчет калорий при выборе RadioButton
 
@@ -191,8 +193,19 @@ public class ResultsDetailsFragment extends Fragment {
                 }
             };
 
-}
 
+
+    private void addComments(){
+        //диалог с предложением ввести комментарий.
+
+        Log.d("ResultsDetailsFragment","Image Button Press handled");
+
+    }
+
+
+
+    private View.OnClickListener mOnClickListener= view-> addComments();
+}
 
 
 
