@@ -106,48 +106,61 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="8dp"
             >
 
 
         <RadioGroup
             android:id="@+id/radiogroup"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:padding="8dp"
             android:visibility="visible"
             tools:visibility="visible">
 
 
+            <RadioButton
+                android:id="@+id/rbBicycle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rbtn_bycicle_text"
+                android:visibility="visible"
+                tools:visibility="visible" />
 
-        <RadioButton
-            android:id="@+id/rbBicycle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/rbtn_bycicle_text"
-            android:visibility="visible"
-            tools:visibility="visible" />
+            <RadioButton
+                android:id="@+id/rbWalk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rbtn_walk_text"
+                tools:visibility="visible" />
 
-        <RadioButton
-            android:id="@+id/rbWalk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/rbtn_walk_text"
-            tools:visibility="visible" />
+            <RadioButton
+                android:id="@+id/rbRun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rbtn_run_text"
+                android:visibility="visible"
+                tools:visibility="visible" />
+        </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/rbRun"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/rbtn_run_text"
-            android:visibility="visible"
-            tools:visibility="visible" />
-    </RadioGroup>
+        <ImageButton
+            android:id="@+id/ibAddComment"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_launcher_background">
+
+        </ImageButton>
+
 
     </LinearLayout>
+        <ImageView
+            android:id="@+id/ivScreenshot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <ImageView
-        android:id="@+id/ivScreenshot"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
+
 
 </LinearLayout>
