@@ -49,5 +49,8 @@
     <string name="rbtn_run_text" >Бег</string>
     <string name="spentCaloriesLabel">Затрачено калорий</string>
     <string name="dateLabel">Дата:</string>
+    <string name="btn_save_label">Сохранить</string>
+    <string name="btn_cancel_label">Отмена</string>
+   />
 
 </resources>

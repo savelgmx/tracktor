@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,9 +29,7 @@ import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.di.ViewModelModule;
 import com.elegion.tracktor.ui.preferences.ReadUserPreferences;
-import com.elegion.tracktor.ui.preferences.UserRepository;
 
-import org.w3c.dom.Text;
 
 import javax.inject.Inject;
 
@@ -194,11 +195,13 @@ public class ResultsDetailsFragment extends Fragment {
             };
 
 
-
     private void addComments(){
         //диалог с предложением ввести комментарий.
-
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         Log.d("ResultsDetailsFragment","Image Button Press handled");
+        ResultsDialogFragment resultsDialogFragment = ResultsDialogFragment.newInstance(1);
+        resultsDialogFragment.show(getActivity().getFragmentManager(), "resultsDialogFragment");
+
 
     }
 
