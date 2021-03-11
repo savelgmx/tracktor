@@ -18,6 +18,7 @@ public class Track extends RealmObject {
     private Double distance;
     private String imageBase64;
     private Double averagespeed;
+    private String comment;
 
     public void setId(long id) {
         this.id = id;
@@ -50,12 +51,12 @@ public class Track extends RealmObject {
     public Double getAverageSpeed(){
         return averagespeed;
     }
-     public void setAverageSpeed(double distance,long duration ){
-         double average_speed;
-         if ((Integer.valueOf((int) duration)>0)&(distance>0)){
-             average_speed =(Double.valueOf(distance)/Double.valueOf(duration));
-         }else {average_speed=0.0;}
-         this.averagespeed=average_speed;
+    public void setAverageSpeed(double distance,long duration ){
+        double average_speed;
+        if ((Integer.valueOf((int) duration)>0)&(distance>0)){
+            average_speed =(Double.valueOf(distance)/Double.valueOf(duration));
+        }else {average_speed=0.0;}
+        this.averagespeed=average_speed;
     }
 
     public void setDistance(Double distance) {
@@ -69,6 +70,9 @@ public class Track extends RealmObject {
     public String getImageBase64() {
         return imageBase64;
     }
+
+    public void setComment (String newComment){this.comment = newComment;}
+    public String getComment(){return comment;}
 
     @Override
 /*
@@ -89,7 +93,7 @@ public class Track extends RealmObject {
                 ", date=" + date +
                 ", duration=" + duration +
                 ", distance=" + distance +
-                 ", imageBase64=" + imageBase64 +
+                ", imageBase64=" + imageBase64 +
                 '}';
     }
 
