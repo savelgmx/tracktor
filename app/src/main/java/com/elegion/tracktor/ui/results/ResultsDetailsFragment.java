@@ -197,9 +197,9 @@ public class ResultsDetailsFragment extends Fragment {
 
     private void addComments(){
         //диалог с предложением ввести комментарий.
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+       // FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         Log.d("ResultsDetailsFragment","Image Button Press handled");
-        ResultsDialogFragment resultsDialogFragment = ResultsDialogFragment.newInstance(1);
+        ResultsDialogFragment resultsDialogFragment = ResultsDialogFragment.newInstance(mTrackId);
         resultsDialogFragment.show(getActivity().getFragmentManager(), "resultsDialogFragment");
 
 
