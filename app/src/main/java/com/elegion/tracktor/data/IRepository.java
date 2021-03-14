@@ -15,6 +15,6 @@ public interface IRepository<T> {
 
     boolean deleteItem(long id);
 
-    void updateItem(T t);
+    long updateItem(T t);
 
 }

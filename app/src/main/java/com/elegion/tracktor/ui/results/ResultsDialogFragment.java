@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.elegion.tracktor.R;
+import com.elegion.tracktor.data.RealmRepository;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -22,20 +25,24 @@ public class ResultsDialogFragment extends DialogFragment {
 
     @BindView(R.id.ibAddComment)
     protected EditText iBAddCommentText;
+    @Inject
+    ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
+
+/*
+    @Inject
+    RealmRepository mRealmRepository;
+*/
 
 
+    //TODO iBAddCommentText make not null
 
     private DialogInterface.OnClickListener mOnClickListener = (dialogInterface, i) -> {
 
         Log.d("ResultsDetailFragment","OnClickListener with mTrackId= "+String.valueOf(mTrackId));
+        Log.d("ResultsDetailFragment","OnClickListener with Comment= "+String.valueOf(iBAddCommentText));
 
- /*       mViewModel.apply(etName.getText().toString(),
-                etDirector.getText().toString(),
-                etYear.getText().toString(),
-                etRate.getText().toString(),
-                etImageURL.getText().toString()
-        );
-*/
+        mResultsViewModel.updateComment(mTrackId,String.valueOf(iBAddCommentText));
+
 
     };
 

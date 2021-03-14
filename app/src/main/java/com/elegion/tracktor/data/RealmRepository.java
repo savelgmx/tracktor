@@ -71,11 +71,22 @@ public class RealmRepository implements IRepository<Track> {
         return isDeleteSuccessful;
     }
 
+    /*
+        @Override
+    public void updateItem(Film Film) {
+        mRealm.beginTransaction();
+        mRealm.copyToRealmOrUpdate(Film);
+        mRealm.commitTransaction();
+        EventBus.getDefault().post(new OnFilmDataBaseUpdate());
+    }
+
+     */
     @Override
-    public void updateItem(final Track track) {
+    public long updateItem(Track track) {
         mRealm.beginTransaction();
         mRealm.copyToRealmOrUpdate(track);
         mRealm.commitTransaction();
+        return 0;
     }
 
     public long createAndInsertTrackFrom(long duration, double distanse, String base64image) {
@@ -92,6 +103,18 @@ public class RealmRepository implements IRepository<Track> {
 //        return sPrimaryId.longValue();
 
         return insertItem(track);
+
+    }
+    public long createAndUpdateTrackFrom(long id,long duration,double distanse,String base64image,String comment){
+        Track track = new Track();
+        track.setDistance(distanse);
+        track.setDuration(duration);
+        track.setImageBase64(base64image);
+        track.setDate(new Date());
+        track.setAverageSpeed(distanse,duration);
+        track.setComment(comment);
+
+        return updateItem(track);
 
     }
 }

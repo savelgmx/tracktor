@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.IRepository;
+import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.ui.preferences.UserRepository;
 import com.elegion.tracktor.util.ScreenshotMaker;
@@ -26,16 +27,17 @@ import toothpick.Toothpick;
  */
 public class ResultsViewModel extends ViewModel {
 
-    private static final String APP_PREFERENCES = "_preferences";
     @Inject
     IRepository<Track> mRepository;
-
-
     @Inject
     UserRepository mUserRepository;
+    @Inject
+    RealmRepository mRealmRepository;
 
     @Inject
     Context mContext;
+
+
 
 
     private MutableLiveData<List<Track>> mTracks = new MutableLiveData<>();
@@ -181,6 +183,18 @@ public class ResultsViewModel extends ViewModel {
     public MutableLiveData<String> getSpentCalories(){ return mSpentCalories; }
 
     public MutableLiveData<String > getDate(){return mDateText; }
+
+
+    public void updateComment(long mTrackId,String comment){
+        Track track = mRepository.getItem(mTrackId);
+        mRealmRepository.createAndUpdateTrackFrom(mTrackId,
+                track.getDuration(),
+                track.getDistance(),
+                track.getImageBase64(),
+                comment);
+    }
+
+
 
 
 }
