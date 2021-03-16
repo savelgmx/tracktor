@@ -18,10 +18,11 @@
         tools:text="Добавить новый комментарий" />
 
     <MultiAutoCompleteTextView
+        android:id="@+id/edAdComment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        >
+        android:layout_height="32dp"
+        android:layout_margin="8dp">
+
 
     </MultiAutoCompleteTextView>
 

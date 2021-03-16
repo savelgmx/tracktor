@@ -25,7 +25,7 @@ public class ResultsDialogFragment extends DialogFragment {
     private static final String KEY_RESULTS_ID="ResultsDialogFragment.KeyResultsId";
     private static long mTrackId; //сохраняем шв екфсл чтобы правильно добвать его к записи
 
-    @BindView(R.id.ibAddComment)
+    @BindView(R.id.edAdComment)
     protected EditText ibAddCommentText;
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
@@ -60,7 +60,7 @@ public class ResultsDialogFragment extends DialogFragment {
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        toothpickInject();
+//        toothpickInject();
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
