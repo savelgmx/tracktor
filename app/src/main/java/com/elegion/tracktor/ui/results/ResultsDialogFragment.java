@@ -41,6 +41,8 @@ public class ResultsDialogFragment extends DialogFragment {
         Log.d("ResultsDetailFragment","OnClickListener with mTrackId= "+String.valueOf(mTrackId));
         Log.d("ResultsDetailFragment","OnClickListener with Comment= "+ ibAddCommentText.getText().toString());
 
+        Log.d("ResultsDetailFragment","mResulsVieMOdel="+String.valueOf(mResultsViewModel));
+
         mResultsViewModel.updateComment(mTrackId, ibAddCommentText.getText().toString());
 
 
@@ -66,10 +68,7 @@ public class ResultsDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fr_comment_dialog_fragment, null);
-
-
-        initUI(view);
-
+        ButterKnife.bind(this, view);
 
         builder.setView(view)
                 .setPositiveButton(R.string.btn_save_label, mOnClickListener)
@@ -89,13 +88,6 @@ public class ResultsDialogFragment extends DialogFragment {
         Toothpick.inject(this, scope);
     }
 
-    private void initUI(View view) {
-        ButterKnife.bind(this, view);
-
-        // tvTitle.setText(mResultsViewModel.getId());
-
-        //mResultsViewModel observer где подставляем текущее значение если есть
-    }
 
 
 }
