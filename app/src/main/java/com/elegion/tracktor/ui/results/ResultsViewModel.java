@@ -185,15 +185,6 @@ public class ResultsViewModel extends ViewModel {
     public MutableLiveData<String > getDate(){return mDateText; }
 
 
-    public void updateComment(long mTrackId,String comment){
-        Track track = mRepository.getItem(mTrackId);
-        mRealmRepository.createAndUpdateTrackFrom(mTrackId,
-                track.getDuration(),
-                track.getDistance(),
-                track.getImageBase64(),
-                comment);
-    }
-
 
 
 

@@ -3,6 +3,7 @@ package com.elegion.tracktor.ui.results;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.arch.lifecycle.ViewModelStoreOwner;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,8 +28,13 @@ public class ResultsDialogFragment extends DialogFragment {
 
     @BindView(R.id.edAdComment)
     protected EditText ibAddCommentText;
+
+    @Inject
+    DialogFragmentViewModel mDialogFragmentViewModel;
+/*
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
+*/
 
 /*
     @Inject
@@ -36,14 +42,17 @@ public class ResultsDialogFragment extends DialogFragment {
 */
 
 
+
     private DialogInterface.OnClickListener mOnClickListener = (dialogInterface, i) -> {
 
         Log.d("ResultsDetailFragment","OnClickListener with mTrackId= "+String.valueOf(mTrackId));
         Log.d("ResultsDetailFragment","OnClickListener with Comment= "+ ibAddCommentText.getText().toString());
 
-        Log.d("ResultsDetailFragment","mResulsVieMOdel="+String.valueOf(mResultsViewModel));
+        Log.d("ResultsDetailFragment","mDialogFragmentViewModel="+String.valueOf(mDialogFragmentViewModel));
 
-        mResultsViewModel.updateComment(mTrackId, ibAddCommentText.getText().toString());
+      //  mResultsViewModel.updateComment(mTrackId, ibAddCommentText.getText().toString());
+    //    mDialogFragmentViewModel.updateComment(mTrackId,ibAddCommentText.getText().toString());
+
 
 
     };
@@ -62,7 +71,7 @@ public class ResultsDialogFragment extends DialogFragment {
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-//        toothpickInject();
+      //  toothpickInject();
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -77,14 +86,13 @@ public class ResultsDialogFragment extends DialogFragment {
         return builder.create();
     }
 
-    //TODO дописать дополнительный модуль для scope.installModules (or correct existing ViewModelModule class)
-    private void toothpickInject() {
+     private void toothpickInject() {
         long id = -1;
         if (getArguments() != null) {
             id = getArguments().getLong(KEY_RESULTS_ID, -1);
         }
         Scope scope = Toothpick.openScope(ResultsDialogFragment.class);
-    //    scope.installModules(new ViewModelModule(this));
+        scope.installModules(new ViewModelModule((ViewModelStoreOwner) this));
         Toothpick.inject(this, scope);
     }
 
