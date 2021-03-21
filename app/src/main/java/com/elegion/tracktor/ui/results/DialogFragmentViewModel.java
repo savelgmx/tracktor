@@ -24,6 +24,13 @@ public class DialogFragmentViewModel extends ViewModel {
         super();
         Toothpick.inject(this, App.getAppScope());
     }
+
+    public DialogFragmentViewModel(Long mTrackId) {
+
+        super();
+        Toothpick.inject(this,App.getAppScope());
+    }
+
     public void updateComment(long mTrackId,String comment){
         Track track = mRepository.getItem(mTrackId);
         mRealmRepository.createAndUpdateTrackFrom(mTrackId,
