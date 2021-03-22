@@ -16,11 +16,10 @@ public class DialogFragmentModule extends Module {
         this.mFragment = fragment;
         this.mTrackId= trackId;
 
-
             bind(DialogFragment.class).toInstance(mFragment);
             bind(DialogFragmentViewModel.class).toProvider(DialogFragmentViewModelProvider.class);
             bind(Long.class).withName("mTrackId").toInstance(mTrackId);
-          //  bind(DialogFragmentViewModelCustomFactory.class).toProvider(DialogFragmentViewModelCustomFactory.class);
+            bind(DialogFragmentViewModelCustomFactory.class).toProvider(DialogFragmentViewModelCustomFactoryProvider.class);
         }
 
     }

@@ -37,6 +37,7 @@ public class DialogFragmentViewModelCustomFactory implements ViewModelProvider.F
         this.mTrackId = trackId;
     }
 
+
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
