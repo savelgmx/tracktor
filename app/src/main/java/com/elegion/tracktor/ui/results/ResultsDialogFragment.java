@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.elegion.tracktor.R;
+import com.elegion.tracktor.di.DialogFragmentModule;
+import com.elegion.tracktor.di.DialogFragmentViewModelModule;
 import com.elegion.tracktor.di.ViewModelModule;
 import javax.inject.Inject;
 
@@ -31,7 +33,8 @@ public class ResultsDialogFragment extends DialogFragment {
 
     @Inject
     DialogFragmentViewModel mDialogFragmentViewModel;
-/*
+
+    /*
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
 */
@@ -47,7 +50,6 @@ public class ResultsDialogFragment extends DialogFragment {
 
         Log.d("ResultsDetailFragment","OnClickListener with mTrackId= "+String.valueOf(mTrackId));
         Log.d("ResultsDetailFragment","OnClickListener with Comment= "+ ibAddCommentText.getText().toString());
-
         Log.d("ResultsDetailFragment","mDialogFragmentViewModel="+String.valueOf(mDialogFragmentViewModel));
 
       //  mResultsViewModel.updateComment(mTrackId, ibAddCommentText.getText().toString());
@@ -71,7 +73,11 @@ public class ResultsDialogFragment extends DialogFragment {
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-      //  toothpickInject();
+        //TODO remove noFactory Found Exeption
+        // at com.elegion.tracktor.ui.results.ResultsDialogFragment.onCreateDialog(ResultsDialogFragment.java:78)
+        Scope scope = Toothpick.openScope(ResultsFragment.class);
+        scope.installModules(new DialogFragmentViewModelModule());
+        Toothpick.inject(this, scope);
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -86,15 +92,6 @@ public class ResultsDialogFragment extends DialogFragment {
         return builder.create();
     }
 
-     private void toothpickInject() {
-        long id = -1;
-        if (getArguments() != null) {
-            id = getArguments().getLong(KEY_RESULTS_ID, -1);
-        }
-        Scope scope = Toothpick.openScope(ResultsDialogFragment.class);
-        scope.installModules(new ViewModelModule((ViewModelStoreOwner) this));
-        Toothpick.inject(this, scope);
-    }
 
 
 
