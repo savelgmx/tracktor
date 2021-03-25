@@ -36,6 +36,6 @@ public class DialogFragmentViewModelCustomFactoryProvider implements Provider<Di
     }
     @Override
     public DialogFragmentViewModelCustomFactory get() {
-        return new DialogFragmentViewModelCustomFactory(mTrackId);
+        return new DialogFragmentViewModelCustomFactory();//mTrackId
     }
 }

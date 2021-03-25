@@ -5,7 +5,10 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelStoreOwner;
 import android.support.annotation.NonNull;
 
+import com.elegion.tracktor.App;
 import com.elegion.tracktor.ui.results.DialogFragmentViewModel;
+
+import toothpick.Toothpick;
 
 /*
 public class FilmDetailViewModelCustomFactory implements ViewModelProvider.Factory {
@@ -33,14 +36,14 @@ public class DialogFragmentViewModelCustomFactory implements ViewModelProvider.F
 
     private Long mTrackId;
 
-    public DialogFragmentViewModelCustomFactory(Long trackId){
-        this.mTrackId = trackId;
+    public DialogFragmentViewModelCustomFactory(){
+        Toothpick.inject(this, App.getAppScope());
     }
 
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new DialogFragmentViewModel(mTrackId);
+        return (T) new DialogFragmentViewModel();
     }
 }
