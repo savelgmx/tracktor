@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.di.DialogFragmentModule;
 import com.elegion.tracktor.di.DialogFragmentViewModelModule;
@@ -52,8 +53,7 @@ public class ResultsDialogFragment extends DialogFragment {
         Log.d("ResultsDetailFragment","OnClickListener with Comment= "+ ibAddCommentText.getText().toString());
         Log.d("ResultsDetailFragment","mDialogFragmentViewModel="+String.valueOf(mDialogFragmentViewModel));
 
-      //  mResultsViewModel.updateComment(mTrackId, ibAddCommentText.getText().toString());
-    //    mDialogFragmentViewModel.updateComment(mTrackId,ibAddCommentText.getText().toString());
+     //    mDialogFragmentViewModel.updateComment(mTrackId,ibAddCommentText.getText().toString());
 
 
 
@@ -75,10 +75,12 @@ public class ResultsDialogFragment extends DialogFragment {
 
         //TODO remove noFactory Found Exeption
         // at com.elegion.tracktor.ui.results.ResultsDialogFragment.onCreateDialog(ResultsDialogFragment.java:78)
-        Scope scope = Toothpick.openScope(ResultsFragment.class);
+/*
+        Scope scope = Toothpick.openScope(ResultsDialogFragment.class);
         scope.installModules(new DialogFragmentViewModelModule());
         Toothpick.inject(this, scope);
-
+*/
+        Toothpick.inject(this,App.getAppScope());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
