@@ -1,8 +1,6 @@
 package com.elegion.tracktor.di;
 
 import android.app.DialogFragment;
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
 
 import com.elegion.tracktor.ui.results.DialogFragmentViewModel;
 import com.elegion.tracktor.util.DialogFragmentViewModelCustomFactory;
