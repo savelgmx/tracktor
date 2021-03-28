@@ -50,6 +50,8 @@ public class ResultsViewModel extends ViewModel {
 
     private MutableLiveData<String> mDateText = new MutableLiveData<>();
 
+    private MutableLiveData<String> mComment = new MutableLiveData<>();
+
     private String TAG =ResultsViewModel.class.getSimpleName();
 
     private Double spentCalories;
