@@ -37,7 +37,9 @@ public class DialogFragmentViewModel extends ViewModel {
                 track.getDuration(),
                 track.getDistance(),
                 track.getImageBase64(),
-                comment);
+                track.getComment()
+
+        );
     }
 
 
