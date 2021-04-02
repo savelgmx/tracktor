@@ -44,4 +44,10 @@ public class StringUtil {
         return df.format(date);
     }
 
+    public static String getCommentsText(String comment){
+        if (comment==null){
+            return "No comments";
+        }else return comment.trim();
+    }
+
 }

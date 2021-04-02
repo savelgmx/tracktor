@@ -83,11 +83,13 @@ public class ResultsViewModel extends ViewModel {
         String time = StringUtil.getTimeText(track.getDuration());
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
         String averageSpeed = StringUtil.getAverageSpeedText(track.getDistance(), track.getDuration());
+        String comment = StringUtil.getCommentsText(track.getComment());
 
         mAverageSpeed.postValue(averageSpeed);
         mTimeText.postValue(time);
         mDistanceText.postValue(distance);
         mImage.postValue(bitmapImage);
+        mComment.postValue(comment);
     }
 
 
