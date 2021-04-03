@@ -3,12 +3,14 @@ package com.elegion.tracktor.ui.results;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
@@ -24,6 +26,10 @@ import toothpick.Toothpick;
 public class ResultsDialogFragment extends DialogFragment {
     private static final String KEY_RESULTS_ID="ResultsDialogFragment.KeyResultsId";
     private static long mTrackId; //сохраняем шв екфсл чтобы правильно добвать его к записи
+
+    @BindView(R.id.tvTitle)
+    protected TextView tvTitle;
+
 
     @BindView(R.id.edAdComment)
     protected EditText ibAddCommentText;
@@ -65,7 +71,8 @@ public class ResultsDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fr_comment_dialog_fragment, null);
-        ButterKnife.bind(this, view);
+        //ButterKnife.bind(this, view);
+        initUI(view);
 
         builder.setView(view)
                 .setPositiveButton(R.string.btn_save_label, mOnClickListener)
@@ -74,6 +81,15 @@ public class ResultsDialogFragment extends DialogFragment {
         return builder.create();
     }
 
+
+    private void initUI(View view){
+        // Введенный комментарий отображает  если он уже есть
+        ButterKnife.bind(this, view);
+        tvTitle.setText(mDialogFragmentViewModel.getTitleId(mTrackId));
+      //  mDialogFragmentViewModel.getComment().observe( this, str->ibAddCommentText.setText(str));
+
+
+    }
 
 
 

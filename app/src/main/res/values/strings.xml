@@ -51,6 +51,8 @@
     <string name="dateLabel">Дата:</string>
     <string name="btn_save_label">Сохранить</string>
     <string name="btn_cancel_label">Отмена</string>
-   />
+    <string name="dialog_title_new_comment">Новый комментарий</string>
+    <string name="dialog_title_edit_comment">Редактировать комментарий</string>
+    />
 
 </resources>
