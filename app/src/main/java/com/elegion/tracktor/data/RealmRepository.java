@@ -106,7 +106,9 @@ public class RealmRepository implements IRepository<Track> {
 
     }
     public long createAndUpdateTrackFrom(long id,long duration,double distanse,String base64image,String comment){
+
         Track track = new Track();
+        track.setId(id);
         track.setDistance(distanse);
         track.setDuration(duration);
         track.setImageBase64(base64image);
