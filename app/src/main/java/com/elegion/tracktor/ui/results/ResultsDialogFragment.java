@@ -3,12 +3,15 @@ package com.elegion.tracktor.ui.results;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -23,7 +26,7 @@ import toothpick.Toothpick;
 
 //отображает диалоговое окно для ввода и редактироания комментария к пройденному треку
 
-public class ResultsDialogFragment extends DialogFragment {
+public class ResultsDialogFragment extends DialogFragment implements LifecycleOwner {
     private static final String KEY_RESULTS_ID="ResultsDialogFragment.KeyResultsId";
     private static long mTrackId; //сохраняем шв екфсл чтобы правильно добвать его к записи
 
@@ -41,10 +44,6 @@ public class ResultsDialogFragment extends DialogFragment {
 
 
     private DialogInterface.OnClickListener mOnClickListener = (dialogInterface, i) -> {
-
-        Log.d("ResultsDetailFragment","OnClickListener with mTrackId= "+String.valueOf(mTrackId));
-        Log.d("ResultsDetailFragment","OnClickListener with Comment= "+ ibAddCommentText.getText().toString());
-        Log.d("ResultsDetailFragment","mDialogFragmentViewModel="+String.valueOf(mDialogFragmentViewModel));
 
          mDialogFragmentViewModel.updateComment(mTrackId,ibAddCommentText.getText().toString());
 
@@ -86,11 +85,14 @@ public class ResultsDialogFragment extends DialogFragment {
         // Введенный комментарий отображает  если он уже есть
         ButterKnife.bind(this, view);
         tvTitle.setText(mDialogFragmentViewModel.getTitleId(mTrackId));
-      //  mDialogFragmentViewModel.getComment().observe( this, str->ibAddCommentText.setText(str));
-
+        ibAddCommentText.setText(mDialogFragmentViewModel.getComment(mTrackId));
 
     }
 
 
-
+    @NonNull
+    @Override
+    public Lifecycle getLifecycle() {
+        return null;
+    }
 }

@@ -16,9 +16,9 @@ import javax.inject.Inject;
 import toothpick.Toothpick;
 
 public class DialogFragmentViewModel extends ViewModel {
-    private MutableLiveData<String> mComment = new MutableLiveData<>();
+  //  private MutableLiveData<String> mComment = new MutableLiveData<>();
 
-    private int trackId;
+    //private int trackId;
     private int mTitleId;
     @Inject
     IRepository<Track> mRepository;
@@ -43,15 +43,6 @@ public class DialogFragmentViewModel extends ViewModel {
     public void updateComment(long mTrackId,String comment){
         Track track = mRepository.getItem(mTrackId);
 
-        Log.d("Result Dailog", "mTrackId="+String.valueOf(mTrackId));
-
-        Log.d("Result Dailog", "Duration="+String.valueOf(track.getDuration()));
-        Log.d("Result Dailog", "Distancе="+String.valueOf(track.getDistance()));
-        //Log.d("Result Dailog", "ImageBase="+String.valueOf(track.getImageBase64()));
-
-        Log.d("Result Dailog","Get Current Comment="+String.valueOf(track.getComment()));
-
-        Log.d("Result Dailog", "Comment="+String.valueOf(comment));
 
 
         mRealmRepository.createAndUpdateTrackFrom(mTrackId,
@@ -71,7 +62,9 @@ public class DialogFragmentViewModel extends ViewModel {
         return mTitleId;
     }
 
-    public MutableLiveData<String> getComment() {
-        return mComment;
+    public String getComment(Long trackid) {
+        Track track = mRepository.getItem(trackid);
+
+        return track.getComment();
     }
 }
