@@ -28,27 +28,27 @@ public class ReadUserPreferences implements UserRepository{
     @Override
     public String getListPreferenceValue(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getString("sex", "");
+        return sharedPreferences.getString("sex", "Man");
 
     }
 
     @Override
     public String getUserWeight(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getString("weight", "");
+        return sharedPreferences.getString("weight", "60");
     }
 
     @Override
     public String getUserHeight(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getString("height", "");
+        return sharedPreferences.getString("height", "170");
     }
 
     @Override
     public String getUserAge(Context context) {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getString("age", "");
+        return sharedPreferences.getString("age", "33");
     }
 
 //хранит значение выбора вида активности (бег,ходьба,велосипед) на экране результатов
