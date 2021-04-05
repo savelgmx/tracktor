@@ -119,7 +119,9 @@
             android:layout_height="wrap_content"
             android:paddingEnd="0dp"
             android:paddingStart="4dp"
-            tools:text="Комментарий" />
+            android:editable="false"
+            tools:text="Комментарий"
+            tools:ignore="Deprecated" />
     </LinearLayout>
 
     <LinearLayout
