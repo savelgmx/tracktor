@@ -58,6 +58,8 @@ public class ResultsDetailsFragment extends Fragment {
     TextView mSpentCalories;
     @BindView(R.id.tvDate)
     TextView mDateText;
+    @BindView(R.id.tvComment)
+    TextView mComment;
 
 
     @Inject
@@ -129,6 +131,10 @@ public class ResultsDetailsFragment extends Fragment {
         mResultsViewModel.getSpentCalories().observe(this, spentCalories -> mSpentCalories.setText(spentCalories));
 
         mResultsViewModel.getDate().observe(this, date -> mDateText.setText(date));
+
+        mResultsViewModel.getComment().observe(this,comment->mComment.setText(comment));
+
+
 
     }
 

@@ -187,6 +187,7 @@ public class ResultsViewModel extends ViewModel {
     public MutableLiveData<String> getSpentCalories(){ return mSpentCalories; }
 
     public MutableLiveData<String > getDate(){return mDateText; }
+    public MutableLiveData<String> getComment(){return mComment;}
 
 
 

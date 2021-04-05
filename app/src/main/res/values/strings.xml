@@ -53,6 +53,7 @@
     <string name="btn_cancel_label">Отмена</string>
     <string name="dialog_title_new_comment">Новый комментарий</string>
     <string name="dialog_title_edit_comment">Редактировать комментарий</string>
+    <string name="CommentLabel">Комментарий</string>
     />
 
 </resources>

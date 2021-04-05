@@ -101,6 +101,26 @@
             tools:text="1000 kkal" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/CommentLabel" />
+
+
+        <MultiAutoCompleteTextView
+            android:id="@+id/tvComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="0dp"
+            android:paddingStart="4dp"
+            tools:text="Комментарий" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
