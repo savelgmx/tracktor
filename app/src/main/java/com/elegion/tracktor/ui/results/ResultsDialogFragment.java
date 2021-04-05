@@ -40,12 +40,15 @@ public class ResultsDialogFragment extends DialogFragment implements LifecycleOw
     @Inject
     DialogFragmentViewModel mDialogFragmentViewModel;
 
+    @Inject
+    ResultsViewModel mResultsViewModel;
+
 
 
 
     private DialogInterface.OnClickListener mOnClickListener = (dialogInterface, i) -> {
 
-         mDialogFragmentViewModel.updateComment(mTrackId,ibAddCommentText.getText().toString());
+         mResultsViewModel.updateComment(mTrackId,ibAddCommentText.getText().toString());
 
 
 
