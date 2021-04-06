@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.elegion.tracktor.App;
+import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.IRepository;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
@@ -38,7 +39,7 @@ public class ResultsViewModel extends ViewModel {
     Context mContext;
 
 
-
+    private int mTitleId;
 
     private MutableLiveData<List<Track>> mTracks = new MutableLiveData<>();
     private MutableLiveData<Bitmap> mImage = new MutableLiveData<>();
@@ -203,7 +204,19 @@ public class ResultsViewModel extends ViewModel {
         );
     }
 
+    public int getTitleId(Long trackid) {
+        Track track = mRepository.getItem(trackid);
+        if(track.getComment()==null){
+            mTitleId= R.string.dialog_title_new_comment;
+        }else mTitleId=R.string.dialog_title_edit_comment;
+        return mTitleId;
+    }
 
+    public String getTrackComment(Long trackid) {
+        Track track = mRepository.getItem(trackid);
+
+        return track.getComment();
+    }
 
 
 }

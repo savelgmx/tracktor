@@ -49,6 +49,7 @@ public class ResultsDialogFragment extends DialogFragment implements LifecycleOw
     private DialogInterface.OnClickListener mOnClickListener = (dialogInterface, i) -> {
 
          mResultsViewModel.updateComment(mTrackId,ibAddCommentText.getText().toString());
+        ibAddCommentText.setText(mResultsViewModel.getTrackComment(mTrackId));
 
 
 
@@ -87,9 +88,8 @@ public class ResultsDialogFragment extends DialogFragment implements LifecycleOw
     private void initUI(View view){
         // Введенный комментарий отображает  если он уже есть
         ButterKnife.bind(this, view);
-        tvTitle.setText(mDialogFragmentViewModel.getTitleId(mTrackId));
-        ibAddCommentText.setText(mDialogFragmentViewModel.getComment(mTrackId));
-
+        tvTitle.setText(mResultsViewModel.getTitleId(mTrackId));
+        ibAddCommentText.setText(mResultsViewModel.getTrackComment(mTrackId));
     }
 
 
