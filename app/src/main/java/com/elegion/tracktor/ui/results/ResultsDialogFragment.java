@@ -51,7 +51,7 @@ public class ResultsDialogFragment extends DialogFragment implements LifecycleOw
          mResultsViewModel.updateComment(mTrackId,ibAddCommentText.getText().toString());
         ibAddCommentText.setText(mResultsViewModel.getTrackComment(mTrackId));
 
-
+        mResultsViewModel.getTrackComment(mTrackId);
 
     };
 

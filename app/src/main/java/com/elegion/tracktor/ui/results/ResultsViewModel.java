@@ -202,6 +202,8 @@ public class ResultsViewModel extends ViewModel {
                 comment
 
         );
+        mComment.postValue(StringUtil.getCommentsText(comment));
+
     }
 
     public int getTitleId(Long trackid) {
@@ -214,6 +216,8 @@ public class ResultsViewModel extends ViewModel {
 
     public String getTrackComment(Long trackid) {
         Track track = mRepository.getItem(trackid);
+
+        mComment.postValue(StringUtil.getCommentsText(track.getComment()));
 
         return track.getComment();
     }

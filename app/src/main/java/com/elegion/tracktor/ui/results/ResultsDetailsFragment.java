@@ -208,6 +208,9 @@ public class ResultsDetailsFragment extends Fragment {
         ResultsDialogFragment resultsDialogFragment = ResultsDialogFragment.newInstance(mTrackId);
         resultsDialogFragment.show(getActivity().getFragmentManager(), "resultsDialogFragment");
 
+        mResultsViewModel.getTrackComment(mTrackId);
+
+
 
     }
 
