@@ -53,6 +53,8 @@ public class ResultsDialogFragment extends DialogFragment implements LifecycleOw
 
         mResultsViewModel.getTrackComment(mTrackId);
 
+        mResultsViewModel.loadImage(mTrackId);
+
     };
 
 
