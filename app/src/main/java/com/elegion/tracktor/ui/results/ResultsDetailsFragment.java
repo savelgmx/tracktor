@@ -204,14 +204,27 @@ public class ResultsDetailsFragment extends Fragment {
     private void addComments(){
         //диалог с предложением ввести комментарий.
        // FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        Log.d("ResultsDetailsFragment","Image Button Press handled");
+
         ResultsDialogFragment resultsDialogFragment = ResultsDialogFragment.newInstance(mTrackId);
         resultsDialogFragment.show(getActivity().getFragmentManager(), "resultsDialogFragment");
 
-        mResultsViewModel.getTrackComment(mTrackId);
+/*
+        Log.d("ResultsDetailsFragment","mResultsViewModel.getTrackComment(mTrackId)="+  mResultsViewModel.getTrackComment(mTrackId));
+        Log.d("ResultsDetailsFragment","mResultsViewModel.getComment()="+  mResultsViewModel.getComment().getValue());
+        Log.d("ResultsDetailsFragment","mComment="+  mComment.getText().toString());
+
+*/
+
+
+        //  mResultsViewModel.getTrackComment(mTrackId);
 
 
 
+    }
+
+    public static void setCommentText(String commentText){
+
+     //   mComment.setText(commentText);
     }
 
 

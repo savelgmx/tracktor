@@ -52,6 +52,8 @@ public class DialogFragmentViewModel extends ViewModel {
                 comment
 
         );
+
+
     }
 
     public int getTitleId(Long trackid) {

@@ -37,8 +37,10 @@ public class ResultsDialogFragment extends DialogFragment implements LifecycleOw
     @BindView(R.id.edAdComment)
     protected EditText ibAddCommentText;
 
+/*
     @Inject
     DialogFragmentViewModel mDialogFragmentViewModel;
+*/
 
     @Inject
     ResultsViewModel mResultsViewModel;
@@ -51,9 +53,11 @@ public class ResultsDialogFragment extends DialogFragment implements LifecycleOw
          mResultsViewModel.updateComment(mTrackId,ibAddCommentText.getText().toString());
         ibAddCommentText.setText(mResultsViewModel.getTrackComment(mTrackId));
 
-        mResultsViewModel.getTrackComment(mTrackId);
+    //    mResultsViewModel.getTrackComment(mTrackId);
 
-        mResultsViewModel.loadImage(mTrackId);
+        //mResultsViewModel.loadImage(mTrackId);
+        Log.d("ResultsDialogFragment","ibAddCommentText.getText().toString())="+ibAddCommentText.getText().toString());
+
 
     };
 
