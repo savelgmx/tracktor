@@ -1,5 +1,6 @@
 package com.elegion.tracktor.ui.results;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -46,6 +47,7 @@ import static com.elegion.tracktor.ui.results.ResultsActivity.RESULT_ID;
  */
 public class ResultsDetailsFragment extends Fragment {
 
+
     @BindView(R.id.tvTime)
     TextView mTimeText;
     @BindView(R.id.tvDistance)
@@ -73,12 +75,18 @@ public class ResultsDetailsFragment extends Fragment {
     private RealmRepository mRealmRepository;
     private long mTrackId;
 
+    private static final int REQUEST_COMMENT = 1; //устанавливает requestCode;
+    private static final int REQUEST_ANOTHER_ONE = 2;
+
+    private static ResultsDetailsFragment mResultsDetailsFragment;
+
 
     public static ResultsDetailsFragment newInstance(long trackId) {
         Bundle bundle = new Bundle();
         bundle.putLong(RESULT_ID, trackId);
         ResultsDetailsFragment fragment = new ResultsDetailsFragment();
         fragment.setArguments(bundle);
+        mResultsDetailsFragment = fragment;
         return fragment;
     }
 
@@ -201,36 +209,47 @@ public class ResultsDetailsFragment extends Fragment {
             };
 
 
+
     private void addComments(){
         //диалог с предложением ввести комментарий.
        // FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
+        //https://habr.com/ru/post/259805/
+       // https://stackoverflow.com/questions/10905312/receive-result-from-dialogfragment
+
         ResultsDialogFragment resultsDialogFragment = ResultsDialogFragment.newInstance(mTrackId);
+      //  resultsDialogFragment.setTargetFragment(mResultsDetailsFragment,REQUEST_COMMENT);
         resultsDialogFragment.show(getActivity().getFragmentManager(), "resultsDialogFragment");
-
-/*
-        Log.d("ResultsDetailsFragment","mResultsViewModel.getTrackComment(mTrackId)="+  mResultsViewModel.getTrackComment(mTrackId));
-        Log.d("ResultsDetailsFragment","mResultsViewModel.getComment()="+  mResultsViewModel.getComment().getValue());
-        Log.d("ResultsDetailsFragment","mComment="+  mComment.getText().toString());
-
-*/
 
 
         //  mResultsViewModel.getTrackComment(mTrackId);
 
 
 
+
+
+
     }
 
-    public static void setCommentText(String commentText){
-
-     //   mComment.setText(commentText);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_COMMENT:
+                    int weight = data.getIntExtra(ResultsDialogFragment.TAG_COMMENT_EDITED, -1);
+                    //используем полученные результаты
+                    //...
+                    break;
+                case REQUEST_ANOTHER_ONE:
+                    //...
+                    break;
+                //обработка других requestCode
+            }
+            //updateUI();
+        }
     }
-
 
 
     private View.OnClickListener mOnClickListener= view-> addComments();
 }
-
-
 
