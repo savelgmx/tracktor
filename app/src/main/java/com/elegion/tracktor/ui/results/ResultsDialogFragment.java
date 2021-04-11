@@ -26,7 +26,7 @@ import toothpick.Toothpick;
 
 //отображает диалоговое окно для ввода и редактироания комментария к пройденному треку
 
-public class ResultsDialogFragment extends DialogFragment implements LifecycleOwner {
+public class ResultsDialogFragment extends DialogFragment {
     private static final String KEY_RESULTS_ID="ResultsDialogFragment.KeyResultsId";
     private static long mTrackId; //сохраняем шв екфсл чтобы правильно добвать его к записи
 
@@ -36,11 +36,6 @@ public class ResultsDialogFragment extends DialogFragment implements LifecycleOw
 
     @BindView(R.id.edAdComment)
     protected EditText ibAddCommentText;
-
-/*
-    @Inject
-    DialogFragmentViewModel mDialogFragmentViewModel;
-*/
 
     @Inject
     ResultsViewModel mResultsViewModel;
@@ -56,8 +51,6 @@ public class ResultsDialogFragment extends DialogFragment implements LifecycleOw
     //    mResultsViewModel.getTrackComment(mTrackId);
 
         //mResultsViewModel.loadImage(mTrackId);
-        Log.d("ResultsDialogFragment","ibAddCommentText.getText().toString())="+ibAddCommentText.getText().toString());
-
 
     };
 
@@ -80,7 +73,6 @@ public class ResultsDialogFragment extends DialogFragment implements LifecycleOw
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fr_comment_dialog_fragment, null);
-        //ButterKnife.bind(this, view);
         initUI(view);
 
         builder.setView(view)
@@ -99,9 +91,11 @@ public class ResultsDialogFragment extends DialogFragment implements LifecycleOw
     }
 
 
+/*
     @NonNull
     @Override
     public Lifecycle getLifecycle() {
         return null;
     }
+*/
 }
