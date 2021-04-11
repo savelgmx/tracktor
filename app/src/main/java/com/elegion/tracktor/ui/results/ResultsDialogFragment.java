@@ -1,17 +1,14 @@
 package com.elegion.tracktor.ui.results;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -30,6 +27,10 @@ public class ResultsDialogFragment extends DialogFragment {
     private static final String KEY_RESULTS_ID="ResultsDialogFragment.KeyResultsId";
     private static long mTrackId; //сохраняем шв екфсл чтобы правильно добвать его к записи
 
+
+    public static final String TAG_COMMENT_EDITED = "comment";//тэг для передачи результата обратно
+
+
     @BindView(R.id.tvTitle)
     protected TextView tvTitle;
 
@@ -47,6 +48,11 @@ public class ResultsDialogFragment extends DialogFragment {
 
          mResultsViewModel.updateComment(mTrackId,ibAddCommentText.getText().toString());
         ibAddCommentText.setText(mResultsViewModel.getTrackComment(mTrackId));
+
+        //отправляем результат обратно
+        Intent intent = new Intent();
+        intent.putExtra(TAG_COMMENT_EDITED, ibAddCommentText.toString());
+        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
 
     //    mResultsViewModel.getTrackComment(mTrackId);
 
@@ -91,11 +97,5 @@ public class ResultsDialogFragment extends DialogFragment {
     }
 
 
-/*
-    @NonNull
-    @Override
-    public Lifecycle getLifecycle() {
-        return null;
-    }
-*/
+
 }
