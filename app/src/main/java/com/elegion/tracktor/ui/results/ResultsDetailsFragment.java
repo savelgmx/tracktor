@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
@@ -45,7 +46,7 @@ import static com.elegion.tracktor.ui.results.ResultsActivity.RESULT_ID;
  * @author Azret Magometov
  * https://apptractor.ru/info/github/mvp-sample.html
  */
-public class ResultsDetailsFragment extends Fragment {
+public class ResultsDetailsFragment extends Fragment implements ResultsDialogFragment.ResultsDialogListener {
 
 
     @BindView(R.id.tvTime)
@@ -217,21 +218,18 @@ public class ResultsDetailsFragment extends Fragment {
         //https://habr.com/ru/post/259805/
        // https://stackoverflow.com/questions/10905312/receive-result-from-dialogfragment
 
+        //https://android-developers.googleblog.com/2012/05/using-dialogfragments.html
+
         ResultsDialogFragment resultsDialogFragment = ResultsDialogFragment.newInstance(mTrackId);
-      //  resultsDialogFragment.setTargetFragment(mResultsDetailsFragment,REQUEST_COMMENT);
-        resultsDialogFragment.show(getActivity().getFragmentManager(), "resultsDialogFragment");
+        resultsDialogFragment.show(getActivity().getSupportFragmentManager(), "resultsDialogFragment");
 
 
         //  mResultsViewModel.getTrackComment(mTrackId);
 
 
-
-
-
-
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+ /*   public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
@@ -248,8 +246,15 @@ public class ResultsDetailsFragment extends Fragment {
             //updateUI();
         }
     }
-
+*/
 
     private View.OnClickListener mOnClickListener= view-> addComments();
+
+    @Override
+    public void onFinishEditDialog(String inputText) {
+        //здесь мы должны ловить строку из диалогового окна ResultsDialogfragment
+
+
+    }
 }
 
