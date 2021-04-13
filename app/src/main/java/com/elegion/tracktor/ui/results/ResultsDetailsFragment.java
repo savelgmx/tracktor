@@ -218,14 +218,9 @@ public class ResultsDetailsFragment extends Fragment implements ResultsDialogFra
         //https://habr.com/ru/post/259805/
        // https://stackoverflow.com/questions/10905312/receive-result-from-dialogfragment
 
-        //https://android-developers.googleblog.com/2012/05/using-dialogfragments.html
-
         ResultsDialogFragment resultsDialogFragment = ResultsDialogFragment.newInstance(mTrackId);
         resultsDialogFragment.setTargetFragment(this,1);
         resultsDialogFragment.show(getActivity().getSupportFragmentManager(), "resultsDialogFragment");
-
-
-        //  mResultsViewModel.getTrackComment(mTrackId);
 
 
     }
@@ -233,18 +228,10 @@ public class ResultsDetailsFragment extends Fragment implements ResultsDialogFra
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            switch (requestCode) {
-                case REQUEST_COMMENT:
-                    int weight = data.getIntExtra(ResultsDialogFragment.TAG_COMMENT_EDITED, -1);
-                    //используем полученные результаты
-                    //...
-                    break;
-                case REQUEST_ANOTHER_ONE:
-                    //...
-                    break;
-                //обработка других requestCode
-            }
-            //updateUI();
+
+              mResultsViewModel.getTrackComment(mTrackId);
+
+
         }
     }
 
