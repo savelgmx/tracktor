@@ -59,10 +59,9 @@ public class ResultsDialogFragment extends DialogFragment implements TextView.On
         ibAddCommentText.setText(mResultsViewModel.getTrackComment(mTrackId));
 
         //отправляем результат обратно
- /*       Intent intent = new Intent();
+        Intent intent = new Intent();
         intent.putExtra(TAG_COMMENT_EDITED, ibAddCommentText.toString());
         getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
-*/
     //    mResultsViewModel.getTrackComment(mTrackId);
 
         //mResultsViewModel.loadImage(mTrackId);

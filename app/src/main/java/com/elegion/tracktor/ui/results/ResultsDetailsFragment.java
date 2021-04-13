@@ -221,6 +221,7 @@ public class ResultsDetailsFragment extends Fragment implements ResultsDialogFra
         //https://android-developers.googleblog.com/2012/05/using-dialogfragments.html
 
         ResultsDialogFragment resultsDialogFragment = ResultsDialogFragment.newInstance(mTrackId);
+        resultsDialogFragment.setTargetFragment(this,1);
         resultsDialogFragment.show(getActivity().getSupportFragmentManager(), "resultsDialogFragment");
 
 
@@ -229,7 +230,7 @@ public class ResultsDetailsFragment extends Fragment implements ResultsDialogFra
 
     }
 
- /*   public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
@@ -246,7 +247,6 @@ public class ResultsDetailsFragment extends Fragment implements ResultsDialogFra
             //updateUI();
         }
     }
-*/
 
     private View.OnClickListener mOnClickListener= view-> addComments();
 
