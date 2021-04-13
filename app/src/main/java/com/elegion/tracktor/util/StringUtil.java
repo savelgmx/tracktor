@@ -45,7 +45,7 @@ public class StringUtil {
     }
 
     public static String getCommentsText(String comment){
-        if (comment==null){
+        if (comment.length()==0){
             return "Введите комментарий";
         }else return comment.trim();
     }
