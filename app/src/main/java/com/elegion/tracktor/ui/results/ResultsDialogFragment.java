@@ -3,27 +3,19 @@ package com.elegion.tracktor.ui.results;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-//import android.app.DialogFragment;
 import android.support.v4.app.DialogFragment;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import toothpick.Toothpick;
 
 //отображает диалоговое окно для ввода и редактироания комментария к пройденному треку implements TextView.OnEditorActionListener
@@ -46,18 +38,10 @@ public class ResultsDialogFragment extends DialogFragment  {
     @Inject
     ResultsViewModel mResultsViewModel;
 
-/*
-
-    public interface ResultsDialogListener {
-        void onFinishEditDialog(String inputText);
-    }
-*/
-
-
 
     private DialogInterface.OnClickListener mOnClickListener = (dialogInterface, i) -> {
 
-         mResultsViewModel.updateComment(mTrackId,ibAddCommentText.getText().toString());
+        mResultsViewModel.updateComment(mTrackId,ibAddCommentText.getText().toString());
         ibAddCommentText.setText(mResultsViewModel.getTrackComment(mTrackId));
 
         //отправляем результат обратно

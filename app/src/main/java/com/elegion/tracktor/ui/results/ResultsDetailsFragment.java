@@ -9,11 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,16 +21,11 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.di.ViewModelModule;
 import com.elegion.tracktor.ui.preferences.ReadUserPreferences;
-
-
 import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import toothpick.Scope;
@@ -76,7 +67,6 @@ public class ResultsDetailsFragment extends Fragment {
     private RealmRepository mRealmRepository;
     private long mTrackId;
 
-    private static final int REQUEST_COMMENT = 1; //устанавливает requestCode;
 
 
     public static ResultsDetailsFragment newInstance(long trackId) {
@@ -84,7 +74,7 @@ public class ResultsDetailsFragment extends Fragment {
         bundle.putLong(RESULT_ID, trackId);
         ResultsDetailsFragment fragment = new ResultsDetailsFragment();
         fragment.setArguments(bundle);
-          return fragment;
+        return fragment;
     }
 
     @Override
@@ -222,7 +212,7 @@ public class ResultsDetailsFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
 
-              mResultsViewModel.getTrackComment(mTrackId);
+            mResultsViewModel.getTrackComment(mTrackId);
 
 
         }
