@@ -46,7 +46,7 @@ import static com.elegion.tracktor.ui.results.ResultsActivity.RESULT_ID;
  * @author Azret Magometov
  * https://apptractor.ru/info/github/mvp-sample.html
  */
-public class ResultsDetailsFragment extends Fragment implements ResultsDialogFragment.ResultsDialogListener {
+public class ResultsDetailsFragment extends Fragment {
 
 
     @BindView(R.id.tvTime)
@@ -77,9 +77,6 @@ public class ResultsDetailsFragment extends Fragment implements ResultsDialogFra
     private long mTrackId;
 
     private static final int REQUEST_COMMENT = 1; //устанавливает requestCode;
-    private static final int REQUEST_ANOTHER_ONE = 2;
-
-    private static ResultsDetailsFragment mResultsDetailsFragment;
 
 
     public static ResultsDetailsFragment newInstance(long trackId) {
@@ -87,8 +84,7 @@ public class ResultsDetailsFragment extends Fragment implements ResultsDialogFra
         bundle.putLong(RESULT_ID, trackId);
         ResultsDetailsFragment fragment = new ResultsDetailsFragment();
         fragment.setArguments(bundle);
-        mResultsDetailsFragment = fragment;
-        return fragment;
+          return fragment;
     }
 
     @Override
@@ -213,10 +209,7 @@ public class ResultsDetailsFragment extends Fragment implements ResultsDialogFra
 
     private void addComments(){
         //диалог с предложением ввести комментарий.
-       // FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-        //https://habr.com/ru/post/259805/
-       // https://stackoverflow.com/questions/10905312/receive-result-from-dialogfragment
+        //https://habr.com/ru/post/259805/ вот эту статью используем для передачи данных из DialogFragment
 
         ResultsDialogFragment resultsDialogFragment = ResultsDialogFragment.newInstance(mTrackId);
         resultsDialogFragment.setTargetFragment(this,1);
@@ -237,11 +230,5 @@ public class ResultsDetailsFragment extends Fragment implements ResultsDialogFra
 
     private View.OnClickListener mOnClickListener= view-> addComments();
 
-    @Override
-    public void onFinishEditDialog(String inputText) {
-        //здесь мы должны ловить строку из диалогового окна ResultsDialogfragment
-
-
-    }
 }
 

@@ -26,9 +26,9 @@ import butterknife.ButterKnife;
 
 import toothpick.Toothpick;
 
-//отображает диалоговое окно для ввода и редактироания комментария к пройденному треку
+//отображает диалоговое окно для ввода и редактироания комментария к пройденному треку implements TextView.OnEditorActionListener
 
-public class ResultsDialogFragment extends DialogFragment implements TextView.OnEditorActionListener {
+public class ResultsDialogFragment extends DialogFragment  {
     private static final String KEY_RESULTS_ID="ResultsDialogFragment.KeyResultsId";
     private static long mTrackId; //сохраняем шв екфсл чтобы правильно добвать его к записи
 
@@ -46,10 +46,12 @@ public class ResultsDialogFragment extends DialogFragment implements TextView.On
     @Inject
     ResultsViewModel mResultsViewModel;
 
+/*
 
     public interface ResultsDialogListener {
         void onFinishEditDialog(String inputText);
     }
+*/
 
 
 
@@ -93,10 +95,6 @@ public class ResultsDialogFragment extends DialogFragment implements TextView.On
 
         ibAddCommentText.requestFocus();
 
-       builder.create().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-       ibAddCommentText.setOnEditorActionListener(this);
-
-
         return builder.create();
 
     }
@@ -107,18 +105,6 @@ public class ResultsDialogFragment extends DialogFragment implements TextView.On
         ButterKnife.bind(this, view);
         tvTitle.setText(mResultsViewModel.getTitleId(mTrackId));
         ibAddCommentText.setText(mResultsViewModel.getTrackComment(mTrackId));
-    }
-
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (EditorInfo.IME_ACTION_DONE == actionId) {
-            // Return input text to activity
-            ResultsDialogListener activity = (ResultsDialogListener) getActivity();
-            activity.onFinishEditDialog(ibAddCommentText.getText().toString());
-            this.dismiss();
-            return true;
-        }
-        return false;
     }
 
 }
