@@ -208,10 +208,18 @@ public class ResultsViewModel extends ViewModel {
 
     public int getTitleId(Long trackid) {
         Track track = mRepository.getItem(trackid);
-        if(track.getComment().length()==0){
-            mTitleId= R.string.dialog_title_new_comment;
-        }else mTitleId=R.string.dialog_title_edit_comment;
+
+        if(track.getComment()==null){
+            mTitleId = R.string.dialog_title_new_comment;
+        }else {
+
+            if (track.getComment().length() == 0) {
+                mTitleId = R.string.dialog_title_new_comment;
+            } else mTitleId = R.string.dialog_title_edit_comment;
+        }
         return mTitleId;
+
+
     }
 
     public String getTrackComment(Long trackid) {
