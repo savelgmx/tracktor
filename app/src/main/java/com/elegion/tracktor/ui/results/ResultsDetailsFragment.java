@@ -139,11 +139,22 @@ public class ResultsDetailsFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+
+    private void imageViewToBitmap(){
+        //converts ImageView item mScreenshotImage to Bitmap mImage
+        mScreenshotImage.buildDrawingCache();
+        mImage= mScreenshotImage.getDrawingCache();
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.actionShare) {
+
+            imageViewToBitmap();
+
             String path = MediaStore.Images.Media.insertImage(requireActivity().getContentResolver(), mImage, "Мой маршрут", null);
-             Uri uri = Uri.parse(path);
+            Uri uri = Uri.parse(path);
             /* В сообщении должна быть информация о расстоянии,
              времени, средней скорости, затраченных калориях,
              комментарий к треку и изображение трека.*/
@@ -151,7 +162,7 @@ public class ResultsDetailsFragment extends Fragment {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("image/jpeg");
             intent.putExtra(Intent.EXTRA_STREAM, uri);
-             intent.putExtra(Intent.EXTRA_TEXT, "Время: " + mTimeText.getText() + "\nРасстояние: " + mDistanceText.getText()
+            intent.putExtra(Intent.EXTRA_TEXT, "Время: " + mTimeText.getText() + "\nРасстояние: " + mDistanceText.getText()
                     +"Средняя скорость: "+mAverageSpeedText.getText()+"Затраченные калории: "+mSpentCalories.getText()
                     +"Комментарий к треку:\n"+mComment.getText()
             );
