@@ -230,6 +230,9 @@ public class ResultsViewModel extends ViewModel {
         return track.getComment();
     }
 
+    public void deleteTrack(Long trackid) {
+        mRealmRepository.deleteItem(trackid);
+    }
 
 }
 

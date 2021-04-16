@@ -169,9 +169,10 @@ public class ResultsDetailsFragment extends Fragment {
             startActivity(Intent.createChooser(intent, "Результаты маршрута"));
             return true;
         } else if (item.getItemId() == R.id.actionDelete) {
-            if (mRealmRepository.deleteItem(mTrackId)) {
-                getActivity().onBackPressed();
-            }
+
+            mResultsViewModel.deleteTrack(mTrackId);
+            getActivity().onBackPressed();
+
             return true;
         } else
             return super.onOptionsItemSelected(item);
