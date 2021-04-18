@@ -54,6 +54,7 @@
     <string name="dialog_title_new_comment">Новый комментарий</string>
     <string name="dialog_title_edit_comment">Редактировать комментарий</string>
     <string name="CommentLabel">Комментарий</string>
+    <string name="error">The list is empty</string>
     />
 
 </resources>
