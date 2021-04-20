@@ -19,6 +19,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.realm.RealmResults;
 import toothpick.Toothpick;
 
 
@@ -65,6 +66,18 @@ public class ResultsViewModel extends ViewModel {
         super();
 
         Toothpick.inject(this, App.getAppScope());
+
+        mTracks.observeForever(tracks ->{
+
+            mIsEmpty.postValue(tracks != null && tracks.isEmpty());
+
+            if (tracks instanceof RealmResults) {
+                RealmResults<Track> trackRealmResults = (RealmResults<Track>) tracks;
+                trackRealmResults.addChangeListener(films -> mIsEmpty.postValue(films.isEmpty()));
+            }
+
+
+        });
 
 
     }

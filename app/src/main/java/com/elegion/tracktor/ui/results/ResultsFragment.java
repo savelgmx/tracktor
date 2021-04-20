@@ -31,6 +31,7 @@ public class ResultsFragment extends Fragment {
 
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
+    @Nullable
     @BindView(R.id.ll_error)
     LinearLayout mErrorLayout;
 
@@ -68,6 +69,7 @@ public class ResultsFragment extends Fragment {
         Toothpick.inject(this, scope);
     }
 
+    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fr_results, container, false);
@@ -88,6 +90,20 @@ public class ResultsFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mResultsAdapter);
+
+        //здесь проверку на IsEmpty и вывод страницы заглушки если список треков еще пуст
+        mResultsViewModel.getIsEmpty().observe(this, isEmpty -> {
+            if (isEmpty != null && !isEmpty) {
+                mRecyclerView.setVisibility(View.VISIBLE);
+                mErrorLayout.setVisibility(View.GONE);
+            } else {
+                mRecyclerView.setVisibility(View.GONE);
+                mErrorLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //End of isEmpty test и вывода заглушки
+
     }
 
     @Override
