@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
@@ -30,6 +31,8 @@ public class ResultsFragment extends Fragment {
 
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
+    @BindView(R.id.ll_error)
+    LinearLayout mErrorLayout;
 
     private OnItemClickListener mListener;
 
@@ -96,4 +99,5 @@ public class ResultsFragment extends Fragment {
     public interface OnItemClickListener {
         void onClick(long trackId);
     }
+
 }

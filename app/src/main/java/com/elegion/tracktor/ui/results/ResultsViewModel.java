@@ -53,9 +53,12 @@ public class ResultsViewModel extends ViewModel {
 
     private MutableLiveData<String> mComment = new MutableLiveData<>();
 
+    private MutableLiveData<Boolean> mIsEmpty=new MutableLiveData<>();
+
     private String TAG =ResultsViewModel.class.getSimpleName();
 
     private Double spentCalories;
+
 
 
     public ResultsViewModel() {
@@ -77,6 +80,12 @@ public class ResultsViewModel extends ViewModel {
     public MutableLiveData<List<Track>> getTracks() {
         return mTracks;
     }
+
+    public MutableLiveData<Boolean> getIsEmpty() {
+        return mIsEmpty;
+    }
+
+
 
     public void loadImage(long mTrackId) {
         Track track = mRepository.getItem(mTrackId);
