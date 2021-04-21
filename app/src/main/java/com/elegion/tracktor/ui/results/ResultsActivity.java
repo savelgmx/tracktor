@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import com.elegion.tracktor.common.ShowResultDetailEvent;
 import com.elegion.tracktor.common.SingleFragmentActivity;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -33,6 +34,17 @@ public class ResultsActivity extends SingleFragmentActivity  {
             return ResultsDetailsFragment.newInstance(resultId);
         else
             return ResultsFragment.newInstance();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        EventBus.getDefault().unregister(this);
+        super.onPause();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
