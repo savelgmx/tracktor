@@ -34,9 +34,9 @@ public class ResultHolder extends RecyclerView.ViewHolder {
 
     public void bind(Track track) {
         mTrackId = track.getId();
-        mDateText.setText(String.valueOf(mTrackId));
-        mDistanceText.setText(String.valueOf(track.getDistance()));
-        mAverageSpeed.setText(String.valueOf(track.getAverageSpeed()));
+        mDateText.setText(StringUtil.getDateText(track.getDate()));
+        mDistanceText.setText(StringUtil.getDistanceText(track.getDistance()));
+        mAverageSpeed.setText(StringUtil.getAverageSpeedText(track.getAverageSpeed(),0));
     }
 
 /*
