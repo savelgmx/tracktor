@@ -35,7 +35,7 @@ public class ResultsFragment extends Fragment {
     @BindView(R.id.ll_error)
     LinearLayout mErrorLayout;
 
-    private OnItemClickListener mListener;
+  //  private OnItemClickListener mListener;
 
     private ResultsAdapter mResultsAdapter;
 
@@ -53,12 +53,14 @@ public class ResultsFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         Toothpick.inject(this, App.getAppScope());
+/*
         if (context instanceof OnItemClickListener) {
             mListener = (OnItemClickListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnItemClickListener");
         }
+*/
     }
 
     @Override
@@ -84,7 +86,7 @@ public class ResultsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mResultsAdapter = new ResultsAdapter(mListener);
+        mResultsAdapter = new ResultsAdapter();//mListener
         mResultsViewModel.getTracks().observe(this, tracks -> mResultsAdapter.submitList(tracks));
         mResultsViewModel.loadTracks();
 
@@ -109,11 +111,13 @@ public class ResultsFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+     //   mListener = null;
     }
 
+/*
     public interface OnItemClickListener {
         void onClick(long trackId);
     }
+*/
 
 }

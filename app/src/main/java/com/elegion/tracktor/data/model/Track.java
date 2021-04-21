@@ -75,26 +75,25 @@ public class Track extends RealmObject {
     public String getComment(){return comment;}
 
     @Override
-/*
     public String toString() {
         return "Track{" +
                 "id=" + id +
                 ", date=" + date +
                 ", duration=" + duration +
                 ", distance=" + distance +
-                ",averagespeed="+averagespeed+
                 ", imageBase64=" + imageBase64 +
                 '}';
     }
-*/
-    public String toString() {
-        return "Track{" +
-                "id=" + id +
-                ", date=" + date +
-                ", duration=" + duration +
-                ", distance=" + distance +
-                ", imageBase64=" + imageBase64 +
-                '}';
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Track) {
+            Track newTrack = (Track) obj;
+            return this.getDistance() == newTrack.getDistance() &&
+                    this.getDuration() == newTrack.getDuration() &&
+                    this.getDate() == newTrack.getDate() &&
+                    this.getAverageSpeed() == newTrack.getAverageSpeed();
+        }
+        return false;
     }
 
 }

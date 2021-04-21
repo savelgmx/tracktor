@@ -8,12 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.elegion.tracktor.R;
+import com.elegion.tracktor.common.ShowResultDetailEvent;
 import com.elegion.tracktor.data.model.Track;
-import com.elegion.tracktor.ui.results.ResultsFragment.OnItemClickListener;
+
+import org.greenrobot.eventbus.EventBus;
+
 
 public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
 
-    private final OnItemClickListener mListener;
+
 
     private static final DiffUtil.ItemCallback<Track> DIFF_CALLBACK = new DiffUtil.ItemCallback<Track>() {
 
@@ -28,10 +31,10 @@ public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
         }
     };
 
-    ResultsAdapter(ResultsFragment.OnItemClickListener listener) {
+
+    ResultsAdapter() {
         super(DIFF_CALLBACK);
-        mListener = listener;
-    }
+     }
 
     @NonNull
     @Override
@@ -43,7 +46,12 @@ public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
     @Override
     public void onBindViewHolder(@NonNull ResultHolder holder, int position) {
         holder.bind(getItem(position));
-        holder.setListener(mListener);
+  //      holder.setListener(mListener);
+        holder.setOnClickListener(id -> EventBus.getDefault().post(new ShowResultDetailEvent(id)));
+
+    }
+    interface OnItemClickListener {
+        void onItemClick (long id);
     }
 
 }

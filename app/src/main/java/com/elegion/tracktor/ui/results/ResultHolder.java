@@ -39,6 +39,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mAverageSpeed.setText(String.valueOf(track.getAverageSpeed()));
     }
 
+/*
     public void setListener(final ResultsFragment.OnItemClickListener listener) {
         mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,4 +52,14 @@ public class ResultHolder extends RecyclerView.ViewHolder {
             }
         });
     }
+*/
+
+    public void setOnClickListener(ResultsAdapter.OnItemClickListener listener) {
+        mView.setOnClickListener(view -> {
+            if(listener != null) {
+                listener.onItemClick(mTrackId);
+            }
+        });
+    }
+
 }
