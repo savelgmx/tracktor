@@ -36,7 +36,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mTrackId = track.getId();
         mDateText.setText(StringUtil.getDateText(track.getDate()));
         mDistanceText.setText(StringUtil.getDistanceText(track.getDistance()));
-        mDuration.setText(StringUtil.getDurationText(track.getDuration()));
+        mDuration.setText(StringUtil.getTimeText(track.getDuration()));
     }
 
 
