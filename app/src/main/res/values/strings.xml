@@ -55,6 +55,8 @@
     <string name="dialog_title_edit_comment">Редактировать комментарий</string>
     <string name="CommentLabel">Комментарий</string>
     <string name="list_empty">The list is empty</string>
+    <string name="sortOrder">Сортировка по возрастанию/убыванию-</string>
+    <string name="sortByDateOrDuration">Сортировка по дате/продолжительности/расстоянию</string>
     />
 
 </resources>
