@@ -10,6 +10,9 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  * @author Azret Magometov
@@ -40,6 +43,33 @@ public class RealmRepository implements IRepository<Track> {
     @Override
     public List<Track> getAll() {
         return mRealm.where(Track.class).findAll();
+    }
+
+    @Override
+    public List<Track> getAllSortById(boolean ascending) {
+/*
+        if (ascending){
+            return mRealm.where(Track.class).sort("id", Sort.ASCENDING).findAll();
+        }
+        else {
+            return mRealm.where(Track.class).sort("id",Sort.DESCENDING).findAllAsync();
+        }
+*/
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmQuery<Track> query = realm.where(Track.class);
+
+        RealmResults<Track> result = query.findAll();
+
+        result = result.sort("id", Sort.DESCENDING);
+
+        //detaching it from realm (optional)
+        List<Track> copied = realm.copyFromRealm(result);
+
+        realm.close();
+
+        return copied;
+
     }
 
     @Override
@@ -119,4 +149,8 @@ public class RealmRepository implements IRepository<Track> {
         return updateItem(track);
 
     }
+
+
+
+
 }

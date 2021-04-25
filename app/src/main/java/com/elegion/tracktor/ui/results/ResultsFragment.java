@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,9 +43,11 @@ public class ResultsFragment extends Fragment {
     LinearLayout mErrorLayout;
 
     private ResultsAdapter mResultsAdapter;
+    private boolean mSortAscending=true;
 
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
+
 
     public ResultsFragment() {
     }
@@ -116,12 +119,17 @@ public class ResultsFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.actionSortByAscOrDesc) {
+            mResultsViewModel.loadSortedByIdTracks(mSortAscending);
+            mSortAscending = !mSortAscending;
 
-            //here increase srt ascending or descending flag
+            Log.d("ResultsFragment" ," mSortAscending = "+String.valueOf(mSortAscending));
+
+
 
             return true;
         } else if (item.getItemId() == R.id.actionSortByDateOrDuration) {
 
+            Log.d("ResultsFragment" ,"Sort order DateOrDuration pressed");
 
             return true;
         } else
