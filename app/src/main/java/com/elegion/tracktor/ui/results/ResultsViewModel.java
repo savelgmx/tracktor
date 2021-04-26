@@ -91,7 +91,7 @@ public class ResultsViewModel extends ViewModel {
     }
 
     public void loadSortedByIdTracks(boolean ascending){
-        mTracks.postValue(mRealmRepository.getAllSortById(ascending));//Realm
+        mTracks.postValue(mRepository.getAllSortById(ascending));//Realm
     }
 
     public MutableLiveData<List<Track>> getTracks() {

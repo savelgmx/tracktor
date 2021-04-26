@@ -42,33 +42,25 @@ public class RealmRepository implements IRepository<Track> {
 
     @Override
     public List<Track> getAll() {
-        return mRealm.where(Track.class).findAll();
+        return mRealm.where(Track.class).sort("id",Sort.DESCENDING).findAll();
     }
 
-    @Override
-    public List<Track> getAllSortById(boolean ascending) {
-/*
+
+    private List<Track> getRealmSortedTracks(boolean ascending){
         if (ascending){
             return mRealm.where(Track.class).sort("id", Sort.ASCENDING).findAll();
         }
         else {
             return mRealm.where(Track.class).sort("id",Sort.DESCENDING).findAllAsync();
         }
-*/
 
-        Realm realm = Realm.getDefaultInstance();
-        RealmQuery<Track> query = realm.where(Track.class);
+    }
 
-        RealmResults<Track> result = query.findAll();
+    @Override
+    public List<Track> getAllSortById(boolean ascending) {
 
-        result = result.sort("id", Sort.DESCENDING);
-
-        //detaching it from realm (optional)
-        List<Track> copied = realm.copyFromRealm(result);
-
-        realm.close();
-
-        return copied;
+        List<Track> tracks = getRealmSortedTracks(ascending);
+        return tracks!= null ? mRealm.copyFromRealm(tracks) : null;
 
     }
 
