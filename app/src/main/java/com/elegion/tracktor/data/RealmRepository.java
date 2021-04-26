@@ -3,6 +3,7 @@ package com.elegion.tracktor.data;
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.model.Track;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -47,12 +48,52 @@ public class RealmRepository implements IRepository<Track> {
 
 
     private List<Track> getRealmSortedTracks(boolean ascending){
-        if (ascending){
-            return mRealm.where(Track.class).sort("id", Sort.ASCENDING).findAll();
+
+        List<Track> tracks = new ArrayList<>();
+
+        Realm realm = Realm.getDefaultInstance();
+
+
+        try {
+            realm.beginTransaction();
+            final RealmResults<Track> realmResults = realm.where(Track.class)
+                    .findAll();
+
+
+            if (ascending) {
+                realmResults.sort("id" , Sort.ASCENDING);
+            } else {
+                realmResults.sort("id" , Sort.DESCENDING);
+            }
+
+            int len = realmResults.size();
+
+            for (int i=0;i<len;i++){
+
+                tracks.add(realmResults.get(i));
+            }
+
+/*
+            for (Track realmResult : realmResults) {
+                Track track = new Track();
+               // copy(track, realmResult);
+                tracks.add(realmResult[i]);
+            }
+*/
+
+            realm.commitTransaction();
+        } catch (Exception e) {
+            e.printStackTrace();
+            realm.cancelTransaction();
+        } finally {
+            realm.close();
         }
-        else {
-            return mRealm.where(Track.class).sort("id",Sort.DESCENDING).findAllAsync();
-        }
+        return tracks;
+
+
+
+
+
 
     }
 
