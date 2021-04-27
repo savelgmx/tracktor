@@ -1,5 +1,7 @@
 package com.elegion.tracktor.data;
 
+import android.support.annotation.MainThread;
+
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.model.Track;
 
@@ -46,17 +48,17 @@ public class RealmRepository implements IRepository<Track> {
         return mRealm.where(Track.class).sort("id",Sort.DESCENDING).findAll();
     }
 
-
+    @MainThread
     private List<Track> getRealmSortedTracks(boolean ascending){
 
         List<Track> tracks = new ArrayList<>();
 
-        Realm realm = Realm.getDefaultInstance();
+   //     Realm realm = Realm.getDefaultInstance();
 
 
         try {
-            realm.beginTransaction();
-            final RealmResults<Track> realmResults = realm.where(Track.class)
+            mRealm.beginTransaction();
+            final RealmResults<Track> realmResults = mRealm.where(Track.class)
                     .findAll();
 
 
@@ -81,12 +83,12 @@ public class RealmRepository implements IRepository<Track> {
             }
 */
 
-            realm.commitTransaction();
+            mRealm.commitTransaction();
         } catch (Exception e) {
             e.printStackTrace();
-            realm.cancelTransaction();
+            mRealm.cancelTransaction();
         } finally {
-            realm.close();
+            mRealm.close();
         }
         return tracks;
 
@@ -101,7 +103,7 @@ public class RealmRepository implements IRepository<Track> {
     public List<Track> getAllSortById(boolean ascending) {
 
         List<Track> tracks = getRealmSortedTracks(ascending);
-        return tracks!= null ? mRealm.copyFromRealm(tracks) : null;
+        return tracks;//!= null ? mRealm.copyFromRealm(tracks) : null;
 
     }
 
