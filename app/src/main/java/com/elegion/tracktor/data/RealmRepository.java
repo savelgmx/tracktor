@@ -1,6 +1,7 @@
 package com.elegion.tracktor.data;
 
 import android.support.annotation.MainThread;
+import android.widget.Toast;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.model.Track;
@@ -13,6 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmAsyncTask;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.Sort;
@@ -23,6 +25,8 @@ import io.realm.Sort;
 public class RealmRepository implements IRepository<Track> {
 
     private Realm mRealm;
+    private RealmAsyncTask asyncTransaction;
+
 
     private static AtomicLong sPrimaryId;
     @Inject
@@ -53,50 +57,46 @@ public class RealmRepository implements IRepository<Track> {
 
         List<Track> tracks = new ArrayList<>();
 
-   //     Realm realm = Realm.getDefaultInstance();
+       Realm realm = Realm.getDefaultInstance();
 
 
-        try {
-            mRealm.beginTransaction();
-            final RealmResults<Track> realmResults = mRealm.where(Track.class)
-                    .findAll();
+        cancelAsyncTransaction();
+         asyncTransaction = realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                // query for all points
+                RealmResults<Track> sortedTracks = realm.where(Track.class).findAllAsync();
+                if (ascending) {
+                    sortedTracks.sort("id", Sort.ASCENDING);
+                }else{
+                    sortedTracks.sort("id",Sort.DESCENDING);
+                }
 
-
-            if (ascending) {
-                realmResults.sort("id" , Sort.ASCENDING);
-            } else {
-                realmResults.sort("id" , Sort.DESCENDING);
+                for (int i = sortedTracks.size() - 1; i >= 0; i--) {
+                    tracks.add(sortedTracks.get(i) ) ;
+                 }
             }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
 
-            int len = realmResults.size();
-
-            for (int i=0;i<len;i++){
-
-                tracks.add(realmResults.get(i));
             }
+        }, new Realm.Transaction.OnError() {
 
-/*
-            for (Track realmResult : realmResults) {
-                Track track = new Track();
-               // copy(track, realmResult);
-                tracks.add(realmResult[i]);
-            }
-*/
+            @Override
+            public void onError(Throwable e) {
+             }
+        });
 
-            mRealm.commitTransaction();
-        } catch (Exception e) {
-            e.printStackTrace();
-            mRealm.cancelTransaction();
-        } finally {
-            mRealm.close();
-        }
         return tracks;
 
+    }
 
-
-
-
-
+    private void cancelAsyncTransaction() {
+        if (asyncTransaction != null && !asyncTransaction.isCancelled()) {
+            asyncTransaction.cancel();
+            asyncTransaction = null;
+        }
     }
 
     @Override
