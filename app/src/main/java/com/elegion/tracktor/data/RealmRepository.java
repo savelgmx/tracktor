@@ -26,7 +26,6 @@ import io.realm.Sort;
 public class RealmRepository implements IRepository<Track> {
 
     private Realm mRealm;
-    private RealmAsyncTask asyncTransaction;
 
 
     private static AtomicLong sPrimaryId;
@@ -53,66 +52,7 @@ public class RealmRepository implements IRepository<Track> {
         return mRealm.where(Track.class).sort("id",Sort.DESCENDING).findAll();
     }
 
-    @MainThread
-    private List<Track> getRealmSortedTracks(boolean ascending){
 
-        List<Track> tracks = new ArrayList<>();
-
-       Realm realm = Realm.getDefaultInstance();
-
-
-        cancelAsyncTransaction();
-         asyncTransaction = realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-
-
-
-                RealmResults<Track> sortedTracks = realm.where(Track.class).findAll();
-                if (ascending) {
-                    sortedTracks.sort("id", Sort.ASCENDING);
-                }else{
-                    sortedTracks.sort("id",Sort.DESCENDING);
-                }
-                Log.d("RealmRepository"," sortedTracks size= "+String.valueOf(sortedTracks.size()));
-
-                for (int i = sortedTracks.size() - 1; i >= 0; i--) {
-                    tracks.add(sortedTracks.get(i) ) ;
-                    Log.d("RealmRepository"," Tracks(i)= "+String.valueOf(tracks.get(i)));
-
-
-                 }
-            }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-
-            }
-        }, new Realm.Transaction.OnError() {
-
-            @Override
-            public void onError(Throwable e) {
-             }
-        });
-
-        return tracks;
-
-    }
-
-    private void cancelAsyncTransaction() {
-        if (asyncTransaction != null && !asyncTransaction.isCancelled()) {
-            asyncTransaction.cancel();
-            asyncTransaction = null;
-        }
-    }
-
-    @Override
-    public List<Track> getAllSortById(boolean ascending) {
-
-        List<Track> tracks = getRealmSortedTracks(ascending);
-        return tracks;//!= null ? mRealm.copyFromRealm(tracks) : null;
-
-    }
 
     @Override
     public long insertItem(Track track) {

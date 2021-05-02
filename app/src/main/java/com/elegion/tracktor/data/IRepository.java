@@ -17,5 +17,4 @@ public interface IRepository<T> {
 
     long updateItem(T t);
 
-    List<T> getAllSortById(boolean ascending);//
 }

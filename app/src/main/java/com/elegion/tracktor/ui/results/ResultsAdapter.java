@@ -13,9 +13,15 @@ import com.elegion.tracktor.data.model.Track;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.Collections;
+import java.util.List;
+
+import io.realm.RealmResults;
+
 
 public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
 
+    private List<Track> tracks = Collections.emptyList();
 
 
     private static final DiffUtil.ItemCallback<Track> DIFF_CALLBACK = new DiffUtil.ItemCallback<Track>() {
@@ -32,9 +38,11 @@ public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
     };
 
 
+
     ResultsAdapter() {
         super(DIFF_CALLBACK);
      }
+
 
     @NonNull
     @Override

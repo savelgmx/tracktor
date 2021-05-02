@@ -34,15 +34,19 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.OrderedRealmCollectionChangeListener;
 import io.realm.Realm;
 import io.realm.RealmAsyncTask;
+import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import io.realm.Sort;
 import toothpick.Scope;
 import toothpick.Toothpick;
 
 
-public class ResultsFragment extends Fragment {
+
+
+public class ResultsFragment extends Fragment implements RealmChangeListener<RealmResults<Track>>{
 
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
@@ -53,6 +57,7 @@ public class ResultsFragment extends Fragment {
     private ResultsAdapter mResultsAdapter;
     private boolean mSortAscending=true;
     private RealmAsyncTask asyncTransaction;
+    private RealmResults<Track> allSortedTracks;
 
 
     @Inject
@@ -130,9 +135,9 @@ public class ResultsFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.actionSortByAscOrDesc) {
-           // mResultsViewModel.loadSortedByIdTracks(mSortAscending);
 
             getRealmSortedTracks(mSortAscending);
+
             mSortAscending = !mSortAscending;
 
             Log.d("ResultsFragment" ," mSortAscending = "+String.valueOf(mSortAscending));
@@ -159,19 +164,33 @@ public class ResultsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        realm = Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance(); // Create Realm instance for the UI thread
+        allSortedTracks = realm.where(Track.class).
+                sort("id",Sort.ASCENDING).
+                findAllAsync();
+        //ResultsAdapter.updateList(allSortedTracks);
 
+        allSortedTracks.addChangeListener(this);
 
 
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        // Remember to close the Realm instance when done with it.
+        cancelAsyncTransaction();
+        //  allSortedDots.removeChangeListener(this);
+        allSortedTracks = null;
+        realm.close();
+    }
 
 
     private List<Track> getRealmSortedTracks(boolean ascending){
 
         List<Track> tracks = new ArrayList<>();
 
-        Realm realm = Realm.getDefaultInstance();
+     //   Realm realm = Realm.getDefaultInstance();
 
 
         cancelAsyncTransaction();
@@ -188,6 +207,7 @@ public class ResultsFragment extends Fragment {
                     sortedTracks.sort("distance",Sort.DESCENDING);
                 }
                 Log.d("ResultsFragment"," sortedTracks size= "+String.valueOf(sortedTracks.size()));
+
 
                 for (int i=1;i< sortedTracks.size(); i++) {
                     tracks.add(sortedTracks.get(i) ) ;
@@ -220,5 +240,8 @@ public class ResultsFragment extends Fragment {
     }
 
 
+    @Override
+    public void onChange(RealmResults<Track> tracks) {
 
+    }
 }
