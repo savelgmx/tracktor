@@ -1,6 +1,7 @@
 package com.elegion.tracktor.data;
 
 import android.support.annotation.MainThread;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.elegion.tracktor.App;
@@ -64,16 +65,22 @@ public class RealmRepository implements IRepository<Track> {
          asyncTransaction = realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                // query for all points
-                RealmResults<Track> sortedTracks = realm.where(Track.class).findAllAsync();
+
+
+
+                RealmResults<Track> sortedTracks = realm.where(Track.class).findAll();
                 if (ascending) {
                     sortedTracks.sort("id", Sort.ASCENDING);
                 }else{
                     sortedTracks.sort("id",Sort.DESCENDING);
                 }
+                Log.d("RealmRepository"," sortedTracks size= "+String.valueOf(sortedTracks.size()));
 
                 for (int i = sortedTracks.size() - 1; i >= 0; i--) {
                     tracks.add(sortedTracks.get(i) ) ;
+                    Log.d("RealmRepository"," Tracks(i)= "+String.valueOf(tracks.get(i)));
+
+
                  }
             }
         }, new Realm.Transaction.OnSuccess() {

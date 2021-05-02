@@ -23,13 +23,21 @@ import android.widget.LinearLayout;
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
+import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.di.ViewModelModule;
 import com.elegion.tracktor.util.CustomViewModelFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmAsyncTask;
+import io.realm.RealmResults;
+import io.realm.Sort;
 import toothpick.Scope;
 import toothpick.Toothpick;
 
@@ -44,9 +52,12 @@ public class ResultsFragment extends Fragment {
 
     private ResultsAdapter mResultsAdapter;
     private boolean mSortAscending=true;
+    private RealmAsyncTask asyncTransaction;
+
 
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
+    private Realm realm;
 
 
     public ResultsFragment() {
@@ -119,7 +130,9 @@ public class ResultsFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.actionSortByAscOrDesc) {
-            mResultsViewModel.loadSortedByIdTracks(mSortAscending);
+           // mResultsViewModel.loadSortedByIdTracks(mSortAscending);
+
+            getRealmSortedTracks(mSortAscending);
             mSortAscending = !mSortAscending;
 
             Log.d("ResultsFragment" ," mSortAscending = "+String.valueOf(mSortAscending));
@@ -141,5 +154,71 @@ public class ResultsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        realm = Realm.getDefaultInstance();
+
+
+
+    }
+
+
+
+    private List<Track> getRealmSortedTracks(boolean ascending){
+
+        List<Track> tracks = new ArrayList<>();
+
+        Realm realm = Realm.getDefaultInstance();
+
+
+        cancelAsyncTransaction();
+        asyncTransaction = realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+
+
+                RealmResults<Track> sortedTracks = realm.where(Track.class).findAll();
+                if (ascending) {
+                    sortedTracks.sort("distance", Sort.ASCENDING);
+                }else{
+                    sortedTracks.sort("distance",Sort.DESCENDING);
+                }
+                Log.d("ResultsFragment"," sortedTracks size= "+String.valueOf(sortedTracks.size()));
+
+                for (int i=1;i< sortedTracks.size(); i++) {
+                    tracks.add(sortedTracks.get(i) ) ;
+                    Log.d("ResultsFragment"," Tracks(i)= "+String.valueOf(tracks.get(i)));
+
+
+                }
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+
+            }
+        }, new Realm.Transaction.OnError() {
+
+            @Override
+            public void onError(Throwable e) {
+            }
+        });
+
+        return tracks;
+
+    }
+
+    private void cancelAsyncTransaction() {
+        if (asyncTransaction != null && !asyncTransaction.isCancelled()) {
+            asyncTransaction.cancel();
+            asyncTransaction = null;
+        }
+    }
+
+
 
 }

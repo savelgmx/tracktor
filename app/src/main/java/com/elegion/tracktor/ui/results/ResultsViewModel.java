@@ -26,6 +26,7 @@ import toothpick.Toothpick;
 
 /**
  * ResultsViewModel. В нем также нужно сделать инжект репозитория
+
  */
 public class ResultsViewModel extends ViewModel {
 
