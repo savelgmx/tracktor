@@ -138,6 +138,8 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
 
             getRealmSortedTracks(mSortAscending);
 
+            mResultsViewModel.loadSortedByIdTracks(mSortAscending);
+
             mSortAscending = !mSortAscending;
 
             Log.d("ResultsFragment" ," mSortAscending = "+String.valueOf(mSortAscending));
@@ -188,15 +190,17 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
 
     private List<Track> getRealmSortedTracks(boolean ascending){
 
-        List<Track> tracks = new ArrayList<>();
+     final List<Track> tracks = new ArrayList<>();
 
-     //   Realm realm = Realm.getDefaultInstance();
+        Realm mRealm = Realm.getDefaultInstance();
 
 
         cancelAsyncTransaction();
         asyncTransaction = realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
+
+
 
 
 
@@ -220,6 +224,8 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
             @Override
             public void onSuccess() {
 
+
+
             }
         }, new Realm.Transaction.OnError() {
 
@@ -227,6 +233,7 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
             public void onError(Throwable e) {
             }
         });
+        Log.d("ResultsFragment","return "+ String.valueOf(tracks));
 
         return tracks;
 

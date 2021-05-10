@@ -26,7 +26,7 @@ import io.realm.Sort;
 public class RealmRepository implements IRepository<Track> {
 
     private Realm mRealm;
-
+    private RealmAsyncTask asyncTransaction;
 
     private static AtomicLong sPrimaryId;
     @Inject
@@ -132,7 +132,43 @@ public class RealmRepository implements IRepository<Track> {
 
     }
 
+    //try use copyfromRealm
 
+    public List<Track> getRealmSortedTracks(boolean ascending){
+
+        List<Track> tracklist;
+
+
+        mRealm.beginTransaction();
+
+        if (ascending){
+
+            tracklist= mRealm.copyFromRealm(mRealm.where(Track.class)
+                    .sort("distance", Sort.ASCENDING)
+                    .findAll()
+            );
+
+            mRealm.commitTransaction();
+
+            Log.d("RealmRepository",String.valueOf(tracklist));
+
+
+            return tracklist;
+
+        }else{
+
+        }
+
+        tracklist=mRealm.copyFromRealm(mRealm.where(Track.class)
+                .sort("distance", Sort.DESCENDING)
+                .findAll()
+        );
+
+        mRealm.commitTransaction();
+        Log.d("RealmRepository",String.valueOf(tracklist));
+
+        return tracklist;
+    }
 
 
 }

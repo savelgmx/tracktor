@@ -258,5 +258,14 @@ public class ResultsViewModel extends ViewModel {
         mRealmRepository.deleteItem(trackid);
     }
 
+
+    public void loadSortedByIdTracks(boolean ascending){
+        mTracks.postValue(mRealmRepository.getRealmSortedTracks(ascending));
+    }
+
+
+
+
+
 }
 
