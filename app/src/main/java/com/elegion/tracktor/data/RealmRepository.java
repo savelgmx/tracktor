@@ -132,42 +132,24 @@ public class RealmRepository implements IRepository<Track> {
 
     }
 
-    //try use copyfromRealm
 
-    public List<Track> getRealmSortedTracks(boolean ascending){
-
-        List<Track> tracklist;
+    @Override
+    public List<Track> getRealmSortedTracks(boolean ascending) {
 
 
-        mRealm.beginTransaction();
+        if (ascending) {
 
-        if (ascending){
-
-            tracklist= mRealm.copyFromRealm(mRealm.where(Track.class)
+            return mRealm.where(Track.class)
                     .sort("distance", Sort.ASCENDING)
-                    .findAll()
-            );
+                    .findAll();
 
-            mRealm.commitTransaction();
-
-            Log.d("RealmRepository",String.valueOf(tracklist));
+        } else {
 
 
-            return tracklist;
-
-        }else{
-
+            return mRealm.where(Track.class)
+                    .sort("distance", Sort.DESCENDING)
+                    .findAll();
         }
-
-        tracklist=mRealm.copyFromRealm(mRealm.where(Track.class)
-                .sort("distance", Sort.DESCENDING)
-                .findAll()
-        );
-
-        mRealm.commitTransaction();
-        Log.d("RealmRepository",String.valueOf(tracklist));
-
-        return tracklist;
     }
 
 

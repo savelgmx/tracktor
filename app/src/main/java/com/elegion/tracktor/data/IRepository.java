@@ -1,5 +1,7 @@
 package com.elegion.tracktor.data;
 
+import com.elegion.tracktor.data.model.Track;
+
 import java.util.List;
 
 /**
@@ -16,5 +18,7 @@ public interface IRepository<T> {
     boolean deleteItem(long id);
 
     long updateItem(T t);
+
+    List<Track> getRealmSortedTracks(boolean ascending);
 
 }
