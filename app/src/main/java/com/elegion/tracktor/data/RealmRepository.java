@@ -37,6 +37,19 @@ public class RealmRepository implements IRepository<Track> {
         sPrimaryId = max == null ? new AtomicLong(0) : new AtomicLong(max.longValue());
     }
 
+/*
+    public RealmRepository() {
+
+        //дополнительный конструктор для создания объекта класса
+        //который используется в loadSortedByIdTracks
+
+            mRealm = Realm.getDefaultInstance();
+            Number max = mRealm.where(Track.class).max("id");
+            sPrimaryId = max == null ? new AtomicLong(0) : new AtomicLong(max.longValue());
+
+    }
+*/
+
     @Override
     public Track getItem(long id) {
         Track track = getRealmAssociatedTrack(id);
@@ -139,16 +152,18 @@ public class RealmRepository implements IRepository<Track> {
 
         if (ascending) {
 
-            return mRealm.where(Track.class)
+            return mRealm.copyFromRealm(mRealm.where(Track.class)
                     .sort("distance", Sort.ASCENDING)
-                    .findAll();
+                    .findAll()
+            );
 
         } else {
 
 
-            return mRealm.where(Track.class)
+            return mRealm.copyFromRealm(mRealm.where(Track.class)
                     .sort("distance", Sort.DESCENDING)
-                    .findAll();
+                    .findAll()
+            );
         }
     }
 

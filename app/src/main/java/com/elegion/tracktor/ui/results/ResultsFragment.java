@@ -136,7 +136,7 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.actionSortByAscOrDesc) {
 
-            getRealmSortedTracks(mSortAscending);
+         //   getRealmSortedTracks(mSortAscending);
 
             mResultsViewModel.loadSortedByIdTracks(mSortAscending);
 
@@ -166,29 +166,19 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
     @Override
     public void onStart() {
         super.onStart();
-        realm = Realm.getDefaultInstance(); // Create Realm instance for the UI thread
-        allSortedTracks = realm.where(Track.class).
-                sort("id",Sort.ASCENDING).
-                findAllAsync();
-        //ResultsAdapter.updateList(allSortedTracks);
-
-        allSortedTracks.addChangeListener(this);
-
 
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        // Remember to close the Realm instance when done with it.
-        cancelAsyncTransaction();
-        //  allSortedDots.removeChangeListener(this);
-        allSortedTracks = null;
-        realm.close();
-    }
+     }
 
 
     private List<Track> getRealmSortedTracks(boolean ascending){
+
+        //не сработало т.к. из потока не получалось вернуть результат
+
 
      final List<Track> tracks = new ArrayList<>();
 

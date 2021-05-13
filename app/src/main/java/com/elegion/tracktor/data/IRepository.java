@@ -1,23 +1,21 @@
 package com.elegion.tracktor.data;
 
-import com.elegion.tracktor.data.model.Track;
-
 import java.util.List;
 
 /**
  * @author Azret Magometov
  */
-public interface IRepository<T> {
+public interface IRepository<Track> {
 
-    T getItem(long id);
+    Track getItem(long id);
 
-    List<T> getAll();
+    List<Track> getAll();
 
-    long insertItem(T t);
+    long insertItem(Track t);
 
     boolean deleteItem(long id);
 
-    long updateItem(T t);
+    long updateItem(Track t);
 
     List<Track> getRealmSortedTracks(boolean ascending);
 

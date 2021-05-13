@@ -260,8 +260,18 @@ public class ResultsViewModel extends ViewModel {
 
 
     public void loadSortedByIdTracks(boolean ascending){
-        mTracks.postValue(mRealmRepository.getRealmSortedTracks(ascending));
-    }
+
+     //   RealmRepository realm = new RealmRepository();
+
+        List<Track> sortedTracks=mRealmRepository.getRealmSortedTracks(ascending);
+
+
+
+            mTracks.postValue(sortedTracks);
+
+
+
+     }
 
 
 
