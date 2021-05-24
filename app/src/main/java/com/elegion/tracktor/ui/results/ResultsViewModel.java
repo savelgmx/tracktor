@@ -11,6 +11,7 @@ import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.IRepository;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
+import com.elegion.tracktor.ui.BaseViewModel;
 import com.elegion.tracktor.ui.preferences.UserRepository;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
@@ -28,7 +29,7 @@ import toothpick.Toothpick;
  * ResultsViewModel. В нем также нужно сделать инжект репозитория
 
  */
-public class ResultsViewModel extends ViewModel {
+public class ResultsViewModel extends BaseViewModel {
 
     @Inject
     IRepository<Track> mRepository;
@@ -43,7 +44,7 @@ public class ResultsViewModel extends ViewModel {
 
     private int mTitleId;
 
-    private MutableLiveData<List<Track>> mTracks = new MutableLiveData<>();
+    protected MutableLiveData<List<Track>> mTracks = new MutableLiveData<>();
     private MutableLiveData<Bitmap> mImage = new MutableLiveData<>();
 
     private MutableLiveData<String> mTimeText = new MutableLiveData<>();
@@ -60,6 +61,8 @@ public class ResultsViewModel extends ViewModel {
     private String TAG =ResultsViewModel.class.getSimpleName();
 
     private Double spentCalories;
+
+    private boolean sortAscending;
 
 
 
@@ -263,19 +266,20 @@ public class ResultsViewModel extends ViewModel {
 
      //   RealmRepository realm = new RealmRepository();
 
-        List<Track> sortedTracks=mRealmRepository.getRealmSortedTracks(ascending);
-
-
-
-            mTracks.postValue(sortedTracks);
-
-
+        sortAscending = ascending;
+        updateFromRepository();
 
      }
 
 
+    @Override
+    protected void updateFromRepository() {
+
+        List<Track> sortedTracks=mRealmRepository.getRealmSortedTracks(sortAscending);
+
+        mTracks.postValue(sortedTracks);
 
 
-
+    }
 }
 

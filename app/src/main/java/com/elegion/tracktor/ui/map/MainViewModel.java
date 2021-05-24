@@ -8,6 +8,7 @@ import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.event.AddPositionToRouteEvent;
 import com.elegion.tracktor.event.UpdateRouteEvent;
 import com.elegion.tracktor.event.UpdateTimerEvent;
+import com.elegion.tracktor.ui.BaseViewModel;
 import com.elegion.tracktor.util.StringUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -18,7 +19,7 @@ import javax.inject.Inject;
 
 import toothpick.Toothpick;
 
-public class MainViewModel extends ViewModel {
+public class MainViewModel extends BaseViewModel {
 
 
     @Inject
@@ -106,5 +107,10 @@ public class MainViewModel extends ViewModel {
     public long saveResults(String base54image) {
 
         return mRealmRepository.createAndInsertTrackFrom(mDurationRaw, mDistanceRaw, base54image);
+    }
+
+    @Override
+    protected void updateFromRepository() {
+
     }
 }
