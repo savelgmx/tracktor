@@ -90,7 +90,7 @@ public class ResultsViewModel extends BaseViewModel {
 
     public void loadTracks() {
         if (mTracks.getValue() == null || mTracks.getValue().isEmpty()) {
-            mTracks.postValue(mRepository.getAll());
+          //  mTracks.postValue(mRepository.getAll());
         }
     }
 
@@ -275,11 +275,14 @@ public class ResultsViewModel extends BaseViewModel {
     @Override
     protected void updateFromRepository() {
 
-        List<Track> sortedTracks=mRealmRepository.getRealmSortedTracks(sortAscending);
-
-        mTracks.postValue(sortedTracks);
+        mTracks.postValue(mRealmRepository.getRealmSortedTracks(sortAscending));
 
 
+    }
+
+    public void loadSortedByDateDurationDistance(int mSortByDateDurationDistance) {
+
+        mTracks.postValue(mRealmRepository.getRealmSortedByDateDurationDistanceTracks(mSortByDateDurationDistance));
     }
 }
 

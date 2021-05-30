@@ -55,14 +55,12 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
     LinearLayout mErrorLayout;
 
     private ResultsAdapter mResultsAdapter;
-    private boolean mSortAscending=true;
-    private RealmAsyncTask asyncTransaction;
-    private RealmResults<Track> allSortedTracks;
-
+    private boolean mSortAscending=true; //сортировка по возрастанию/убыванию
+    private int mSortByDateDurationDistance=1;//сортировка по дате/продолжительности/расстоянию циклична
+    //1-по дате 2-по продолжительности 3-по расстоянию
 
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
-    private Realm realm;
 
 
     public ResultsFragment() {
@@ -104,7 +102,8 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
         super.onActivityCreated(savedInstanceState);
         mResultsAdapter = new ResultsAdapter();//mListener
         mResultsViewModel.getTracks().observe(this, tracks -> mResultsAdapter.submitList(tracks));
-        mResultsViewModel.loadTracks();
+        //  mResultsViewModel.loadTracks();
+        mResultsViewModel.loadSortedByIdTracks(mSortAscending);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mResultsAdapter);
@@ -136,20 +135,17 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.actionSortByAscOrDesc) {
 
-         //   getRealmSortedTracks(mSortAscending);
-
             mResultsViewModel.loadSortedByIdTracks(mSortAscending);
-
             mSortAscending = !mSortAscending;
-
-            Log.d("ResultsFragment" ," mSortAscending = "+String.valueOf(mSortAscending));
-
-
 
             return true;
         } else if (item.getItemId() == R.id.actionSortByDateOrDuration) {
 
-            Log.d("ResultsFragment" ,"Sort order DateOrDuration pressed");
+            mResultsViewModel.loadSortedByDateDurationDistance(mSortByDateDurationDistance);
+
+            mSortByDateDurationDistance=mSortByDateDurationDistance+1;//сортировка по дате/продолжительности/расстоянию циклична
+            //1-по дате 2-по продолжительности 3-по расстоянию
+            if (mSortByDateDurationDistance>3) mSortByDateDurationDistance=1; //Переключение односторонее и цикличное
 
             return true;
         } else
@@ -172,69 +168,8 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
     @Override
     public void onStop() {
         super.onStop();
-     }
-
-
-    private List<Track> getRealmSortedTracks(boolean ascending){
-
-        //не сработало т.к. из потока не получалось вернуть результат
-
-
-     final List<Track> tracks = new ArrayList<>();
-
-        Realm mRealm = Realm.getDefaultInstance();
-
-
-        cancelAsyncTransaction();
-        asyncTransaction = realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-
-
-
-
-
-                RealmResults<Track> sortedTracks = realm.where(Track.class).findAll();
-                if (ascending) {
-                    sortedTracks.sort("distance", Sort.ASCENDING);
-                }else{
-                    sortedTracks.sort("distance",Sort.DESCENDING);
-                }
-                Log.d("ResultsFragment"," sortedTracks size= "+String.valueOf(sortedTracks.size()));
-
-
-                for (int i=1;i< sortedTracks.size(); i++) {
-                    tracks.add(sortedTracks.get(i) ) ;
-                    Log.d("ResultsFragment"," Tracks(i)= "+String.valueOf(tracks.get(i)));
-
-
-                }
-            }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-
-
-
-            }
-        }, new Realm.Transaction.OnError() {
-
-            @Override
-            public void onError(Throwable e) {
-            }
-        });
-        Log.d("ResultsFragment","return "+ String.valueOf(tracks));
-
-        return tracks;
-
     }
 
-    private void cancelAsyncTransaction() {
-        if (asyncTransaction != null && !asyncTransaction.isCancelled()) {
-            asyncTransaction.cancel();
-            asyncTransaction = null;
-        }
-    }
 
 
     @Override

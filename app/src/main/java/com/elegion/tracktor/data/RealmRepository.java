@@ -153,7 +153,7 @@ public class RealmRepository implements IRepository<Track> {
         if (ascending) {
 
             return mRealm.copyFromRealm(mRealm.where(Track.class)
-                    .sort("distance", Sort.ASCENDING)
+                    .sort("id", Sort.ASCENDING)
                     .findAll()
             );
 
@@ -161,11 +161,45 @@ public class RealmRepository implements IRepository<Track> {
 
 
             return mRealm.copyFromRealm(mRealm.where(Track.class)
-                    .sort("distance", Sort.DESCENDING)
+                    .sort("id", Sort.DESCENDING)
                     .findAll()
             );
         }
     }
 
 
+    public List<Track> getRealmSortedByDateDurationDistanceTracks(int mSortByDateDurationDistance) {
+
+        Realm mAnotherRealm = Realm.getDefaultInstance();
+        List<Track> mSortedRealm = null;
+        switch (mSortByDateDurationDistance){
+            case 1:  //sort by date
+
+                mSortedRealm = mAnotherRealm.copyFromRealm(mAnotherRealm.where(Track.class)
+                        .sort("date",Sort.ASCENDING)
+                        .findAll()
+                );
+
+                break;
+            case 2: //sort by duration
+                mSortedRealm = mAnotherRealm.copyFromRealm(mAnotherRealm.where(Track.class)
+                        .sort("duration",Sort.ASCENDING)
+                        .findAll()
+                );
+
+                break;
+            case 3://sort by distance;
+                mSortedRealm = mAnotherRealm.copyFromRealm(mAnotherRealm.where(Track.class)
+                        .sort("distance",Sort.ASCENDING)
+                        .findAll()
+                );
+
+                break;
+
+
+        }
+
+        mAnotherRealm.close();
+      return   mSortedRealm;
+    }
 }
