@@ -102,7 +102,7 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
         super.onActivityCreated(savedInstanceState);
         mResultsAdapter = new ResultsAdapter();//mListener
         mResultsViewModel.getTracks().observe(this, tracks -> mResultsAdapter.submitList(tracks));
-        //  mResultsViewModel.loadTracks();
+        mResultsViewModel.loadTracks();
         mResultsViewModel.loadSortedByIdTracks(mSortAscending);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

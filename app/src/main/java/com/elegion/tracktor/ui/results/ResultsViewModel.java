@@ -90,7 +90,7 @@ public class ResultsViewModel extends BaseViewModel {
 
     public void loadTracks() {
         if (mTracks.getValue() == null || mTracks.getValue().isEmpty()) {
-          //  mTracks.postValue(mRepository.getAll());
+            mTracks.postValue(mRepository.getAll());
         }
     }
 

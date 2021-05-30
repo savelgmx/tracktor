@@ -37,19 +37,6 @@ public class RealmRepository implements IRepository<Track> {
         sPrimaryId = max == null ? new AtomicLong(0) : new AtomicLong(max.longValue());
     }
 
-/*
-    public RealmRepository() {
-
-        //дополнительный конструктор для создания объекта класса
-        //который используется в loadSortedByIdTracks
-
-            mRealm = Realm.getDefaultInstance();
-            Number max = mRealm.where(Track.class).max("id");
-            sPrimaryId = max == null ? new AtomicLong(0) : new AtomicLong(max.longValue());
-
-    }
-*/
-
     @Override
     public Track getItem(long id) {
         Track track = getRealmAssociatedTrack(id);
@@ -62,7 +49,7 @@ public class RealmRepository implements IRepository<Track> {
 
     @Override
     public List<Track> getAll() {
-        return mRealm.where(Track.class).sort("id",Sort.DESCENDING).findAll();
+        return mRealm.where(Track.class).findAll();
     }
 
 
@@ -96,16 +83,6 @@ public class RealmRepository implements IRepository<Track> {
         return isDeleteSuccessful;
     }
 
-    /*
-        @Override
-    public void updateItem(Film Film) {
-        mRealm.beginTransaction();
-        mRealm.copyToRealmOrUpdate(Film);
-        mRealm.commitTransaction();
-        EventBus.getDefault().post(new OnFilmDataBaseUpdate());
-    }
-
-     */
     @Override
     public long updateItem(Track track) {
         mRealm.beginTransaction();
@@ -149,10 +126,12 @@ public class RealmRepository implements IRepository<Track> {
     @Override
     public List<Track> getRealmSortedTracks(boolean ascending) {
 
+        Realm mAnotherRealm = Realm.getDefaultInstance();
+        List<Track> mSortedRealm = null;
 
         if (ascending) {
 
-            return mRealm.copyFromRealm(mRealm.where(Track.class)
+            mSortedRealm= mAnotherRealm.copyFromRealm(mAnotherRealm.where(Track.class)
                     .sort("id", Sort.ASCENDING)
                     .findAll()
             );
@@ -160,11 +139,15 @@ public class RealmRepository implements IRepository<Track> {
         } else {
 
 
-            return mRealm.copyFromRealm(mRealm.where(Track.class)
+            mSortedRealm= mAnotherRealm.copyFromRealm(mAnotherRealm.where(Track.class)
                     .sort("id", Sort.DESCENDING)
                     .findAll()
             );
         }
+
+        mAnotherRealm.close();
+
+        return   mSortedRealm;
     }
 
 
