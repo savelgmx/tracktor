@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
@@ -136,12 +137,35 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
         if (item.getItemId() == R.id.actionSortByAscOrDesc) {
 
             mResultsViewModel.loadSortedByIdTracks(mSortAscending);
+            if (mSortAscending){
+                //сортровка по возрастанию
+                Toast.makeText(getContext(),"Сортировка по возрастанию Id",Toast.LENGTH_SHORT).show();
+
+            }else {
+                Toast.makeText(getContext(),"Сортировка по убыванию Id",Toast.LENGTH_SHORT).show();
+
+            }
             mSortAscending = !mSortAscending;
 
             return true;
         } else if (item.getItemId() == R.id.actionSortByDateOrDuration) {
 
             mResultsViewModel.loadSortedByDateDurationDistance(mSortByDateDurationDistance);
+
+            //---show Toast about sorting order
+            switch (mSortByDateDurationDistance){
+                case 1:  //sort by date
+                    Toast.makeText(getContext(),"Сортировка по возрастанию Даты/Времени",Toast.LENGTH_SHORT).show();
+                    break;
+                case 2: //sort by duration
+                    Toast.makeText(getContext(),"Сортировка по возрастанию Длительности(duration)",Toast.LENGTH_SHORT).show();                    break;
+                case 3://sort by distance;
+                    Toast.makeText(getContext(),"Сортировка по ройденному Расстоянию(Distance)",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+
+            //end show
+
 
             mSortByDateDurationDistance=mSortByDateDurationDistance+1;//сортировка по дате/продолжительности/расстоянию циклична
             //1-по дате 2-по продолжительности 3-по расстоянию

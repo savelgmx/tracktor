@@ -11,7 +11,7 @@ import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.IRepository;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
-import com.elegion.tracktor.ui.BaseViewModel;
+
 import com.elegion.tracktor.ui.preferences.UserRepository;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
@@ -29,7 +29,7 @@ import toothpick.Toothpick;
  * ResultsViewModel. В нем также нужно сделать инжект репозитория
 
  */
-public class ResultsViewModel extends BaseViewModel {
+public class ResultsViewModel extends ViewModel {
 
     @Inject
     IRepository<Track> mRepository;
@@ -264,21 +264,11 @@ public class ResultsViewModel extends BaseViewModel {
 
     public void loadSortedByIdTracks(boolean ascending){
 
-     //   RealmRepository realm = new RealmRepository();
-
+        mTracks.postValue(mRealmRepository.getRealmSortedTracks(sortAscending));
         sortAscending = ascending;
-        updateFromRepository();
 
      }
 
-
-    @Override
-    protected void updateFromRepository() {
-
-        mTracks.postValue(mRealmRepository.getRealmSortedTracks(sortAscending));
-
-
-    }
 
     public void loadSortedByDateDurationDistance(int mSortByDateDurationDistance) {
 
