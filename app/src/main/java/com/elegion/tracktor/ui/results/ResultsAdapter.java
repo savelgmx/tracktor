@@ -3,6 +3,7 @@ package com.elegion.tracktor.ui.results;
 import android.support.annotation.NonNull;
 import android.support.v7.recyclerview.extensions.ListAdapter;
 import android.support.v7.util.DiffUtil;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,28 @@ public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
     @Override
     public void onBindViewHolder(@NonNull ResultHolder holder, int position) {
         holder.bind(getItem(position));
-        holder.setOnClickListener(id -> EventBus.getDefault().post(new ShowResultDetailEvent(id)));
+        holder.setOnClickListener(id ->{
+            Log.d("ResultAdapter","On Click Listener  triggered with id="+String.valueOf(id));
+
+/*
+                    Movie movie = movieList.get(getAdapterPosition());
+                    movie.setExpanded(!movie.isExpanded());
+
+
+ */
+
+
+
+            EventBus.getDefault().post(new ShowResultDetailEvent(id));
+        });
+
+
+
+
+        boolean isExpanded = getItem(position).isExpanded();
+        holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+
+
 
     }
     interface OnItemClickListener {

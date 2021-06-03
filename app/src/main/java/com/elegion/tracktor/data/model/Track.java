@@ -19,6 +19,7 @@ public class Track extends RealmObject {
     private String imageBase64;
     private Double averagespeed;
     private String comment;
+    private boolean expanded;
 
     public void setId(long id) {
         this.id = id;
@@ -73,6 +74,16 @@ public class Track extends RealmObject {
 
     public void setComment (String newComment){this.comment = newComment;}
     public String getComment(){return comment;}
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
+
+
 
     @Override
     public String toString() {

@@ -1,17 +1,13 @@
 package com.elegion.tracktor.ui.results;
 
-import android.arch.lifecycle.ViewModelProviders;
+
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,27 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
-import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.di.ViewModelModule;
-import com.elegion.tracktor.util.CustomViewModelFactory;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.OrderedRealmCollectionChangeListener;
-import io.realm.Realm;
-import io.realm.RealmAsyncTask;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
-import io.realm.Sort;
 import toothpick.Scope;
 import toothpick.Toothpick;
 
@@ -103,7 +87,8 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
         super.onActivityCreated(savedInstanceState);
         mResultsAdapter = new ResultsAdapter();//mListener
         mResultsViewModel.getTracks().observe(this, tracks -> mResultsAdapter.submitList(tracks));
-        mResultsViewModel.loadTracks();
+      //  mResultsViewModel.loadTracks();
+
         mResultsViewModel.loadSortedByIdTracks(mSortAscending);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -160,7 +145,7 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
                 case 2: //sort by duration
                     Toast.makeText(getContext(),"Сортировка по возрастанию Длительности(duration)",Toast.LENGTH_SHORT).show();                    break;
                 case 3://sort by distance;
-                    Toast.makeText(getContext(),"Сортировка по ройденному Расстоянию(Distance)",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Сортировка по пройденному Расстоянию(Distance)",Toast.LENGTH_SHORT).show();
                     break;
             }
 
