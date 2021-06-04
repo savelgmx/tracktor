@@ -65,6 +65,8 @@ public class ResultHolder extends RecyclerView.ViewHolder {
 
 
     public void setOnClickListener(ResultsAdapter.OnItemClickListener listener) {
+
+
         mView.setOnClickListener(view -> {
 
             Log.d("ResultHolder","On Click Listener  triggered");
@@ -73,6 +75,16 @@ public class ResultHolder extends RecyclerView.ViewHolder {
             if(listener != null) {
                 listener.onItemClick(mTrackId);
             }
+
+        });
+    }
+
+    public void setOnLongClickListener(ResultsAdapter.OnItemLongClickListener listener) {
+        mView.setOnLongClickListener(view->{
+            if(listener!=null) {
+                listener.OnItemLongClick(mTrackId);
+            }
+            return true;
         });
     }
 
