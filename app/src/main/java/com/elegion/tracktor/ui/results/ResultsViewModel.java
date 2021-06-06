@@ -67,6 +67,8 @@ public class ResultsViewModel extends ViewModel {
 
     private boolean sortAscending;
 
+    private Track track;
+
 
 
     public ResultsViewModel() {
@@ -109,7 +111,8 @@ public class ResultsViewModel extends ViewModel {
 
 
     public void loadImage(long mTrackId) {
-        Track track = mRepository.getItem(mTrackId);
+        track = mRepository.getItem(mTrackId);
+        if (track != null){
         String distance = StringUtil.getDistanceText(track.getDistance());
         String time = StringUtil.getTimeText(track.getDuration());
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
@@ -117,13 +120,26 @@ public class ResultsViewModel extends ViewModel {
         String comment = StringUtil.getCommentsText(track.getComment());
 
         mAverageSpeed.postValue(averageSpeed);
-        mTimeText.postValue(time);
+        mAction.postValue(track.getAction());
         mDistanceText.postValue(distance);
-        mImage.postValue(bitmapImage);
         mComment.postValue(comment);
+
+        mTimeText.postValue(time);
+        mImage.postValue(bitmapImage);
+         mAction.observeForever(this::updateTrackAction);
+         calculateSpentCalories(track.getAction());
+        }
     }
 
+    public void updateTrackAction(Integer action) {
 
+            if (track.getAction() != action) {
+                track.setAction(action);
+                mRepository.updateItem(track);
+                calculateSpentCalories(action);
+            }
+
+    }
 
 
     public void calculateSpentCalories(int checkedIndexId ){
@@ -197,7 +213,7 @@ public class ResultsViewModel extends ViewModel {
     }
 
     public void getStringDate(long mTrackId){
-        Track track = mRepository.getItem(mTrackId);
+         track = mRepository.getItem(mTrackId); //Track
         String date = StringUtil.getDateText(track.getDate());
         mDateText.postValue(date);
     }

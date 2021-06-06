@@ -100,7 +100,7 @@ public class ResultsDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fr_result_detail, container, false);
 
 //        mRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
-  //      SetSavedRadioButtonChecked(CheckedRadioButtonIndex);
+        //      SetSavedRadioButtonChecked(CheckedRadioButtonIndex);
 
 
         mIbAddComment = view.findViewById(R.id.ibAddComment);
@@ -124,20 +124,15 @@ public class ResultsDetailsFragment extends Fragment {
         mTrackId = getArguments().getLong(RESULT_ID, 0);
 
         mResultsViewModel.getStringDate(mTrackId);
-
         mResultsViewModel.loadImage(mTrackId);
-        mResultsViewModel.getImage().observe(this, image -> mScreenshotImage.setImageBitmap(image));
 
+        mResultsViewModel.getImage().observe(this, image -> mScreenshotImage.setImageBitmap(image));
         mResultsViewModel.getTime().observe(this, time -> mTimeText.setText(time));
         mResultsViewModel.getDistance().observe(this, distance -> mDistanceText.setText(distance));
         mResultsViewModel.getAverageSpeed().observe(this, averageSpeed -> mAverageSpeedText.setText(averageSpeed));
-
         mResultsViewModel.getSpentCalories().observe(this, spentCalories -> mSpentCalories.setText(spentCalories));
-
         mResultsViewModel.getDate().observe(this, date -> mDateText.setText(date));
-
         mResultsViewModel.getComment().observe(this,comment->mComment.setText(comment));
-
         mResultsViewModel.getAction().observe(this, spAction::setSelection);
 
 
@@ -172,9 +167,12 @@ public class ResultsDetailsFragment extends Fragment {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("image/jpeg");
             intent.putExtra(Intent.EXTRA_STREAM, uri);
-            intent.putExtra(Intent.EXTRA_TEXT, "Время: " + mTimeText.getText() + "\nРасстояние: " + mDistanceText.getText()
-                    +"Средняя скорость: "+mAverageSpeedText.getText()+"Затраченные калории: "+mSpentCalories.getText()
-                    +"Комментарий к треку:\n"+mComment.getText()
+            intent.putExtra(Intent.EXTRA_TEXT, "Время: " + mTimeText.getText()
+                    + "\nРасстояние: " + mDistanceText.getText()
+                    +"\nСредняя скорость: "+mAverageSpeedText.getText()
+                    +"\nЗатраченные калории: "+mSpentCalories.getText()
+                    + "\nВид деятельности: " + spAction.getSelectedItem().toString()
+                    +"\nКомментарий к треку: "+mComment.getText()
             );
             startActivity(Intent.createChooser(intent, "Результаты маршрута"));
             return true;
