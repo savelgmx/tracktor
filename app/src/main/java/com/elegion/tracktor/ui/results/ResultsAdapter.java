@@ -62,10 +62,13 @@ public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
         });
         holder.setOnLongClickListener(id->{
           Log.d("ResultAdapter","On LONG LIsterner with id="+String.valueOf(id));
+
+            boolean isExpanded = getItem(position).isExpanded();
+            holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+
+
         });
 
-        boolean isExpanded = getItem(position).isExpanded();
-        holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
 
 
 

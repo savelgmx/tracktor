@@ -58,7 +58,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mDuration.setText(StringUtil.getTimeText(track.getDuration()));
 
         mAverageSpeed.setText(StringUtil.getAverageSpeedText(track.getDistance(),track.getDuration()));
-        //mSpentCalories.setText(StringUtil.getSpentCaloriesText(track.));
+      //  mSpentCalories.setText(StringUtil.getSpentCaloriesText(track.get));
         mComment.setText(StringUtil.getCommentsText(track.getComment()));
 
     }
