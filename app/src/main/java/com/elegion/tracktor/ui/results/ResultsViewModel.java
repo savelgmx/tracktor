@@ -52,6 +52,9 @@ public class ResultsViewModel extends ViewModel {
     private MutableLiveData<String> mAverageSpeed = new MutableLiveData<>();
     private MutableLiveData<String> mSpentCalories = new MutableLiveData<>();
 
+    private MutableLiveData<Integer> mAction = new MutableLiveData<>();
+
+
     private MutableLiveData<String> mDateText = new MutableLiveData<>();
 
     private MutableLiveData<String> mComment = new MutableLiveData<>();
@@ -273,6 +276,10 @@ public class ResultsViewModel extends ViewModel {
     public void loadSortedByDateDurationDistance(int mSortByDateDurationDistance) {
 
         mTracks.postValue(mRealmRepository.getRealmSortedByDateDurationDistanceTracks(mSortByDateDurationDistance));
+    }
+
+    public MutableLiveData<Integer> getAction() {
+        return mAction;
     }
 }
 

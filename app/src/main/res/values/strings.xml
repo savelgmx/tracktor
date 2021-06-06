@@ -57,6 +57,7 @@
     <string name="list_empty">The list is empty</string>
     <string name="sortOrder">Сортировка по возрастанию/убыванию-</string>
     <string name="sortByDateOrDuration">Сортировка по дате/продолжительности/расстоянию</string>
+    <string name="actionLabel">Вид активности</string>
     />
 
 </resources>

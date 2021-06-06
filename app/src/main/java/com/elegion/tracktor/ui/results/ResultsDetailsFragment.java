@@ -16,10 +16,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
@@ -28,6 +30,7 @@ import com.elegion.tracktor.ui.preferences.ReadUserPreferences;
 import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemSelected;
 import toothpick.Scope;
 import toothpick.Toothpick;
 
@@ -54,6 +57,9 @@ public class ResultsDetailsFragment extends Fragment {
     TextView mDateText;
     @BindView(R.id.tvComment)
     TextView mComment;
+
+    @BindView(R.id.spAction)
+    Spinner spAction;
 
 
     @Inject
@@ -92,9 +98,10 @@ public class ResultsDetailsFragment extends Fragment {
         setHasOptionsMenu(true);
 
         View view = inflater.inflate(R.layout.fr_result_detail, container, false);
-        mRadioGroup = view.findViewById(R.id.radiogroup);
-        mRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
-        SetSavedRadioButtonChecked(CheckedRadioButtonIndex);
+
+//        mRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
+  //      SetSavedRadioButtonChecked(CheckedRadioButtonIndex);
+
 
         mIbAddComment = view.findViewById(R.id.ibAddComment);
         mIbAddComment.setOnClickListener(mOnClickListener);
@@ -108,6 +115,8 @@ public class ResultsDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+        initSpinner();
 
         mResultsViewModel.calculateSpentCalories(CheckedRadioButtonIndex);
 
@@ -129,6 +138,7 @@ public class ResultsDetailsFragment extends Fragment {
 
         mResultsViewModel.getComment().observe(this,comment->mComment.setText(comment));
 
+        mResultsViewModel.getAction().observe(this, spAction::setSelection);
 
 
     }
@@ -179,6 +189,23 @@ public class ResultsDetailsFragment extends Fragment {
     }
 
 
+    private void initSpinner() {
+        String[] actions = getResources().getStringArray(R.array.actions);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),
+                R.layout.support_simple_spinner_dropdown_item,
+                actions);
+        arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spAction.setAdapter(arrayAdapter);
+
+    }
+
+    @OnItemSelected(R.id.spAction)
+    public void spinnerItemSelected(Spinner spinner, int position) {
+        mResultsViewModel.getAction().postValue(position);
+    }
+
+
     /* устанавливает предпочитаемый RadioButton согласно сохраненному Id
      */
 
@@ -205,6 +232,9 @@ public class ResultsDetailsFragment extends Fragment {
                             .findViewById(checkedId);
                     int checkedIndex = mRadioGroup.indexOfChild(checkedRadioButton);
                     ReadUserPreferences.saveKindOfActivityId(checkedIndex, getContext());
+                    mResultsViewModel.getAction().postValue(checkedIndex);
+
+
 
                     mResultsViewModel.calculateSpentCalories(checkedIndex);//пересчет калорий при выборе RadioButton
 
