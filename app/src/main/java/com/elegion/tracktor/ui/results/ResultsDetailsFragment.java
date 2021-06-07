@@ -66,11 +66,7 @@ public class ResultsDetailsFragment extends Fragment {
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
 
     private ImageButton mIbAddComment;
-    private RadioGroup mRadioGroup;
-    private int CheckedRadioButtonIndex;
-
     private Bitmap mImage;
-    private RealmRepository mRealmRepository;
     private long mTrackId;
 
 
@@ -99,10 +95,6 @@ public class ResultsDetailsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fr_result_detail, container, false);
 
-//        mRadioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
-        //      SetSavedRadioButtonChecked(CheckedRadioButtonIndex);
-
-
         mIbAddComment = view.findViewById(R.id.ibAddComment);
         mIbAddComment.setOnClickListener(mOnClickListener);
 
@@ -118,7 +110,7 @@ public class ResultsDetailsFragment extends Fragment {
 
         initSpinner();
 
-        mResultsViewModel.calculateSpentCalories(CheckedRadioButtonIndex);
+       // mResultsViewModel.calculateSpentCalories(mResultsViewModel.getAction());
 
 
         mTrackId = getArguments().getLong(RESULT_ID, 0);
@@ -203,42 +195,6 @@ public class ResultsDetailsFragment extends Fragment {
         mResultsViewModel.getAction().postValue(position);
     }
 
-
-    /* устанавливает предпочитаемый RadioButton согласно сохраненному Id
-     */
-
-    private void SetSavedRadioButtonChecked(int savedRadioIndex) {
-        RadioButton savedCheckedRadioButton = (RadioButton) mRadioGroup
-                .getChildAt(savedRadioIndex);
-        savedCheckedRadioButton.setChecked(true);
-    }
-
-
-    /**
-     * Listener для отслеживания выбора RadioButton
-     * <p>
-     * checkedIndexId: 0 Велосипед
-     * checkedIndexId: 1 Ходьба
-     * checkedIndexId: 2 Бег
-     */
-    private final RadioGroup.OnCheckedChangeListener onCheckedChangeListener =
-            new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-                    RadioButton checkedRadioButton = (RadioButton) mRadioGroup
-                            .findViewById(checkedId);
-                    int checkedIndex = mRadioGroup.indexOfChild(checkedRadioButton);
-                    ReadUserPreferences.saveKindOfActivityId(checkedIndex, getContext());
-                    mResultsViewModel.getAction().postValue(checkedIndex);
-
-
-
-                    mResultsViewModel.calculateSpentCalories(checkedIndex);//пересчет калорий при выборе RadioButton
-
-
-                }
-            };
 
 
 
