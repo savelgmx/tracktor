@@ -53,5 +53,21 @@ public class StringUtil {
             } else return comment.trim();
         }
     }
+    public static String getActionText(int codeAction) {
+        String actionText="";
+        switch (codeAction) {
+            case 0:
+                actionText = "Велосипед";
+                break;
+            case 1:
+                actionText = "Ходьба";
+                break;
+            case 2:
+                actionText = "Бег";
+            break;
+        }
+        return actionText;
+    }
+
 
 }

@@ -29,6 +29,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     private TextView mAverageSpeed;
     private TextView mSpentCalories;
     private MultiAutoCompleteTextView mComment;
+    private TextView mAction;
 
     List<Track> trackList;
 
@@ -42,6 +43,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mAverageSpeed = view.findViewById(R.id.tv_AverageSpeed);
         mSpentCalories = view.findViewById(R.id.tv_SpentCalories);
         mComment       = view.findViewById(R.id.tv_Comment);
+        mAction     = view.findViewById(R.id.tv_Action);
 
         expandableLayout = view.findViewById(R.id.expandableLayout);
     }
@@ -60,6 +62,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mAverageSpeed.setText(StringUtil.getAverageSpeedText(track.getDistance(),track.getDuration()));
       //  mSpentCalories.setText(StringUtil.getSpentCaloriesText(track.get));
         mComment.setText(StringUtil.getCommentsText(track.getComment()));
+        mAction.setText(StringUtil.getActionText(track.getAction()));
 
     }
 
@@ -82,6 +85,9 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     public void setOnLongClickListener(ResultsAdapter.OnItemLongClickListener listener) {
         mView.setOnLongClickListener(view->{
             if(listener!=null) {
+
+                Log.d("ResultHolder","On LONG Click Listener  triggered");
+
                 listener.OnItemLongClick(mTrackId);
             }
             return true;

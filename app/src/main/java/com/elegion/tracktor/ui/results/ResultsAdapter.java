@@ -56,12 +56,12 @@ public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
     public void onBindViewHolder(@NonNull ResultHolder holder, int position) {
         holder.bind(getItem(position));
         holder.setOnClickListener(id ->{
-            Log.d("ResultAdapter","On Click Listener  triggered with id="+String.valueOf(id));
+   //         Log.d("ResultAdapter","On Click Listener  triggered with id="+String.valueOf(id));
 
             EventBus.getDefault().post(new ShowResultDetailEvent(id));
         });
         holder.setOnLongClickListener(id->{
-          Log.d("ResultAdapter","On LONG LIsterner with id="+String.valueOf(id));
+  //        Log.d("ResultAdapter","On LONG LIsterner with id="+String.valueOf(id));
 
             boolean isExpanded = getItem(position).isExpanded();
             holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
