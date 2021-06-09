@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
+import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
@@ -16,6 +17,8 @@ import com.elegion.tracktor.util.StringUtil;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import toothpick.Toothpick;
 
 /**
  * @author Azret Magometov
@@ -36,6 +39,9 @@ public class ResultHolder extends RecyclerView.ViewHolder {
 
     private Track mTrack;
 
+    @Inject
+    ResultsViewModel mResultsViewModel;
+
 
 
     public ResultHolder(View view) {
@@ -51,6 +57,10 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mAction     = view.findViewById(R.id.tv_Action);
 
         expandableLayout = view.findViewById(R.id.expandableLayout);
+
+        Toothpick.inject(this, App.getAppScope());
+
+
     }
 
     @Override
@@ -67,7 +77,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mDuration.setText(StringUtil.getTimeText(track.getDuration()));
 
         mAverageSpeed.setText(StringUtil.getAverageSpeedText(track.getDistance(),track.getDuration()));
-      //  mSpentCalories.setText(StringUtil.getSpentCaloriesText(track.get));
+        mSpentCalories.setText(StringUtil.getSpentCaloriesText(mResultsViewModel.calculateSpentCalories(track.getAction())));
         mComment.setText(StringUtil.getCommentsText(track.getComment()));
         mAction.setText(StringUtil.getActionText(track.getAction()));
 
