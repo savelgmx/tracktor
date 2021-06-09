@@ -9,10 +9,13 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
 import com.elegion.tracktor.R;
+import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.util.StringUtil;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * @author Azret Magometov
@@ -31,7 +34,9 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     private MultiAutoCompleteTextView mComment;
     private TextView mAction;
 
-    List<Track> trackList;
+    private Track mTrack;
+
+
 
     public ResultHolder(View view) {
         super(view);
@@ -54,6 +59,8 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(Track track) {
+
+        mTrack = track;
         mTrackId = track.getId();
         mDateText.setText(StringUtil.getDateText(track.getDate()));
         mDistanceText.setText(StringUtil.getDistanceText(track.getDistance()));
@@ -86,8 +93,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mView.setOnLongClickListener(view->{
             if(listener!=null) {
 
-                Log.d("ResultHolder","On LONG Click Listener  triggered");
-
+                mTrack.setExpanded(!mTrack.isExpanded());
                 listener.OnItemLongClick(mTrackId);
             }
             return true;
