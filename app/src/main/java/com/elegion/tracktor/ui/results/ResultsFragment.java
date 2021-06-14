@@ -29,9 +29,9 @@ import toothpick.Scope;
 import toothpick.Toothpick;
 
 
+//implements RealmChangeListener<RealmResults<Track>>
 
-
-public class ResultsFragment extends Fragment implements RealmChangeListener<RealmResults<Track>>{
+public class ResultsFragment extends Fragment {
 
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
@@ -181,8 +181,10 @@ public class ResultsFragment extends Fragment implements RealmChangeListener<Rea
 
 
 
+/*
     @Override
     public void onChange(RealmResults<Track> tracks) {
 
     }
+*/
 }

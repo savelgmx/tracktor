@@ -26,7 +26,6 @@ import io.realm.Sort;
 public class RealmRepository implements IRepository<Track> {
 
     private Realm mRealm;
-    private RealmAsyncTask asyncTransaction;
 
     private static AtomicLong sPrimaryId;
     @Inject
@@ -117,6 +116,7 @@ public class RealmRepository implements IRepository<Track> {
         track.setDate(new Date());
         track.setAverageSpeed(distanse,duration);
         track.setComment(comment);
+        track.setExpanded(false);
 
         return updateItem(track);
 
