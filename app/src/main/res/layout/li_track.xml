@@ -12,132 +12,152 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/container_padding_small">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
 
             <TextView
                 android:id="@+id/tv_date"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/view_vertical_padding_small"
-                android:textAppearance="?attr/textAppearanceListItem" />
-        </LinearLayout>
+                android:padding="8dp"
+                android:text="Date"
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/tv_distance"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:padding="8dp"
+                android:text="Distance"
+
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
             <TextView
                 android:id="@+id/tv_duration"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceListItem" />
-        </LinearLayout>
+                android:padding="8dp"
+                android:text="Duration"
 
-        <LinearLayout
-            android:id="@+id/expandableLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp">
+                android:textAppearance="?attr/textAppearanceListItem"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_distance" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/expandableLayout"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_duration">
 
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/averagespeedLabel" />
-
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/averagespeedLabel"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="16dp" />
 
                 <TextView
                     android:id="@+id/tv_AverageSpeed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="0dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="16dp"
                     android:paddingStart="4dp"
+                    android:paddingEnd="0dp"
+                    app:layout_constraintStart_toEndOf="@+id/textView"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="5 km/h" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp">
 
                 <TextView
+                    android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/spentCaloriesLabel" />
-
+                    android:layout_marginTop="16dp"
+                    android:text="@string/spentCaloriesLabel"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/textView"
+                    tools:layout_editor_absoluteX="16dp" />
 
                 <TextView
                     android:id="@+id/tv_SpentCalories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="0dp"
+                    android:layout_marginStart="152dp"
+                    android:layout_marginTop="16dp"
                     android:paddingStart="4dp"
+                    android:paddingEnd="0dp"
+                    app:layout_constraintStart_toStartOf="@id/textView2"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_AverageSpeed"
                     tools:text="1000 kkal" />
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp">
                 <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/actionLabel" />
-
+                    android:text="@string/actionLabel"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="387dp" />
 
                 <TextView
                     android:id="@+id/tv_Action"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="0dp"
+                    android:layout_marginBottom="16dp"
                     android:paddingStart="4dp"
+                    android:paddingEnd="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_Comment"
+                    app:layout_constraintStart_toEndOf="@+id/textView3"
                     tools:text="walking" />
 
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp">
-
                 <TextView
+                    android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/CommentLabel" />
-
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="40dp"
+                    android:text="@string/CommentLabel"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_Comment"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.847" />
 
                 <MultiAutoCompleteTextView
                     android:id="@+id/tv_Comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="0dp"
-                    android:paddingStart="4dp"
+                    android:layout_marginStart="116dp"
                     android:editable="false"
-                    tools:text="Комментарий"
-                    tools:ignore="Deprecated" />
-            </LinearLayout>
+                    android:paddingStart="4dp"
+                    android:paddingEnd="0dp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="Deprecated"
+                    tools:text="Комментарий" />
 
 
+            </android.support.constraint.ConstraintLayout>
 
-
-
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
 

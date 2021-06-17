@@ -1,6 +1,7 @@
 package com.elegion.tracktor.ui.results;
 
 import android.app.MediaRouteButton;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -43,7 +44,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.tv_Comment) MultiAutoCompleteTextView mComment;
     @BindView(R.id.tv_Action) TextView mAction;
     
-    @BindView(R.id.expandableLayout) LinearLayout expandableLayout;
+    @BindView(R.id.expandableLayout) ConstraintLayout expandableLayout;
     
     
     
