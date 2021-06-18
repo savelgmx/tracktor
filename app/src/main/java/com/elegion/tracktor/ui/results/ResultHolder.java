@@ -1,21 +1,16 @@
 package com.elegion.tracktor.ui.results;
 
-import android.app.MediaRouteButton;
+
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
-
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
-import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.util.StringUtil;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -72,7 +67,6 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mDateText.setText(StringUtil.getDateText(track.getDate()));
         mDistanceText.setText(StringUtil.getDistanceText(track.getDistance()));
         mDuration.setText(StringUtil.getTimeText(track.getDuration()));
-        
         mAverageSpeed.setText(StringUtil.getAverageSpeedText(track.getDistance(),track.getDuration()));
         mSpentCalories.setText(StringUtil.getSpentCaloriesText(mResultsViewModel.calculateSpentCalories(track.getAction())));
         mComment.setText(StringUtil.getCommentsText(track.getComment()));
@@ -82,6 +76,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     @OnClick(R.id.tv_Comment)
     public void changeComment(){
         Log.d("ResultHoler","comment was pressed in expandable");
+        mResultsViewModel.updateComment(mTrackId,mComment.getText().toString());//здесь сохраняем редактируемый комментарий
     
     }
     
@@ -90,9 +85,6 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         
         
         mView.setOnClickListener(view -> {
-            
-            Log.d("ResultHolder","On Click Listener  triggered");
-            
             
             if(listener != null) {
                 listener.onItemClick(mTrackId);
