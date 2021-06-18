@@ -69,12 +69,13 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/averagespeedLabel"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="16dp" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_AverageSpeed"
@@ -92,11 +93,12 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/spentCaloriesLabel"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@id/textView"
-                    tools:layout_editor_absoluteX="16dp" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView" />
 
                 <TextView
                     android:id="@+id/tv_SpentCalories"
@@ -115,11 +117,12 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/actionLabel"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@id/textView2"
-                    tools:layout_editor_absoluteX="16dp" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView2" />
 
                 <TextView
                     android:id="@+id/tv_Action"
@@ -136,13 +139,13 @@
                     android:id="@+id/tv_Comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="128dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:editable="false"
+                    android:editable="true"
                     android:paddingStart="4dp"
                     android:paddingEnd="0dp"
-                    app:layout_constraintStart_toStartOf="@id/textView4"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_Action"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4"
                     tools:ignore="Deprecated"
                     tools:text="Комментарий" />
 
@@ -150,10 +153,12 @@
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/CommentLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3"
-                    tools:layout_editor_absoluteX="26dp" />
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 
             </android.support.constraint.ConstraintLayout>
