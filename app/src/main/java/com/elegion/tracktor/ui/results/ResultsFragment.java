@@ -38,11 +38,14 @@ public class ResultsFragment extends Fragment {
     @Nullable
     @BindView(R.id.ll_error)
     LinearLayout mErrorLayout;
-
+    
+    private Menu menu_results_fragment;
     private ResultsAdapter mResultsAdapter;
     private boolean mSortAscending=true; //сортировка по возрастанию/убыванию
     private int mSortByDateDurationDistance=1;//сортировка по дате/продолжительности/расстоянию циклична
     //1-по дате 2-по продолжительности 3-по расстоянию
+    
+    
 
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
@@ -112,6 +115,7 @@ public class ResultsFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_results_fragment, menu);
+        menu_results_fragment= menu;
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -119,6 +123,17 @@ public class ResultsFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (mResultsAdapter.isExpandedItem==true){
+            //когда расширенный список раскрыт
+            menu_results_fragment.findItem(R.id.actionShare).setVisible(true);
+            menu_results_fragment.findItem(R.id.actionDelete).setVisible(true);
+        }else{
+            menu_results_fragment.findItem(R.id.actionShare).setVisible(false);
+            menu_results_fragment.findItem(R.id.actionDelete).setVisible(false);
+        }
+    
+        
+        
         if (item.getItemId() == R.id.actionSortByAscOrDesc) {
 
             mResultsViewModel.loadSortedByIdTracks(mSortAscending);
