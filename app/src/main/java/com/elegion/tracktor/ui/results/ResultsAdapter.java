@@ -4,8 +4,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.recyclerview.extensions.ListAdapter;
 import android.support.v7.util.DiffUtil;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.common.ShowResultDetailEvent;
 import com.elegion.tracktor.data.model.Track;
@@ -13,12 +17,21 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import toothpick.Toothpick;
+
 
 public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
     
     private List<Track> tracks = Collections.emptyList();
     
     public Boolean isExpandedItem=false;
+    
+   // private ResultsFragment mResultsFragment=ResultsFragment.newInstance();
+    @Inject
+    ResultsFragment mResultsFragment;
+    
     
     
     private static final DiffUtil.ItemCallback<Track> DIFF_CALLBACK = new DiffUtil.ItemCallback<Track>() {
@@ -38,6 +51,7 @@ public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
     
     ResultsAdapter() {
         super(DIFF_CALLBACK);
+        Toothpick.inject(this, App.getAppScope());
         
     }
     
@@ -63,6 +77,8 @@ public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
             holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
             
             if (isExpanded){isExpandedItem=true; } else { isExpandedItem=false; }
+            
+           mResultsFragment.showMenuIfExpandedItem();
             
             
             

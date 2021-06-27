@@ -49,7 +49,7 @@ public class ResultsFragment extends Fragment {
 
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
-
+    
 
     public ResultsFragment() {
     }
@@ -117,20 +117,33 @@ public class ResultsFragment extends Fragment {
         inflater.inflate(R.menu.menu_results_fragment, menu);
         menu_results_fragment= menu;
         super.onCreateOptionsMenu(menu, inflater);
+    
     }
 
 
+    public void showMenuIfExpandedItem(){
+        
+        
+        
+        if (menu_results_fragment!=null) {
+    
+            if (mResultsAdapter.isExpandedItem == true) {
+        
+        
+                //когда расширенный список раскрыт
+                menu_results_fragment.findItem(R.id.actionShare).setVisible(true);
+                menu_results_fragment.findItem(R.id.actionDelete).setVisible(true);
+            } else {
+                menu_results_fragment.findItem(R.id.actionShare).setVisible(false);
+                menu_results_fragment.findItem(R.id.actionDelete).setVisible(false);
+            }
+        }
+    }
+    
+    
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mResultsAdapter.isExpandedItem==true){
-            //когда расширенный список раскрыт
-            menu_results_fragment.findItem(R.id.actionShare).setVisible(true);
-            menu_results_fragment.findItem(R.id.actionDelete).setVisible(true);
-        }else{
-            menu_results_fragment.findItem(R.id.actionShare).setVisible(false);
-            menu_results_fragment.findItem(R.id.actionDelete).setVisible(false);
-        }
     
         
         
