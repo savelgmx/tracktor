@@ -78,9 +78,6 @@ public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
             
             if (isExpanded){isExpandedItem=true; } else { isExpandedItem=false; }
             
-           mResultsFragment.showMenuIfExpandedItem();
-            
-            
             
         });
         

@@ -32,7 +32,7 @@ import toothpick.Toothpick;
 //implements RealmChangeListener<RealmResults<Track>>
 
 public class ResultsFragment extends Fragment {
-
+    
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
     @Nullable
@@ -46,24 +46,24 @@ public class ResultsFragment extends Fragment {
     //1-по дате 2-по продолжительности 3-по расстоянию
     
     
-
+    
     @Inject
     ResultsViewModel mResultsViewModel;//ResultsViewModel должен инжектиться в ResultsFragment
     
-
+    
     public ResultsFragment() {
     }
-
+    
     public static ResultsFragment newInstance() {
         return new ResultsFragment();
     }
-
+    
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         Toothpick.inject(this, App.getAppScope());
     }
-
+    
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,32 +71,36 @@ public class ResultsFragment extends Fragment {
         scope.installModules(new ViewModelModule(this));
         Toothpick.inject(this, scope);
     }
-
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fr_results, container, false);
     }
-
+    
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+    
+        Toast.makeText(getContext(),"Долгое нажатие по 3 верхним строкам сворачивает/расширяет элемент списка " +
+                "\n Короткое-выводит детальную инфу по треку ",Toast.LENGTH_SHORT).show();
+    
     }
-
+    
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mResultsAdapter = new ResultsAdapter();//mListener
         mResultsViewModel.getTracks().observe(this, tracks -> mResultsAdapter.submitList(tracks));
-      //  mResultsViewModel.loadTracks();
-
+        //  mResultsViewModel.loadTracks();
+        
         mResultsViewModel.loadSortedByIdTracks(mSortAscending);
-
+        
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mResultsAdapter);
-
+        
         //здесь проверку на IsEmpty и вывод страницы заглушки если список треков еще пуст
         mResultsViewModel.getIsEmpty().observe(this, isEmpty -> {
             if (isEmpty != null && !isEmpty) {
@@ -107,29 +111,33 @@ public class ResultsFragment extends Fragment {
                 mErrorLayout.setVisibility(View.VISIBLE);
             }
         });
-
+        
         //End of isEmpty test и вывода заглушки
-
+        
     }
-
+    
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_results_fragment, menu);
         menu_results_fragment= menu;
+        showMenuIfExpandedItem();
+        
+        
+        
         super.onCreateOptionsMenu(menu, inflater);
-    
+        
     }
-
-
+    
+    
     public void showMenuIfExpandedItem(){
         
         
         
         if (menu_results_fragment!=null) {
-    
+            
             if (mResultsAdapter.isExpandedItem == true) {
-        
-        
+                
+                
                 //когда расширенный список раскрыт
                 menu_results_fragment.findItem(R.id.actionShare).setVisible(true);
                 menu_results_fragment.findItem(R.id.actionDelete).setVisible(true);
@@ -141,30 +149,30 @@ public class ResultsFragment extends Fragment {
     }
     
     
-
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-    
+        
         
         
         if (item.getItemId() == R.id.actionSortByAscOrDesc) {
-
+            
             mResultsViewModel.loadSortedByIdTracks(mSortAscending);
             if (mSortAscending){
                 //сортровка по возрастанию
                 Toast.makeText(getContext(),"Сортировка по возрастанию Id",Toast.LENGTH_SHORT).show();
-
+                
             }else {
                 Toast.makeText(getContext(),"Сортировка по убыванию Id",Toast.LENGTH_SHORT).show();
-
+                
             }
             mSortAscending = !mSortAscending;
-
+            
             return true;
         } else if (item.getItemId() == R.id.actionSortByDateOrDuration) {
-
+            
             mResultsViewModel.loadSortedByDateDurationDistance(mSortByDateDurationDistance);
-
+            
             //---show Toast about sorting order
             switch (mSortByDateDurationDistance){
                 case 1:  //sort by date
@@ -176,32 +184,32 @@ public class ResultsFragment extends Fragment {
                     Toast.makeText(getContext(),"Сортировка по пройденному Расстоянию(Distance)",Toast.LENGTH_SHORT).show();
                     break;
             }
-
+            
             //end show
-
-
+            
+            
             mSortByDateDurationDistance=mSortByDateDurationDistance+1;//сортировка по дате/продолжительности/расстоянию циклична
             //1-по дате 2-по продолжительности 3-по расстоянию
             if (mSortByDateDurationDistance>3) mSortByDateDurationDistance=1; //Переключение односторонее и цикличное
-
+            
             return true;
         } else
             return super.onOptionsItemSelected(item);
     }
-
-
+    
+    
     @Override
     public void onDetach() {
         super.onDetach();
     }
-
-
+    
+    
     @Override
     public void onStart() {
         super.onStart();
-
+        
     }
-
+    
     @Override
     public void onStop() {
         super.onStop();
