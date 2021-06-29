@@ -147,26 +147,7 @@ public class ResultsDetailsFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.actionShare) {
-
-            imageViewToBitmap();
-
-            String path = MediaStore.Images.Media.insertImage(requireActivity().getContentResolver(), mImage, "Мой маршрут", null);
-            Uri uri = Uri.parse(path);
-            /* В сообщении должна быть информация о расстоянии,
-             времени, средней скорости, затраченных калориях,
-             комментарий к треку и изображение трека.*/
-
-            Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.setType("image/jpeg");
-            intent.putExtra(Intent.EXTRA_STREAM, uri);
-            intent.putExtra(Intent.EXTRA_TEXT, "Время: " + mTimeText.getText()
-                    + "\nРасстояние: " + mDistanceText.getText()
-                    +"\nСредняя скорость: "+mAverageSpeedText.getText()
-                    +"\nЗатраченные калории: "+mSpentCalories.getText()
-                    + "\nВид деятельности: " + spAction.getSelectedItem().toString()
-                    +"\nКомментарий к треку: "+mComment.getText()
-            );
-            startActivity(Intent.createChooser(intent, "Результаты маршрута"));
+            doShare();
             return true;
         } else if (item.getItemId() == R.id.actionDelete) {
 
@@ -189,12 +170,35 @@ public class ResultsDetailsFragment extends Fragment {
         spAction.setAdapter(arrayAdapter);
 
     }
-
+    
     @OnItemSelected(R.id.spAction)
     public void spinnerItemSelected(Spinner spinner, int position) {
         mResultsViewModel.getAction().postValue(position);
     }
 
+    
+    public void doShare(){
+        imageViewToBitmap();
+    
+        String path = MediaStore.Images.Media.insertImage(requireActivity().getContentResolver(), mImage, "Мой маршрут", null);
+        Uri uri = Uri.parse(path);
+            /* В сообщении должна быть информация о расстоянии,
+             времени, средней скорости, затраченных калориях,
+             комментарий к треку и изображение трека.*/
+    
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/jpeg");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.putExtra(Intent.EXTRA_TEXT, "Время: " + mTimeText.getText()
+                + "\nРасстояние: " + mDistanceText.getText()
+                +"\nСредняя скорость: "+mAverageSpeedText.getText()
+                +"\nЗатраченные калории: "+mSpentCalories.getText()
+                + "\nВид деятельности: " + spAction.getSelectedItem().toString()
+                +"\nКомментарий к треку: "+mComment.getText()
+        );
+        startActivity(Intent.createChooser(intent, "Результаты маршрута"));
+    
+    }
 
 
 
