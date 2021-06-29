@@ -24,12 +24,8 @@ import toothpick.Toothpick;
 
 public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
     
-    private List<Track> tracks = Collections.emptyList();
     
-    public Boolean isExpandedItem=true;
-    
-   // private ResultsFragment mResultsFragment=ResultsFragment.newInstance();
-    @Inject
+     @Inject
     ResultsFragment mResultsFragment;
     
     
@@ -75,9 +71,6 @@ public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
             
             boolean isExpanded = getItem(position).isExpanded();
             holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-            
-            if (isExpanded){isExpandedItem=true; } else { isExpandedItem=false; }
-            
             
         });
         

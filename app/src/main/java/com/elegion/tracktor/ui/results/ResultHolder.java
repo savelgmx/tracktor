@@ -36,6 +36,10 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     @Inject
     ResultsViewModel mResultsViewModel;
     
+    @Inject
+    Context mContext;
+
+
     @BindView(R.id.tv_date) TextView mDateText;
     @BindView(R.id.tv_distance) TextView mDistanceText;
     @BindView(R.id.tv_duration) TextView mDuration;
@@ -46,11 +50,6 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.textViewOptions) TextView mTextViewOptions;
     
     @BindView(R.id.expandableLayout) ConstraintLayout expandableLayout;
-    
-    
-    @Inject
-    Context mContext;
-    
     
     
     public ResultHolder(View view)  {
@@ -82,7 +81,6 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     }
     @OnClick(R.id.tv_Comment)
     public void changeComment(){
-        Log.d("ResultHoler","comment was pressed in expandable");
         mResultsViewModel.updateComment(mTrackId,mComment.getText().toString());//здесь сохраняем редактируемый комментарий
         
     }
@@ -93,16 +91,18 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         //здесь будем вызывать popup options menu
         PopupMenu popup=new PopupMenu(mContext,mTextViewOptions);
         popup.inflate(R.menu.menu_details_fragment);
+        popup.show();
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.actionShare://делимся результатами трека
+                        Log.d("ResultHolder","actionShare Menu with TrackId="+ mTrackId);
                         
                         break;
                     case R.id.actionDelete://удаляем трек
-                        mResultsViewModel.deleteTrack(mTrackId);
-                         break;
+                        //       mResultsViewModel.deleteTrack(mTrackId);
+                        //        break;
                 }
                 return false;
             }

@@ -31,8 +31,6 @@ import toothpick.Toothpick;
 import static com.elegion.tracktor.ui.results.ResultsActivity.RESULT_ID;
 
 
-//implements RealmChangeListener<RealmResults<Track>>
-
 public class ResultsFragment extends Fragment {
     
     @BindView(R.id.recycler)
