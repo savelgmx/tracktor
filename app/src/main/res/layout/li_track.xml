@@ -160,6 +160,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
+                <TextView
+                    android:id="@+id/textViewOptions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="43dp"
+                    android:layout_marginTop="17dp"
+                    android:text="@string/tvOptionsLabel"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/tv_AverageSpeed"
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
             </android.support.constraint.ConstraintLayout>
 

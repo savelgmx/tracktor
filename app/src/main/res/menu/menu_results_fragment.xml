@@ -17,20 +17,4 @@
 
         />
 
-    <item
-        android:id="@+id/actionShare"
-        android:icon="?attr/actionModeShareDrawable"
-        android:title="@string/share"
-        app:showAsAction="ifRoom|withText"
-        android:visible="false"
-        />
-    <item
-        android:id="@+id/actionDelete"
-        android:title="@string/btn_delete_result"
-        android:icon="@android:drawable/ic_delete"
-        app:showAsAction="ifRoom|withText"
-        android:visible="false"
-    />
-
-
 </menu>

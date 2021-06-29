@@ -26,7 +26,7 @@ public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
     
     private List<Track> tracks = Collections.emptyList();
     
-    public Boolean isExpandedItem=false;
+    public Boolean isExpandedItem=true;
     
    // private ResultsFragment mResultsFragment=ResultsFragment.newInstance();
     @Inject

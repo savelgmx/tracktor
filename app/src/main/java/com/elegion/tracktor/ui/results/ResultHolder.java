@@ -1,12 +1,17 @@
 package com.elegion.tracktor.ui.results;
 
 
+import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.model.Track;
@@ -38,11 +43,13 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.tv_SpentCalories) TextView mSpentCalories;
     @BindView(R.id.tv_Comment) MultiAutoCompleteTextView mComment;
     @BindView(R.id.tv_Action) TextView mAction;
+    @BindView(R.id.textViewOptions) TextView mTextViewOptions;
     
     @BindView(R.id.expandableLayout) ConstraintLayout expandableLayout;
     
     
-    
+    @Inject
+    Context mContext;
     
     
     
@@ -77,7 +84,32 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     public void changeComment(){
         Log.d("ResultHoler","comment was pressed in expandable");
         mResultsViewModel.updateComment(mTrackId,mComment.getText().toString());//здесь сохраняем редактируемый комментарий
+        
+    }
     
+    @OnClick(R.id.textViewOptions)
+    public void onOptionsMenu(){
+        Log.d("ResultHolder","On Optopns Menu with TrackId="+ mTrackId);
+        //здесь будем вызывать popup options menu
+        PopupMenu popup=new PopupMenu(mContext,mTextViewOptions);
+        popup.inflate(R.menu.menu_details_fragment);
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.actionShare://делимся результатами трека
+                        
+                        break;
+                    case R.id.actionDelete://удаляем трек
+                        mResultsViewModel.deleteTrack(mTrackId);
+                         break;
+                }
+                return false;
+            }
+        });
+        
+        
+        
     }
     
     

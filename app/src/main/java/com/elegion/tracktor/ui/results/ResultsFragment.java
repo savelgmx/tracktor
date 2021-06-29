@@ -28,6 +28,8 @@ import io.realm.RealmResults;
 import toothpick.Scope;
 import toothpick.Toothpick;
 
+import static com.elegion.tracktor.ui.results.ResultsActivity.RESULT_ID;
+
 
 //implements RealmChangeListener<RealmResults<Track>>
 
@@ -44,6 +46,8 @@ public class ResultsFragment extends Fragment {
     private boolean mSortAscending=true; //сортировка по возрастанию/убыванию
     private int mSortByDateDurationDistance=1;//сортировка по дате/продолжительности/расстоянию циклична
     //1-по дате 2-по продолжительности 3-по расстоянию
+    
+    private long mTrackId;
     
     
     
@@ -84,7 +88,10 @@ public class ResultsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
     
-        Toast.makeText(getContext(),"Долгое нажатие по 3 верхним строкам сворачивает/расширяет элемент списка " +
+      
+    
+    
+        Toast.makeText(getContext(),"Долгое нажатие по 3 верхним строкам сворачивает/расширяет элемент списка" +
                 "\n Короткое-выводит детальную инфу по треку ",Toast.LENGTH_SHORT).show();
     
     }
@@ -120,32 +127,8 @@ public class ResultsFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_results_fragment, menu);
         menu_results_fragment= menu;
-        showMenuIfExpandedItem();
-        
-        
-        
         super.onCreateOptionsMenu(menu, inflater);
         
-    }
-    
-    
-    public void showMenuIfExpandedItem(){
-        
-        
-        
-        if (menu_results_fragment!=null) {
-            
-            if (mResultsAdapter.isExpandedItem == true) {
-                
-                
-                //когда расширенный список раскрыт
-                menu_results_fragment.findItem(R.id.actionShare).setVisible(true);
-                menu_results_fragment.findItem(R.id.actionDelete).setVisible(true);
-            } else {
-                menu_results_fragment.findItem(R.id.actionShare).setVisible(false);
-                menu_results_fragment.findItem(R.id.actionDelete).setVisible(false);
-            }
-        }
     }
     
     
