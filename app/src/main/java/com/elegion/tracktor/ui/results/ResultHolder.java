@@ -7,10 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
@@ -47,7 +47,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.tv_SpentCalories) TextView mSpentCalories;
     @BindView(R.id.tv_Comment) MultiAutoCompleteTextView mComment;
     @BindView(R.id.tv_Action) TextView mAction;
-    @BindView(R.id.textViewOptions) TextView mTextViewOptions;
+    @BindView(R.id.ibViewOptions) ImageButton mIbViewOptions;
     
     @BindView(R.id.expandableLayout) ConstraintLayout expandableLayout;
     
@@ -85,11 +85,11 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         
     }
     
-    @OnClick(R.id.textViewOptions)
+    @OnClick(R.id.ibViewOptions)
     public void onOptionsMenu(){
         Log.d("ResultHolder","On Optopns Menu with TrackId="+ mTrackId);
         //здесь будем вызывать popup options menu
-        PopupMenu popup=new PopupMenu(mContext,mTextViewOptions);
+        PopupMenu popup=new PopupMenu(mContext, mIbViewOptions);
         popup.inflate(R.menu.menu_details_fragment);
         popup.show();
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
