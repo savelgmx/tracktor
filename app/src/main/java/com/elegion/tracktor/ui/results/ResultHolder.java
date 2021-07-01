@@ -2,6 +2,10 @@ package com.elegion.tracktor.ui.results;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,12 +15,11 @@ import android.widget.ImageButton;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.model.Track;
+import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -24,20 +27,26 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import toothpick.Toothpick;
 
+import static android.support.v4.content.ContextCompat.startActivity;
+
+
 /**
  * @author Azret Magometov
  */
 public class ResultHolder extends RecyclerView.ViewHolder {
-    
+
     private View mView;
     private long mTrackId;
     private Track mTrack;
-    
+
     @Inject
     ResultsViewModel mResultsViewModel;
-    
+
     @Inject
     Context mContext;
+
+    @Inject
+    ResultsDetailsFragment mResultsDetailsFragment;
 
 
     @BindView(R.id.tv_date) TextView mDateText;
@@ -48,26 +57,26 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.tv_Comment) MultiAutoCompleteTextView mComment;
     @BindView(R.id.tv_Action) TextView mAction;
     @BindView(R.id.ibViewOptions) ImageButton mIbViewOptions;
-    
+
     @BindView(R.id.expandableLayout) ConstraintLayout expandableLayout;
-    
-    
+
+
     public ResultHolder(View view)  {
-        
+
         super(view);
         mView = view;
         ButterKnife.bind(this,view);
         Toothpick.inject(this, App.getAppScope());
-        
+
     }
-    
+
     @Override
     public String toString() {
         return super.toString() + " '" + mDistanceText.getText() + "'";
     }
-    
+
     public void bind(Track track) {
-        
+
         mTrack = track;
         mTrackId = track.getId();
         mDateText.setText(StringUtil.getDateText(track.getDate()));
@@ -77,18 +86,17 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mSpentCalories.setText(StringUtil.getSpentCaloriesText(mResultsViewModel.calculateSpentCalories(track.getAction())));
         mComment.setText(StringUtil.getCommentsText(track.getComment()));
         mAction.setText(StringUtil.getActionText(track.getAction()));
-        
+
     }
     @OnClick(R.id.tv_Comment)
     public void changeComment(){
         mResultsViewModel.updateComment(mTrackId,mComment.getText().toString());//здесь сохраняем редактируемый комментарий
-        
+
     }
-    
+
     @OnClick(R.id.ibViewOptions)
     public void onOptionsMenu(){
-        Log.d("ResultHolder","On Optopns Menu with TrackId="+ mTrackId);
-        //здесь будем вызывать popup options menu
+         //здесь будем вызывать popup options menu
         PopupMenu popup=new PopupMenu(mContext, mIbViewOptions);
         popup.inflate(R.menu.menu_details_fragment);
         popup.show();
@@ -97,43 +105,62 @@ public class ResultHolder extends RecyclerView.ViewHolder {
             public boolean onMenuItemClick(MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.actionShare://делимся результатами трека
-                        Log.d("ResultHolder","actionShare Menu with TrackId="+ mTrackId);
-                        
+                        doShare();
                         break;
                     case R.id.actionDelete://удаляем трек
-                        //       mResultsViewModel.deleteTrack(mTrackId);
-                        //        break;
+                        mResultsViewModel.deleteTrack(mTrackId);
+                        break;
                 }
                 return false;
             }
         });
-        
-        
-        
     }
-    
-    
+
+    private void doShare(){
+        //здесь мы получим Image а затем Intent intent = new Intent(Intent.ACTION_SEND);
+        Bitmap bitmapImage = ScreenshotMaker.fromBase64(mTrack.getImageBase64());
+        String path = MediaStore.Images.Media.insertImage(mContext.getContentResolver(), bitmapImage, "Мой маршрут", null);
+        Uri uri = Uri.parse(path);
+            /* В сообщении должна быть информация о расстоянии,
+             времени, средней скорости, затраченных калориях,
+             комментарий к треку и изображение трека.*/
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/jpeg");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.putExtra(Intent.EXTRA_TEXT, "Время: " + mDateText.getText()
+                + "\nРасстояние: " + mDistanceText.getText()
+                +"\nСредняя скорость: "+mAverageSpeed.getText()
+                +"\nЗатраченные калории: "+mSpentCalories.getText()
+                + "\nВид деятельности: " + mAction.getText()
+                +"\nКомментарий к треку: "+mComment.getText()
+        );
+        startActivity(mContext,Intent.createChooser(intent, "Результаты маршрута"),null);
+
+    }
+
+
     public void setOnClickListener(ResultsAdapter.OnItemClickListener listener) {
-        
-        
+
+
         mView.setOnClickListener(view -> {
-            
+
             if(listener != null) {
                 listener.onItemClick(mTrackId);
             }
-            
+
         });
     }
-    
+
     public void setOnLongClickListener(ResultsAdapter.OnItemLongClickListener listener) {
         mView.setOnLongClickListener(view->{
             if(listener!=null) {
-                
+
                 mTrack.setExpanded(!mTrack.isExpanded());
                 listener.OnItemLongClick(mTrackId);
             }
             return true;
         });
     }
-    
+
 }
