@@ -16,22 +16,32 @@ import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmAsyncTask;
+import io.realm.RealmConfiguration;
+import io.realm.RealmConfiguration.Builder;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.Sort;
+import io.realm.exceptions.RealmMigrationNeededException;
 
-/**
- * @author Azret Magometov
- */
 public class RealmRepository implements IRepository<Track> {
 
     private Realm mRealm;
+
 
     private static AtomicLong sPrimaryId;
     @Inject
     public RealmRepository(App context) {
         Realm.init(context);
-        mRealm = Realm.getDefaultInstance();
+
+        try {
+            mRealm = Realm.getDefaultInstance();
+        }catch (RealmMigrationNeededException r){
+            RealmConfiguration config= new RealmConfiguration.Builder()
+                    .schemaVersion(2) //конфиги должны удаляться при изменении схемы
+                    .build();
+            Realm.deleteRealm(config);
+            mRealm=Realm.getDefaultInstance();
+        }
         Number max = mRealm.where(Track.class).max("id");
         sPrimaryId = max == null ? new AtomicLong(0) : new AtomicLong(max.longValue());
     }
@@ -183,6 +193,6 @@ public class RealmRepository implements IRepository<Track> {
         }
 
         mAnotherRealm.close();
-      return   mSortedRealm;
+        return   mSortedRealm;
     }
 }

@@ -17,6 +17,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
+import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
@@ -35,6 +36,7 @@ import static android.support.v4.content.ContextCompat.startActivity;
  */
 public class ResultHolder extends RecyclerView.ViewHolder {
 
+   // private  RealmRepository mRepository;
     private View mView;
     private long mTrackId;
     private Track mTrack;
@@ -47,6 +49,10 @@ public class ResultHolder extends RecyclerView.ViewHolder {
 
     @Inject
     ResultsDetailsFragment mResultsDetailsFragment;
+
+    @Inject
+
+    RealmRepository mRepository;
 
 
     @BindView(R.id.tv_date) TextView mDateText;
@@ -67,6 +73,9 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mView = view;
         ButterKnife.bind(this,view);
         Toothpick.inject(this, App.getAppScope());
+
+     //   mRepository = new RealmRepository(mContext);
+
 
     }
 
@@ -108,7 +117,8 @@ public class ResultHolder extends RecyclerView.ViewHolder {
                         doShare();
                         break;
                     case R.id.actionDelete://удаляем трек
-                        mResultsViewModel.deleteTrack(mTrackId);
+                        //mResultsViewModel.deleteTrack(mTrackId);
+                        mRepository.deleteItem(mTrackId);
                         break;
                 }
                 return false;
