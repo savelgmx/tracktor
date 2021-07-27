@@ -54,6 +54,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_distance" />
 
+            <Button
+                android:id="@+id/btn_expand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_duration"
+                android:text="@string/expand"/>
+
+
+
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/expandableLayout"
                 android:layout_width="0dp"
@@ -62,7 +73,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_duration"
+                app:layout_constraintTop_toBottomOf="@id/btn_expand"
                 app:layout_constraintVertical_bias="1.0">
 
                 <TextView
@@ -176,6 +187,7 @@
             </android.support.constraint.ConstraintLayout>
 
         </android.support.constraint.ConstraintLayout>
+
 
     </android.support.v7.widget.CardView>
 

@@ -59,6 +59,7 @@
     <string name="sortByDateOrDuration">Сортировка по дате/продолжительности/расстоянию</string>
     <string name="actionLabel">Вид активности</string>
     <string name="tvOptionsLabel">⋮ ⋮</string>
+    <string name="expand">Расширить</string>
     />
 
 </resources>
