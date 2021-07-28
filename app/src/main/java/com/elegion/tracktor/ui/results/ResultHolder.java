@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.PopupMenu;
@@ -65,6 +66,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.ibViewOptions) ImageButton mIbViewOptions;
 
     @BindView(R.id.expandableLayout) ConstraintLayout expandableLayout;
+    @BindView(R.id.btn_expand) Button mExpandButton;
 
 
     public ResultHolder(View view)  {
@@ -73,9 +75,6 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mView = view;
         ButterKnife.bind(this,view);
         Toothpick.inject(this, App.getAppScope());
-
-     //   mRepository = new RealmRepository(mContext);
-
 
     }
 
@@ -96,11 +95,20 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mComment.setText(StringUtil.getCommentsText(track.getComment()));
         mAction.setText(StringUtil.getActionText(track.getAction()));
 
+        setExpandableLayoutVisibilty();
+
     }
     @OnClick(R.id.tv_Comment)
     public void changeComment(){
         mResultsViewModel.updateComment(mTrackId,mComment.getText().toString());//здесь сохраняем редактируемый комментарий
 
+    }
+
+    @OnClick(R.id.btn_expand)
+    public void setExpandableLayoutVisibilty(){
+        mTrack.setExpanded(!mTrack.isExpanded());
+        expandableLayout.setVisibility(mTrack.isExpanded() ? View.VISIBLE : View.GONE);//depend on expand flag value set visibility of expand Layout
+        mExpandButton.setText(mTrack.isExpanded() ?"Свернуть":"Развернуть");
     }
 
     @OnClick(R.id.ibViewOptions)
@@ -119,12 +127,16 @@ public class ResultHolder extends RecyclerView.ViewHolder {
                     case R.id.actionDelete://удаляем трек
                         //mResultsViewModel.deleteTrack(mTrackId);
                         mRepository.deleteItem(mTrackId);
+                        mResultsViewModel.getTracks();
                         break;
                 }
                 return false;
             }
         });
     }
+
+
+
 
     private void doShare(){
         //здесь мы получим Image а затем Intent intent = new Intent(Intent.ACTION_SEND);

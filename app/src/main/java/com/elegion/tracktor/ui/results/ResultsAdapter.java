@@ -64,7 +64,7 @@ public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
         holder.bind(getItem(position));
         holder.setOnClickListener(id ->{
             EventBus.getDefault().post(new ShowResultDetailEvent(id));
-            
+            notifyDataSetChanged();
             
         });
         holder.setOnLongClickListener(id->{
