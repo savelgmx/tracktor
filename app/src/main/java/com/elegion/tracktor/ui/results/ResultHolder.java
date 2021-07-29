@@ -20,8 +20,12 @@ import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
+import com.elegion.tracktor.event.DeleteTrackEvent;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
+
+import org.greenrobot.eventbus.EventBus;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -126,8 +130,8 @@ public class ResultHolder extends RecyclerView.ViewHolder {
                         break;
                     case R.id.actionDelete://удаляем трек
                         //mResultsViewModel.deleteTrack(mTrackId);
-                        mRepository.deleteItem(mTrackId);
-                        mResultsViewModel.getTracks();
+                        EventBus.getDefault().post(new DeleteTrackEvent(mTrackId));
+
                         break;
                 }
                 return false;
