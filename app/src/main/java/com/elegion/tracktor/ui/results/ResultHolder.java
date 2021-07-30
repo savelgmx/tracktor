@@ -139,10 +139,14 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         });
     }
 
+    @OnClick(R.id.btn_delete)
+    public void deleteItem(){
+        EventBus.getDefault().post(new DeleteTrackEvent(mTrackId));
+    }
 
 
-
-    private void doShare(){
+    @OnClick(R.id.btn_share)
+    public void doShare(){
         //здесь мы получим Image а затем Intent intent = new Intent(Intent.ACTION_SEND);
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(mTrack.getImageBase64());
         String path = MediaStore.Images.Media.insertImage(mContext.getContentResolver(), bitmapImage, "Мой маршрут", null);
