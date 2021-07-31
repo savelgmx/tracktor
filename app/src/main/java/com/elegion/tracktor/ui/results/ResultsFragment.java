@@ -21,6 +21,7 @@ import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.di.ViewModelModule;
 import com.elegion.tracktor.event.DeleteTrackEvent;
+import com.elegion.tracktor.event.EditTrackCommentEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -63,7 +64,11 @@ public class ResultsFragment extends Fragment {
     }
 
     public static ResultsFragment newInstance() {
-        return new ResultsFragment();
+        Bundle bundle = new Bundle();
+      //  bundle.putLong(RESULT_ID, trackId);
+        ResultsFragment fragment = new ResultsFragment();
+        fragment.setArguments(bundle);
+        return fragment; // return new ResultsFragment();
     }
 
     @Override
@@ -215,5 +220,16 @@ public class ResultsFragment extends Fragment {
         mResultsViewModel.deleteTrack(trackId);
         mResultsViewModel.loadSortedByDateDurationDistance(mSortByDateDurationDistance);
         //mResultsAdapter.submitList(mResultsViewModel.stripRealmTrack());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEditTrackCommentEvent(EditTrackCommentEvent editTrackCommentEvent){
+
+        mTrackId=editTrackCommentEvent.getTrackId();
+         //Track track = mResultsViewModel.getTrack(trackId);
+        String trackComment=mResultsViewModel.getTrackComment(mTrackId);
+        //далее AlertDialog
+
+
     }
 }

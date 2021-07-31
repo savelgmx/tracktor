@@ -20,6 +20,7 @@ import com.elegion.tracktor.R;
 import com.elegion.tracktor.data.RealmRepository;
 import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.event.DeleteTrackEvent;
+import com.elegion.tracktor.event.EditTrackCommentEvent;
 import com.elegion.tracktor.util.ScreenshotMaker;
 import com.elegion.tracktor.util.StringUtil;
 
@@ -103,7 +104,8 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     }
     @OnClick(R.id.ibViewComment)
     public void changeComment(){
-        mResultsViewModel.updateComment(mTrackId,mComment.getText().toString());//здесь сохраняем редактируемый комментарий
+   //     mResultsViewModel.updateComment(mTrackId,mComment.getText().toString());//здесь сохраняем редактируемый комментарий
+        EventBus.getDefault().post(new EditTrackCommentEvent(mTrackId, mComment.getText().toString()));
 
     }
 
