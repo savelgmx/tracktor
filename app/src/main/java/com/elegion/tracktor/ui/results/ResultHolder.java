@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -67,7 +66,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.tv_SpentCalories) TextView mSpentCalories;
     @BindView(R.id.tv_Comment) MultiAutoCompleteTextView mComment;
     @BindView(R.id.tv_Action) TextView mAction;
-    @BindView(R.id.ibViewOptions) ImageButton mIbViewOptions;
+    @BindView(R.id.ibViewComment) ImageButton mIbViewComment;
 
     @BindView(R.id.expandableLayout) ConstraintLayout expandableLayout;
     @BindView(R.id.btn_expand) Button mExpandButton;
@@ -102,7 +101,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         setExpandableLayoutVisibilty();
 
     }
-    @OnClick(R.id.tv_Comment)
+    @OnClick(R.id.ibViewComment)
     public void changeComment(){
         mResultsViewModel.updateComment(mTrackId,mComment.getText().toString());//здесь сохраняем редактируемый комментарий
 
@@ -113,30 +112,6 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mTrack.setExpanded(!mTrack.isExpanded());
         expandableLayout.setVisibility(mTrack.isExpanded() ? View.VISIBLE : View.GONE);//depend on expand flag value set visibility of expand Layout
         mExpandButton.setText(mTrack.isExpanded() ?"Свернуть":"Развернуть");
-    }
-
-    @OnClick(R.id.ibViewOptions)
-    public void onOptionsMenu(){
-         //здесь будем вызывать popup options menu
-        PopupMenu popup=new PopupMenu(mContext, mIbViewOptions);
-        popup.inflate(R.menu.menu_details_fragment);
-        popup.show();
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.actionShare://делимся результатами трека
-                        doShare();
-                        break;
-                    case R.id.actionDelete://удаляем трек
-                        //mResultsViewModel.deleteTrack(mTrackId);
-                        EventBus.getDefault().post(new DeleteTrackEvent(mTrackId));
-
-                        break;
-                }
-                return false;
-            }
-        });
     }
 
     @OnClick(R.id.btn_delete)
