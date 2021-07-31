@@ -1,7 +1,9 @@
 package com.elegion.tracktor.ui.results;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.elegion.tracktor.App;
@@ -229,7 +232,22 @@ public class ResultsFragment extends Fragment {
          //Track track = mResultsViewModel.getTrack(trackId);
         String trackComment=mResultsViewModel.getTrackComment(mTrackId);
         //далее AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.fr_comment_dialog_fragment, null);
 
+        final EditText etComment = view.findViewById(R.id.edAdComment);
 
+        builder.setView(view)
+                .setPositiveButton(R.string.btn_save_label, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mResultsViewModel.updateComment(mTrackId,etComment.getText().toString());
+                        etComment.setText(mResultsViewModel.getTrackComment(mTrackId));
+
+                    }
+                })
+                .setNegativeButton(R.string.btn_cancel_label, null);
+         builder.create().show();
     }
 }
