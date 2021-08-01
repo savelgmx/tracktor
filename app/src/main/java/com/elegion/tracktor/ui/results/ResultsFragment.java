@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
@@ -105,10 +106,12 @@ public class ResultsFragment extends Fragment {
         ButterKnife.bind(this, view);
 
 
+/*
 
 
         Toast.makeText(getContext(),"Долгое нажатие по 3 верхним строкам сворачивает/расширяет элемент списка" +
                 "\n Короткое-выводит детальную инфу по треку ",Toast.LENGTH_SHORT).show();
+*/
 
     }
 
@@ -236,14 +239,21 @@ public class ResultsFragment extends Fragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fr_comment_dialog_fragment, null);
 
+        final TextView tvTitle = view.findViewById(R.id.tvTitle);
         final EditText etComment = view.findViewById(R.id.edAdComment);
+        //здесь меняем заголовок
+        tvTitle.setText(mResultsViewModel.getTitleId(mTrackId));
+        etComment.setText(mResultsViewModel.getTrackComment(mTrackId));
+
+
+
 
         builder.setView(view)
                 .setPositiveButton(R.string.btn_save_label, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mResultsViewModel.updateComment(mTrackId,etComment.getText().toString());
-                        etComment.setText(mResultsViewModel.getTrackComment(mTrackId));
+                      //  etComment.setText(mResultsViewModel.getTrackComment(mTrackId));
 
                     }
                 })

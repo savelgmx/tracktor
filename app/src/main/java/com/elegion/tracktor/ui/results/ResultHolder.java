@@ -159,6 +159,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         });
     }
 
+/*
     public void setOnLongClickListener(ResultsAdapter.OnItemLongClickListener listener) {
         mView.setOnLongClickListener(view->{
             if(listener!=null) {
@@ -169,5 +170,6 @@ public class ResultHolder extends RecyclerView.ViewHolder {
             return true;
         });
     }
+*/
 
 }

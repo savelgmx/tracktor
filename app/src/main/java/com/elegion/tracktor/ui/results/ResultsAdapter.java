@@ -67,13 +67,15 @@ public class ResultsAdapter extends ListAdapter<Track, ResultHolder> {
             notifyDataSetChanged();
             
         });
+/*
         holder.setOnLongClickListener(id->{
             
             boolean isExpanded = getItem(position).isExpanded();
             holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
             
         });
-        
+*/
+
         
     }
     interface OnItemClickListener {
