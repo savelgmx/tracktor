@@ -104,6 +104,11 @@ public class ResultsViewModel extends ViewModel {
         return mTracks;
     }
 
+    public Track getTrack(long trackId) {
+        return mRepository.getItem(trackId);
+    }
+
+
     public MutableLiveData<Boolean> getIsEmpty() {
         return mIsEmpty;
     }

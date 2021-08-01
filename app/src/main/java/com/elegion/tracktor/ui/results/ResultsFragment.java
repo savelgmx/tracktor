@@ -232,7 +232,7 @@ public class ResultsFragment extends Fragment {
     public void OnEditTrackCommentEvent(EditTrackCommentEvent editTrackCommentEvent){
 
         mTrackId=editTrackCommentEvent.getTrackId();
-         //Track track = mResultsViewModel.getTrack(trackId);
+         Track track = mResultsViewModel.getTrack(mTrackId);
         String trackComment=mResultsViewModel.getTrackComment(mTrackId);
         //далее AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -243,8 +243,7 @@ public class ResultsFragment extends Fragment {
         final EditText etComment = view.findViewById(R.id.edAdComment);
         //здесь меняем заголовок
         tvTitle.setText(mResultsViewModel.getTitleId(mTrackId));
-        etComment.setText(mResultsViewModel.getTrackComment(mTrackId));
-
+        etComment.setText(trackComment);
 
 
 
@@ -253,7 +252,9 @@ public class ResultsFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mResultsViewModel.updateComment(mTrackId,etComment.getText().toString());
+                        track.setComment(etComment.getText().toString());
                       //  etComment.setText(mResultsViewModel.getTrackComment(mTrackId));
+                        editTrackCommentEvent.getCommentText().setText(track.getComment());
 
                     }
                 })

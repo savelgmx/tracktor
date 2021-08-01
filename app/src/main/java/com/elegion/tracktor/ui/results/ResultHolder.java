@@ -105,7 +105,7 @@ public class ResultHolder extends RecyclerView.ViewHolder {
     @OnClick(R.id.ibViewComment)
     public void changeComment(){
    //     mResultsViewModel.updateComment(mTrackId,mComment.getText().toString());//здесь сохраняем редактируемый комментарий
-        EventBus.getDefault().post(new EditTrackCommentEvent(mTrackId, mComment.getText().toString()));
+        EventBus.getDefault().post(new EditTrackCommentEvent(mTrackId, mComment));
 
     }
 

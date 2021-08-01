@@ -1,12 +1,13 @@
 package com.elegion.tracktor.event;
 
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
 public class EditTrackCommentEvent {
     private final long mTrackId;
-    private final String mCommentText;
+    private final TextView mCommentText;
 
-    public EditTrackCommentEvent(long trackId, String commentText) {
+    public EditTrackCommentEvent(long trackId, MultiAutoCompleteTextView commentText) {
         mTrackId = trackId;
         mCommentText = commentText;
     }
@@ -15,7 +16,7 @@ public class EditTrackCommentEvent {
         return mTrackId;
     }
 
-    public String getCommentText() {
+    public TextView getCommentText() {
         return mCommentText;
     }
 }
