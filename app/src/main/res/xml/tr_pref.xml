@@ -52,5 +52,16 @@
         android:lines="1"
         android:title="@string/dialog_title_user_age" />
 
+    <ListPreference
+        android:defaultValue="1"
+        android:dialogTitle="compression ratio"
+        android:entries="@array/entries_list_compression_ratio"
+        android:entryValues="@array/entryvalues_list_compression_ratio"
+        android:key="@string/pref_key_compression_ratio"
+        android:title="@string/title_compression_ratio"
+        />
+
+
+
 
 </PreferenceScreen>

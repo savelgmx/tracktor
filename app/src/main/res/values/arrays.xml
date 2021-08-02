@@ -4,11 +4,16 @@
     <string-array name="entries_list_preference_unit">
         <item>Километры</item>
         <item>Мили</item>
+        <item>Meters</item>
+        <item>Foots</item>>
     </string-array>
 
     <string-array name="entryvalues_list_preference_unit">
         <item>1</item>
         <item>2</item>
+        <item>3</item>
+        <item>4</item>
+
     </string-array>
 
     <string-array name="entries_list_preference_shutdown">
@@ -25,7 +30,7 @@
         <item>3600</item>
     </string-array>
     <string-array name="entries_list_preference_gender">
-         <item>Man</item>
+        <item>Man</item>
         <item>Woman</item>
     </string-array>
 
@@ -37,5 +42,17 @@
         <item>Велосипед</item>
         <item>Ходьба</item>
         <item>Бег</item>
+    </string-array>
+    <string-array name="entries_list_compression_ratio">
+        <item>25</item>
+        <item>50</item>
+        <item>75</item>
+        <item>100</item>
+    </string-array>
+    <string-array name="entryvalues_list_compression_ratio">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
     </string-array>
 </resources>

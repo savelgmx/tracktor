@@ -60,6 +60,8 @@
     <string name="actionLabel">Вид активности</string>
     <string name="tvOptionsLabel">⋮ ⋮</string>
     <string name="expand">Расширить</string>
+    <string name="title_compression_ratio">Степень сжатия изображения в %</string>
+    <string name="pref_key_compression_ratio">compression_ratio</string>
     />
 
 </resources>
