@@ -51,6 +51,13 @@ public class ReadUserPreferences implements UserRepository{
         return sharedPreferences.getString("age", "33");
     }
 
+
+    public String getCompressionRatio(Context context){
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getString("compression_ratio","25");
+    }
+
 //хранит значение выбора вида активности (бег,ходьба,велосипед) на экране результатов
     public static boolean saveKindOfActivityId(int kindOfActivityID, Context context) {
         Log.i("saveSessionId", String.valueOf(kindOfActivityID));
