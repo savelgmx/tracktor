@@ -1,13 +1,47 @@
 package com.elegion.tracktor.util;
 
+import android.app.Application;
+import android.content.Context;
+
+import com.elegion.tracktor.ui.preferences.ReadUserPreferences;
+import com.elegion.tracktor.ui.preferences.UserRepository;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 public class StringUtil {
 
+    private static UserRepository mUserRepository;
+     private static ReadUserPreferences mUserPreferences;
+    private static Context mContext;
+    /*
+        @Inject
+        UserRepository mUserRepository;
+    */
+
+/*
+    @Inject
+    Context mContext;
+    @Inject
+    ReadUserPreferences mUserPreferences;
+*/
+
+
+    public StringUtil(){
+
+        Application application;
+/*
+        mContext= application.getApplicationContext();
+        mUserPreferences= new ReadUserPreferences();
+*/
+    }
+
     private  static Double averageSpeed;
+    private static String unit;
 
     public static String getTimeText(long totalSeconds) {
         long hours = totalSeconds / 3600;
@@ -17,6 +51,13 @@ public class StringUtil {
     }
 
     public static String getDistanceText(double value) {
+
+
+
+        String distance;
+  //      unit= mUserPreferences.getListOfDistanceUnits(mContext);
+
+
         return round(value, 0) + " м.";
     }
 

@@ -33,6 +33,12 @@ public class ReadUserPreferences implements UserRepository{
     }
 
     @Override
+    public String getListOfDistanceUnits(Context context){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getString("unit","Meters");
+    }
+
+    @Override
     public String getUserWeight(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.getString("weight", "60");
@@ -52,7 +58,8 @@ public class ReadUserPreferences implements UserRepository{
     }
 
 
-    public String getCompressionRatio(Context context){
+    @Override
+    public String getListOfCompressionRatio(Context context){
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.getString("compression_ratio","25");

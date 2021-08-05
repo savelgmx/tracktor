@@ -11,4 +11,10 @@ public interface UserRepository {
     String getUserHeight(Context context);// editTextPreferece [height]
 
     String getUserAge(Context context);// editTextPreferece [age]
+
+    String getListOfDistanceUnits(Context context);
+
+    String  getListOfCompressionRatio(Context context);
+
+
 }
