@@ -159,6 +159,8 @@ public class CounterService extends Service {
     private void onTimerUpdate(long totalSeconds) {
         EventBus.getDefault().post(new UpdateTimerEvent(totalSeconds, mDistance));
 
+
+
         Notification notification = buildNotification(StringUtil.getTimeText(totalSeconds), StringUtil.getDistanceText(mDistance));
         mNotificationManager.notify(NOTIFICATION_ID, notification);
 

@@ -118,6 +118,10 @@ public class ResultsViewModel extends ViewModel {
     public void loadImage(long mTrackId) {
         track = mRepository.getItem(mTrackId);
         if (track != null){
+
+
+        getListUnitsValue();
+
         String distance = StringUtil.getDistanceText(track.getDistance());
         String time = StringUtil.getTimeText(track.getDuration());
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
@@ -144,6 +148,14 @@ public class ResultsViewModel extends ViewModel {
                 calculateSpentCalories(action);
             }
 
+    }
+
+    public String getListUnitsValue(){
+        return mUserRepository.getListOfDistanceUnits(mContext);
+    }
+
+    public String getListCompressionRatioValue(){
+        return mUserRepository.getListOfCompressionRatio(mContext);
     }
 
 

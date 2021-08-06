@@ -2,6 +2,7 @@ package com.elegion.tracktor.ui.map;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.content.Context;
 
 import com.elegion.tracktor.App;
 import com.elegion.tracktor.data.RealmRepository;
@@ -9,6 +10,7 @@ import com.elegion.tracktor.event.AddPositionToRouteEvent;
 import com.elegion.tracktor.event.UpdateRouteEvent;
 import com.elegion.tracktor.event.UpdateTimerEvent;
 
+import com.elegion.tracktor.ui.preferences.UserRepository;
 import com.elegion.tracktor.util.StringUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -24,6 +26,13 @@ public class MainViewModel extends ViewModel {
 
     @Inject
     RealmRepository mRealmRepository;
+
+    @Inject
+    UserRepository mUserRepository;
+    @Inject
+    Context mContext;
+
+
 
 
     private MutableLiveData<Boolean> startEnabled = new MutableLiveData<>();
@@ -42,6 +51,8 @@ public class MainViewModel extends ViewModel {
         EventBus.getDefault().register(this);
         startEnabled.setValue(true);
         stopEnabled.setValue(false);
+
+        getListUnitsValue();
 
     }
 
@@ -102,6 +113,13 @@ public class MainViewModel extends ViewModel {
     public long saveResults(String base54image) {
 
         return mRealmRepository.createAndInsertTrackFrom(mDurationRaw, mDistanceRaw, base54image);
+    }
+    public String getListUnitsValue(){
+        return mUserRepository.getListOfDistanceUnits(mContext);
+    }
+
+    public String getListCompressionRatioValue(){
+        return mUserRepository.getListOfCompressionRatio(mContext);
     }
 
 }
