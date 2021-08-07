@@ -119,13 +119,10 @@ public class ResultsViewModel extends ViewModel {
         track = mRepository.getItem(mTrackId);
         if (track != null){
 
-
-        getListUnitsValue();
-
         String distance = StringUtil.getDistanceText(track.getDistance());
         String time = StringUtil.getTimeText(track.getDuration());
         Bitmap bitmapImage = ScreenshotMaker.fromBase64(track.getImageBase64());
-        String averageSpeed = StringUtil.getAverageSpeedText(track.getDistance(), track.getDuration());
+        String averageSpeed = StringUtil.getVelocityText(mContext,StringUtil.getVelocity(track));//StringUtil.getAverageSpeedText(track.getDistance(), track.getDuration());
         String comment = StringUtil.getCommentsText(track.getComment());
 
         mAverageSpeed.postValue(averageSpeed);
@@ -148,14 +145,6 @@ public class ResultsViewModel extends ViewModel {
                 calculateSpentCalories(action);
             }
 
-    }
-
-    public String getListUnitsValue(){
-        return mUserRepository.getListOfDistanceUnits(mContext);
-    }
-
-    public String getListCompressionRatioValue(){
-        return mUserRepository.getListOfCompressionRatio(mContext);
     }
 
 
