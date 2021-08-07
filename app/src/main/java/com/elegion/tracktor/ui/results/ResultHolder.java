@@ -94,7 +94,8 @@ public class ResultHolder extends RecyclerView.ViewHolder {
         mDateText.setText(StringUtil.getDateText(track.getDate()));
         mDistanceText.setText(StringUtil.getDistanceText(track.getDistance()));
         mDuration.setText(StringUtil.getTimeText(track.getDuration()));
-        mAverageSpeed.setText(StringUtil.getAverageSpeedText(track.getDistance(),track.getDuration()));
+      //  mAverageSpeed.setText(StringUtil.getAverageSpeedText(track.getDistance(),track.getDuration()));
+        mAverageSpeed.setText(StringUtil.getVelocityText(mContext,StringUtil.getVelocity(track)));
         mSpentCalories.setText(StringUtil.getSpentCaloriesText(mResultsViewModel.calculateSpentCalories(track.getAction())));
         mComment.setText(StringUtil.getCommentsText(track.getComment()));
         mAction.setText(StringUtil.getActionText(track.getAction()));

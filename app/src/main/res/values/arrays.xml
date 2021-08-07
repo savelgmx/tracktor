@@ -5,7 +5,7 @@
         <item>Километры</item>
         <item>Мили</item>
         <item>Meters</item>
-        <item>Foots</item>>
+        <item>Feet</item>>
     </string-array>
 
     <string-array name="entryvalues_list_preference_unit">

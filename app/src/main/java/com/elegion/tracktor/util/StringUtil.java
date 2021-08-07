@@ -2,7 +2,10 @@ package com.elegion.tracktor.util;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
+import com.elegion.tracktor.data.model.Track;
 import com.elegion.tracktor.ui.preferences.ReadUserPreferences;
 import com.elegion.tracktor.ui.preferences.UserRepository;
 
@@ -18,27 +21,8 @@ public class StringUtil {
     private static UserRepository mUserRepository;
      private static ReadUserPreferences mUserPreferences;
     private static Context mContext;
-    /*
-        @Inject
-        UserRepository mUserRepository;
-    */
-
-/*
-    @Inject
-    Context mContext;
-    @Inject
-    ReadUserPreferences mUserPreferences;
-*/
 
 
-    public StringUtil(){
-
-        Application application;
-/*
-        mContext= application.getApplicationContext();
-        mUserPreferences= new ReadUserPreferences();
-*/
-    }
 
     private  static Double averageSpeed;
     private static String unit;
@@ -52,17 +36,37 @@ public class StringUtil {
 
     public static String getDistanceText(double value) {
 
-
-
-        String distance;
-  //      unit= mUserPreferences.getListOfDistanceUnits(mContext);
-
-
         return round(value, 0) + " м.";
     }
+    private static String getUnitDistance(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        int iUnit = Integer.valueOf(preferences.getString("unit", "-1"));
+        switch (iUnit) {
+            case 1:
+                return " км.";
+            case 2:
+                return " мили";
+            case 3:
+                return " м.";
+            case 4:
+                return " feets";
+            default:
+                return " м.";
+        }
+    }
+
 
     public static String round(double value, int places) {
         return String.format("%." + places + "f", value);
+    }
+    //auto translating m/s to km / hour or mile/hour
+    public static String getVelocityText(Context context, double value) {
+        String unit = " " + getUnitDistance(context) + "/час";
+        value = 3.6 * value;
+        return round(value, 1) + unit;
+    }
+    public static double getVelocity(Track track) {
+        return track.getDuration() != 0 ? track.getDistance() / track.getDuration() : 0.0;
     }
 
     public static String getAverageSpeedText(Double distance, long time){
