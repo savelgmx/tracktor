@@ -6,7 +6,8 @@ package com.elegion.tracktor.util;
 
 public class DistanceConverter {
 
-    public double convertFromMetersToMiles(double distance){ return distance/1609; }
-    public double convertFromMetersToFeets(double distance){return distance*3.28084;}
+    public static double convertFromMetersToKm(double distance){return distance/1000;}
+    public static double convertFromMetersToMiles(double distance){ return distance/1609; }
+    public static double convertFromMetersToFeets(double distance){return distance*3.28084;}
 
 }

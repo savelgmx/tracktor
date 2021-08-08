@@ -19,7 +19,7 @@ import javax.inject.Inject;
 public class StringUtil {
 
     private static UserRepository mUserRepository;
-     private static ReadUserPreferences mUserPreferences;
+    private static ReadUserPreferences mUserPreferences;
     private static Context mContext;
 
 
@@ -61,9 +61,19 @@ public class StringUtil {
     }
     //auto translating m/s to km / hour or mile/hour
     public static String getVelocityText(Context context, double value) {
-        String unit = " " + getUnitDistance(context) + "/час";
-        value = 3.6 * value;
-        return round(value, 1) + unit;
+        String unit = getUnitDistance(context) ;
+        switch (unit.trim()){
+            case "км.":
+                return " "+round(DistanceConverter.convertFromMetersToKm(value),1) + " км/час";
+            case "мили":
+                return " "+round(DistanceConverter.convertFromMetersToMiles(value),1 ) + " миль/час";
+            case " м.":
+                return " " +round(value,1) + "/сек.";
+            case "feets":
+                return " " +round(DistanceConverter.convertFromMetersToFeets(value),1) + " фут./час";
+            default:
+                return " " +" м."+"/сек.";
+        }
     }
     public static double getVelocity(Track track) {
         return track.getDuration() != 0 ? track.getDistance() / track.getDuration() : 0.0;
@@ -109,7 +119,7 @@ public class StringUtil {
                 break;
             case 2:
                 actionText = "Бег";
-            break;
+                break;
         }
         return actionText;
     }
