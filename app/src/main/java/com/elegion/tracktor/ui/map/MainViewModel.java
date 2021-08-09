@@ -52,7 +52,7 @@ public class MainViewModel extends ViewModel {
         startEnabled.setValue(true);
         stopEnabled.setValue(false);
 
-        getListUnitsValue();
+     //   getListUnitsValue();
 
     }
 

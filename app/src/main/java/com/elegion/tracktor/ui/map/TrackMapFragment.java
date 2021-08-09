@@ -1,15 +1,14 @@
 package com.elegion.tracktor.ui.map;
 
 import android.Manifest;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
-import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.di.ViewModelModule;
 import com.elegion.tracktor.event.AddPositionToRouteEvent;
@@ -53,14 +52,17 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
 
     private GoogleMap mMap;
 
-    //private
+
+
     @Inject
     MainViewModel mMainViewModel;
+
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setRetainInstance(true);
+
     }
 
     public void configure() {
@@ -69,6 +71,9 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
         scope.installModules(new ViewModelModule(this));
 
         Toothpick.inject(this, scope);
+
+
+
     }
 
     @Override
@@ -139,7 +144,9 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
 
             takeMapScreenshot(route, bitmap -> {
 
-                String base64image = ScreenshotMaker.toBase64(bitmap);
+               // String base64image = ScreenshotMaker.toBase64(bitmap);
+
+                String base64image = ScreenshotMaker.toBase64(bitmap, Bitmap.CompressFormat.PNG,getCompressionRatioValue());
                 long resultId = mMainViewModel.saveResults(base64image);
                 ResultsActivity.start(getContext(), resultId);
             });
@@ -176,6 +183,28 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {
+
+    }
+    private int getCompressionRatioValue(){
+        int compressionRatioValue; //это и есть настоящая величина в % которую
+        //надо подставить в параметры bitmap.compress
+
+        int compressionRatio=Integer.parseInt(mMainViewModel.getListCompressionRatioValue());
+
+        switch(compressionRatio){
+            case 1:
+                compressionRatioValue=25;
+            case 2:
+                compressionRatioValue=50;
+            case 3:
+                compressionRatioValue=75;
+            case 4:
+                compressionRatioValue=100;
+            default:
+                compressionRatioValue=100;
+
+        }
+        return compressionRatioValue;
 
     }
 

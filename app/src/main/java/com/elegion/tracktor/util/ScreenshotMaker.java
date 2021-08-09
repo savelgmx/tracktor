@@ -18,7 +18,9 @@ public class ScreenshotMaker {
     }
 
     public static String toBase64(Bitmap bitmap) {
+
         return Base64.encodeToString(getBytes(bitmap), Base64.DEFAULT);
+
     }
 
     public static Bitmap fromBase64(String base64) {
@@ -31,4 +33,12 @@ public class ScreenshotMaker {
         bm.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
+
+    public static String toBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality)
+    {
+        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
+        image.compress(compressFormat, quality, byteArrayOS);
+        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
+    }
+
 }
