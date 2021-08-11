@@ -111,9 +111,22 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
         super.onPause();
     }
 
+    /*
+                mMap.addPolyline(new PolylineOptions().add(segmentForRouteEvent.points.first.point,
+                    segmentForRouteEvent.points.second.point)
+                    .color(ContextCompat.getColor(getContext(),
+                            R.color.colorRouteLine)));
+
+     */
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAddPositionToRoute(AddPositionToRouteEvent event) {
-        mMap.addPolyline(new PolylineOptions().add(event.getLastPosition(), event.getNewPosition()));
+        mMap.addPolyline(new PolylineOptions().add(event.getLastPosition(),
+                event.getNewPosition())
+                .color(ContextCompat.getColor(getContext(),
+                        R.color.colorAccent))
+
+        );
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(event.getNewPosition(), DEFAULT_ZOOM));
     }
 
