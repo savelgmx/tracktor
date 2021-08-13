@@ -55,6 +55,7 @@ public class MainPreferences extends PreferenceFragmentCompat implements SharedP
         setSummaryFor(findPreference(getString(R.string.pref_key_height)));
         setSummaryFor(findPreference(getString(R.string.pref_key_age)));
         setSummaryFor(findPreference("compression_ratio"));
+        setSummaryFor(findPreference("color_line"));
     }
 
     private void setSummaryFor(Preference preference) {

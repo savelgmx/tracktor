@@ -69,7 +69,7 @@ public class ReadUserPreferences implements UserRepository{
     public String getListOfLineColorsValue(Context context) {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return null;
+        return sharedPreferences.getString("color_line","#F44336");
     }
 
     @Override

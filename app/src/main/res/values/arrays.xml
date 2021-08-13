@@ -65,11 +65,11 @@
     </string-array>
 
     <string-array name="entryvalues_list_color_line">
-        <item>@color/color_line_red</item>
-        <item>@color/color_line_green</item>
-        <item>@color/color_Line_blue</item>
-        <item>@color/color_line_yellow</item>
-        <item>@color/color_line_balck</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>@color/color_line_black</item>
     </string-array>
 
 
