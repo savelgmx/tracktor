@@ -55,4 +55,22 @@
         <item>3</item>
         <item>4</item>
     </string-array>
+
+    <string-array name="entries_list_color_line">
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Yellow</item>
+        <item>Black</item>
+    </string-array>
+
+    <string-array name="entryvalues_list_color_line">
+        <item>@color/color_line_red</item>
+        <item>@color/color_line_green</item>
+        <item>@color/color_Line_blue</item>
+        <item>@color/color_line_yellow</item>
+        <item>@color/color_line_balck</item>
+    </string-array>
+
+
 </resources>

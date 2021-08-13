@@ -16,5 +16,7 @@ public interface UserRepository {
 
     String  getListOfCompressionRatio(Context context);
 
+    String getListOfLineColorsValue(Context context);
 
+    String getListOfLineThicknessValue(Context context);
 }

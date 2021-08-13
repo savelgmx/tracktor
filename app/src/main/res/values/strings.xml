@@ -62,6 +62,8 @@
     <string name="expand">Расширить</string>
     <string name="title_compression_ratio">Степень сжатия изображения в %</string>
     <string name="pref_key_compression_ratio">compression_ratio</string>
+    <string name="title_color_line">Цвет линии</string>
+    <string name="pref_key_color_line">color_line</string>
     />
 
 </resources>

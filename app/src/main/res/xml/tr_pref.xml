@@ -61,6 +61,14 @@
         android:title="@string/title_compression_ratio"
         />
 
+    <ListPreference
+        android:defaultValue="1"
+        android:dialogTitle="color line"
+        android:entries="@array/entries_list_color_line"
+        android:entryValues="@array/entryvalues_list_color_line"
+        android:key="@string/pref_key_color_line"
+        android:title="@string/title_color_line"
+        />
 
 
 

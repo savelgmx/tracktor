@@ -65,7 +65,19 @@ public class ReadUserPreferences implements UserRepository{
         return sharedPreferences.getString("compression_ratio","25");
     }
 
-//хранит значение выбора вида активности (бег,ходьба,велосипед) на экране результатов
+    @Override
+    public String getListOfLineColorsValue(Context context) {
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return null;
+    }
+
+    @Override
+    public String getListOfLineThicknessValue(Context context) {
+        return null;
+    }
+
+    //хранит значение выбора вида активности (бег,ходьба,велосипед) на экране результатов
     public static boolean saveKindOfActivityId(int kindOfActivityID, Context context) {
         Log.i("saveSessionId", String.valueOf(kindOfActivityID));
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);

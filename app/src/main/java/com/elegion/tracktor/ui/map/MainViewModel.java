@@ -122,4 +122,8 @@ public class MainViewModel extends ViewModel {
         return mUserRepository.getListOfCompressionRatio(mContext);
     }
 
+    public String getListLineColorValue(){
+        return mUserRepository.getListOfLineColorsValue(mContext);
+    }
+
 }
