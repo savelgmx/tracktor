@@ -111,22 +111,13 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
         super.onPause();
     }
 
-    /*
-                mMap.addPolyline(new PolylineOptions().add(segmentForRouteEvent.points.first.point,
-                    segmentForRouteEvent.points.second.point)
-                    .color(ContextCompat.getColor(getContext(),
-                            R.color.colorRouteLine)));
-
-     */
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAddPositionToRoute(AddPositionToRouteEvent event) {
         mMap.addPolyline(new PolylineOptions().add(event.getLastPosition(),
                 event.getNewPosition())
-                .color(ContextCompat.getColor(getContext(),
-                        R.color.colorAccent))
-
+                .color(getColorsValue())
         );
+
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(event.getNewPosition(), DEFAULT_ZOOM));
     }
 
@@ -135,7 +126,9 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
         mMap.clear();
 
         List<LatLng> route = event.getRoute();
-        mMap.addPolyline(new PolylineOptions().addAll(route));
+        mMap.addPolyline(new PolylineOptions().addAll(route)
+                .color(getColorsValue())
+        );
         addMarker(route.get(0), getString(R.string.start));
         zoomRoute(route);
 
@@ -207,18 +200,50 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
         switch(compressionRatio){
             case 1:
                 compressionRatioValue=25;
+                break;
             case 2:
                 compressionRatioValue=50;
+                break;
             case 3:
                 compressionRatioValue=75;
+                break;
             case 4:
                 compressionRatioValue=100;
+                break;
             default:
                 compressionRatioValue=100;
 
         }
         return compressionRatioValue;
 
+    }
+
+    private int getColorsValue(){
+        int colorConstantValue;//это величина константы из файла Colors.xml
+        //которая будет позднее использвана
+        int colorConstant=Integer.parseInt(mMainViewModel.getListLineColorValue());
+        switch (colorConstant){
+            case 1:
+                colorConstantValue=R.color.color_line_red;
+                break;
+            case 2:
+                colorConstantValue=R.color.color_line_green;
+                break;
+            case 3:
+                colorConstantValue=R.color.color_Line_blue;
+                break;
+            case 4:
+                colorConstantValue=R.color.color_line_yellow;
+                break;
+            case 5:
+                colorConstantValue=R.color.color_line_black;
+                break;
+            default:
+                colorConstantValue=R.color.color_line_black;
+
+        }
+
+        return colorConstantValue;
     }
 
 }
