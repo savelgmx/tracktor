@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.elegion.tracktor.App;
@@ -36,7 +37,7 @@ public class CounterFragment extends Fragment {
     @BindView(R.id.tvDistance)
     TextView tvDistance;
     @BindView(R.id.buttonStart)
-    Button buttonStart;
+    ImageButton buttonStart;
     @BindView(R.id.buttonStop)
     Button buttonStop;
 
@@ -82,6 +83,8 @@ public class CounterFragment extends Fragment {
         EventBus.getDefault().post(new StartBtnClickedEvent());
         viewModel.switchButtons();
         viewModel.clear();
+     //   buttonStart.setImageDrawable(R.drawable.icons_red_start_48);
+
     }
 
     @OnClick(R.id.buttonStop)
