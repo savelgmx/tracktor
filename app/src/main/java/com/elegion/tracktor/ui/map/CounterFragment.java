@@ -83,7 +83,7 @@ public class CounterFragment extends Fragment {
         EventBus.getDefault().post(new StartBtnClickedEvent());
         viewModel.switchButtons();
         viewModel.clear();
-     //   buttonStart.setImageDrawable(R.drawable.);
+      //  buttonStart.setImageDrawable(R.drawable.ic_red_start);
 
     }
 
