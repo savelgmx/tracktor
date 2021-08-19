@@ -111,8 +111,42 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
         super.onPause();
     }
 
+    /*
+       private int getColorsValue(){
+        int colorConstantValue;//это величина константы из файла Colors.xml
+        //которая будет позднее использвана
+        int colorConstant=Integer.parseInt(mMainViewModel.getListLineColorValue());
+        switch (colorConstant){
+            case 1:
+                colorConstantValue=R.color.color_line_red;
+                break;
+            case 2:
+                colorConstantValue=R.color.color_line_green;
+                break;
+            case 3:
+                colorConstantValue=R.color.color_Line_blue;
+                break;
+            case 4:
+                colorConstantValue=R.color.color_line_yellow;
+                break;
+            case 5:
+                colorConstantValue=R.color.color_line_black;
+                break;
+            default:
+                colorConstantValue=R.color.color_line_black;
+
+        }
+
+        return colorConstantValue;
+    }
+
+     */
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAddPositionToRoute(AddPositionToRouteEvent event) {
+
+
+
         mMap.addPolyline(new PolylineOptions().add(event.getLastPosition(),
                 event.getNewPosition())
                 .color(getColorsValue())
@@ -240,6 +274,7 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
                 break;
             default:
                 colorConstantValue=R.color.color_line_black;
+                break;
 
         }
 
