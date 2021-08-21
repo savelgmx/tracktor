@@ -278,7 +278,7 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
 
         }
 
-        return colorConstantValue;
+        return getResources().getColor(colorConstantValue) ;
     }
 
 }
