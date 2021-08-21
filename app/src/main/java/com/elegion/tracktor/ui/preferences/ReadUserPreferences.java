@@ -73,8 +73,9 @@ public class ReadUserPreferences implements UserRepository{
     }
 
     @Override
-    public String getListOfLineThicknessValue(Context context) {
-        return null;
+    public String getListOfLineWidthValue(Context context) {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getString("line_width","10");
     }
 
     //хранит значение выбора вида активности (бег,ходьба,велосипед) на экране результатов

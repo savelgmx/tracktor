@@ -125,5 +125,8 @@ public class MainViewModel extends ViewModel {
     public String getListLineColorValue(){
         return mUserRepository.getListOfLineColorsValue(mContext);
     }
+    public String getListOfLineWidthValue(){
+        return mUserRepository.getListOfLineWidthValue(mContext);
+    }
 
 }

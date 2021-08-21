@@ -52,8 +52,6 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
 
     private GoogleMap mMap;
 
-
-
     @Inject
     MainViewModel mMainViewModel;
 
@@ -71,9 +69,6 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
         scope.installModules(new ViewModelModule(this));
 
         Toothpick.inject(this, scope);
-
-
-
     }
 
     @Override
@@ -111,36 +106,6 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
         super.onPause();
     }
 
-    /*
-       private int getColorsValue(){
-        int colorConstantValue;//это величина константы из файла Colors.xml
-        //которая будет позднее использвана
-        int colorConstant=Integer.parseInt(mMainViewModel.getListLineColorValue());
-        switch (colorConstant){
-            case 1:
-                colorConstantValue=R.color.color_line_red;
-                break;
-            case 2:
-                colorConstantValue=R.color.color_line_green;
-                break;
-            case 3:
-                colorConstantValue=R.color.color_Line_blue;
-                break;
-            case 4:
-                colorConstantValue=R.color.color_line_yellow;
-                break;
-            case 5:
-                colorConstantValue=R.color.color_line_black;
-                break;
-            default:
-                colorConstantValue=R.color.color_line_black;
-
-        }
-
-        return colorConstantValue;
-    }
-
-     */
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAddPositionToRoute(AddPositionToRouteEvent event) {
@@ -150,6 +115,7 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
         mMap.addPolyline(new PolylineOptions().add(event.getLastPosition(),
                 event.getNewPosition())
                 .color(getColorsValue())
+                .width(getWidthValue())
         );
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(event.getNewPosition(), DEFAULT_ZOOM));
@@ -162,6 +128,7 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
         List<LatLng> route = event.getRoute();
         mMap.addPolyline(new PolylineOptions().addAll(route)
                 .color(getColorsValue())
+                .width(getWidthValue())
         );
         addMarker(route.get(0), getString(R.string.start));
         zoomRoute(route);
@@ -279,6 +246,12 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
         }
 
         return getResources().getColor(colorConstantValue) ;
+    }
+
+    private float getWidthValue(){
+        int width;
+        width = Integer.parseInt(mMainViewModel.getListOfLineWidthValue());
+        return Float.valueOf(width);
     }
 
 }

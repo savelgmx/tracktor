@@ -64,6 +64,8 @@
     <string name="pref_key_compression_ratio">compression_ratio</string>
     <string name="title_color_line">Цвет линии</string>
     <string name="pref_key_color_line">color_line</string>
+    <string name="pref_key_line_width">line_width</string>
+    <string name="title_line_width">Толщина линии</string>
     />
 
 </resources>

@@ -18,5 +18,5 @@ public interface UserRepository {
 
     String getListOfLineColorsValue(Context context);
 
-    String getListOfLineThicknessValue(Context context);
+    String getListOfLineWidthValue(Context context);
 }

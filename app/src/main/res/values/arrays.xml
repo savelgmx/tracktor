@@ -72,5 +72,19 @@
         <item>5</item>
     </string-array>
 
+    <string-array name="entries_list_line_width">
+        <item>thin 5px</item>
+        <item>middle 10 px</item>
+        <item>fat 20 px</item>
+        <item>very fat 50 px</item>
+    </string-array>
+    <string-array name="entryvalues_list_line_width">
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+        <item>50</item>
+    </string-array>
+
+
 
 </resources>
