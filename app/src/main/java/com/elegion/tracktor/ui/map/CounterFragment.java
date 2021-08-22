@@ -75,7 +75,7 @@ public class CounterFragment extends Fragment {
 
         viewModel.getStartEnabled().observe(this, buttonStart::setEnabled);
         viewModel.getStopEnabled().observe(this, buttonStop::setEnabled);
-    }
+     }
 
     @SuppressLint("CheckResult")
     @OnClick(R.id.buttonStart)
@@ -83,7 +83,7 @@ public class CounterFragment extends Fragment {
         EventBus.getDefault().post(new StartBtnClickedEvent());
         viewModel.switchButtons();
         viewModel.clear();
-      //  buttonStart.setImageDrawable(R.drawable.ic_red_start);
+        buttonStart.setImageResource(R.drawable.start_red);
 
     }
 

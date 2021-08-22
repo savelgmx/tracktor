@@ -60,10 +60,13 @@
         <ImageButton
             android:id="@+id/buttonStart"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
             android:layout_weight="1"
+            android:paddingEnd="4dp"
+            android:layout_marginTop="4dp"
+
             android:text="@string/start"
-            android:src="@android:drawable/ic_media_play"
+            android:src="@drawable/start_green"
             android:textSize="16sp" />
 
         <Button
