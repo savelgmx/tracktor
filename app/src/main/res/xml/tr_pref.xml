@@ -69,14 +69,6 @@
         android:key="@string/pref_key_color_line"
         android:title="@string/title_color_line"
         />
-    <ListPreference
-        android:defaultValue="1"
-        android:dialogTitle="compression ratio"
-        android:entries="@array/entries_list_compression_ratio"
-        android:entryValues="@array/entryvalues_list_compression_ratio"
-        android:key="@string/pref_key_compression_ratio"
-        android:title="@string/title_compression_ratio"
-        />
 
     <ListPreference
         android:defaultValue="1"
