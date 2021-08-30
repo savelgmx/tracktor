@@ -84,7 +84,32 @@
         <item>20</item>
         <item>50</item>
     </string-array>
-
+    <string-array name="entries_list_icon_start">
+        <item>start_green</item>
+        <item>start_green_slim</item>
+        <item>start_green_circle</item>
+        <item>start_red</item>
+        <item>start_banner_red</item>
+        <item>start_red_circle</item>
+    </string-array>
+    <string-array name="entryvalues_list_icon_start">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="entries_list_icon_stop">
+        <item>stop_banner_hand</item>
+        <item>stop_banner_red</item>
+        <item>stop_red_circle</item>
+    </string-array>
+    <string-array name="entryvalues_list_icon_stop">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 
 
 </resources>

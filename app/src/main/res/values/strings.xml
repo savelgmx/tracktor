@@ -66,6 +66,10 @@
     <string name="pref_key_color_line">color_line</string>
     <string name="pref_key_line_width">line_width</string>
     <string name="title_line_width">Толщина линии</string>
+    <string name="title_icon_start">Icon for start button</string>
+    <string name="pref_key_icon_start">icon_start</string>
+    <string name="pref_key_icon_stop">icon_stop</string>
+    <string name="title_icon_stop">Icon for start button</string>
     />
 
 </resources>

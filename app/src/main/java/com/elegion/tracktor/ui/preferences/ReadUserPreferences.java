@@ -78,6 +78,16 @@ public class ReadUserPreferences implements UserRepository{
         return sharedPreferences.getString("line_width","10");
     }
 
+    @Override
+    public String getListOfStartImageButtonIcons(Context context) {
+        return null;
+    }
+
+    @Override
+    public String getListOfStopImageButtonIcons(Context context) {
+        return null;
+    }
+
     //хранит значение выбора вида активности (бег,ходьба,велосипед) на экране результатов
     public static boolean saveKindOfActivityId(int kindOfActivityID, Context context) {
         Log.i("saveSessionId", String.valueOf(kindOfActivityID));

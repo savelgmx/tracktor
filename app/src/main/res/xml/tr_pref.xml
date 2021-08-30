@@ -79,6 +79,22 @@
         android:title="@string/title_line_width"
         />
 
+    <ListPreference
+        android:defaultValue="1"
+        android:dialogTitle="icon start"
+        android:entries="@array/entries_list_icon_start"
+        android:entryValues="@array/entryvalues_list_icon_start"
+        android:key="@string/pref_key_icon_start"
+        android:title="@string/title_icon_start"
+        />
 
+    <ListPreference
+        android:defaultValue="1"
+        android:dialogTitle="icon stop"
+        android:entries="@array/entries_list_icon_stop"
+        android:entryValues="@array/entryvalues_list_icon_stop"
+        android:key="@string/pref_key_icon_stop"
+        android:title="@string/title_icon_stop"
+        />
 
 </PreferenceScreen>

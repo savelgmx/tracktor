@@ -19,4 +19,10 @@ public interface UserRepository {
     String getListOfLineColorsValue(Context context);
 
     String getListOfLineWidthValue(Context context);
+
+    String getListOfStartImageButtonIcons(Context context);
+
+    String getListOfStopImageButtonIcons(Context context);
+
+
 }
