@@ -80,7 +80,8 @@ public class ReadUserPreferences implements UserRepository{
 
     @Override
     public String getListOfStartImageButtonIcons(Context context) {
-        return null;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getString("icon_start","R.drawable.start_banner_1.png");
     }
 
     @Override

@@ -129,4 +129,12 @@ public class MainViewModel extends ViewModel {
         return mUserRepository.getListOfLineWidthValue(mContext);
     }
 
+
+    public String getListOfStartImageButtonIcons(){
+        return mUserRepository.getListOfStartImageButtonIcons(mContext);
+    }
+    public String getListOfStopImageButtonIcons(){
+        return mUserRepository.getListOfStopImageButtonIcons(mContext);
+    }
+
 }
