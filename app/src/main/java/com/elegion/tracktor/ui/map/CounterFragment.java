@@ -75,6 +75,10 @@ public class CounterFragment extends Fragment {
 
         viewModel.getStartEnabled().observe(this, buttonStart::setEnabled);
         viewModel.getStopEnabled().observe(this, buttonStop::setEnabled);
+
+
+        getStartButtonIcon();
+
      }
 
     @SuppressLint("CheckResult")
@@ -83,8 +87,6 @@ public class CounterFragment extends Fragment {
         EventBus.getDefault().post(new StartBtnClickedEvent());
         viewModel.switchButtons();
         viewModel.clear();
-        buttonStart.setImageResource(R.drawable.start_red);
-
     }
 
     @OnClick(R.id.buttonStop)
@@ -97,4 +99,36 @@ public class CounterFragment extends Fragment {
         Toothpick.closeScope(this);
         super.onDestroy();
     }
+
+    void getStartButtonIcon(){
+
+        int iconConstant=Integer.parseInt(viewModel.getListOfStartImageButtonIcons());
+
+        switch (iconConstant){
+            case 1:
+                buttonStart.setImageResource(R.drawable.start_green);
+                break;
+            case 2:
+                buttonStart.setImageResource(R.drawable.start_green_slim);
+                break;
+            case 3:
+                buttonStart.setImageResource(R.drawable.start_green_circle);
+                break;
+            case 4:
+                buttonStart.setImageResource( R.drawable.start_red);
+                break;
+            case 5:
+                buttonStart.setImageResource(R.drawable.start_banner_1);
+                break;
+            case 6:
+                buttonStart.setImageResource(R.drawable.start_black_slim);
+                break;
+
+            default:
+                buttonStart.setImageResource(R.drawable.start_green_slim);
+                break;
+        }
+
+    }
+
 }
