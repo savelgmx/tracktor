@@ -69,7 +69,7 @@
     <string name="title_icon_start">Icon for start button</string>
     <string name="pref_key_icon_start">icon_start</string>
     <string name="pref_key_icon_stop">icon_stop</string>
-    <string name="title_icon_stop">Icon for start button</string>
+    <string name="title_icon_stop">Icon for stop button</string>
     />
 
 </resources>
