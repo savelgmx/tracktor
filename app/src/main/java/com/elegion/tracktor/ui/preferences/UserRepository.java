@@ -20,9 +20,9 @@ public interface UserRepository {
 
     String getListOfLineWidthValue(Context context);
 
-    String getListOfStartImageButtonIcons(Context context);
+    String getListOfStartMarkIcons(Context context);
 
-    String getListOfStopImageButtonIcons(Context context);
+    String getListOfStopMarkIcons(Context context);
 
 
 }

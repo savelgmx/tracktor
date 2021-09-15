@@ -1,7 +1,6 @@
 package com.elegion.tracktor.ui.map;
 
 import android.annotation.SuppressLint;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.elegion.tracktor.App;
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.di.ViewModelModule;
 import com.elegion.tracktor.event.StartBtnClickedEvent;
@@ -37,7 +35,7 @@ public class CounterFragment extends Fragment {
     @BindView(R.id.tvDistance)
     TextView tvDistance;
     @BindView(R.id.buttonStart)
-    ImageButton buttonStart;
+    Button buttonStart;
     @BindView(R.id.buttonStop)
     Button buttonStop;
 
@@ -77,8 +75,6 @@ public class CounterFragment extends Fragment {
         viewModel.getStopEnabled().observe(this, buttonStop::setEnabled);
 
 
-        getStartButtonIcon();
-
      }
 
     @SuppressLint("CheckResult")
@@ -100,9 +96,10 @@ public class CounterFragment extends Fragment {
         super.onDestroy();
     }
 
+/*
     void getStartButtonIcon(){
 
-        int iconConstant=Integer.parseInt(viewModel.getListOfStartImageButtonIcons());
+        int iconConstant=Integer.parseInt(viewModel.getListOfStartMarkIcons());
 
         switch (iconConstant){
             case 1:
@@ -129,6 +126,8 @@ public class CounterFragment extends Fragment {
                 break;
         }
 
+
     }
+*/
 
 }
