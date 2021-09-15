@@ -133,7 +133,7 @@ public class MainViewModel extends ViewModel {
     public String getListOfStartMarkIcons(){
         return mUserRepository.getListOfStartMarkIcons(mContext);
     }
-    public String getListOfStopImageButtonIcons(){
+    public String getListOfStopMarkIcons(){
         return mUserRepository.getListOfStopMarkIcons(mContext);
     }
 

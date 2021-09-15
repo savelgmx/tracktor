@@ -174,6 +174,62 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
 
     }
 
+    private Bitmap getStartLogo(){
+
+        Bitmap startLogo;
+
+        int iconConstant=Integer.parseInt(mMainViewModel.getListOfStartMarkIcons());
+        switch (iconConstant){
+            case 1:
+                startLogo = BitmapFactory.decodeResource(getResources(), R.drawable.start_green);
+                break;
+            case 2:
+                startLogo = BitmapFactory.decodeResource(getResources(),R.drawable.start_green_slim);
+                break;
+            case 3:
+                startLogo = BitmapFactory.decodeResource(getResources(),R.drawable.start_green_circle);
+                break;
+            case 4:
+                startLogo = BitmapFactory.decodeResource(getResources(), R.drawable.start_red);
+                break;
+            case 5:
+                startLogo = BitmapFactory.decodeResource(getResources(),R.drawable.start_banner_1);
+                break;
+            case 6:
+                startLogo = BitmapFactory.decodeResource(getResources(),R.drawable.start_black_slim);
+                break;
+
+            default:
+                startLogo = BitmapFactory.decodeResource(getResources(),R.drawable.start_green_slim);
+                break;
+        }
+
+        return generateSmallIcon(startLogo);
+    }
+
+    private Bitmap getStopLogo(){
+        Bitmap stopLogo;
+
+        int iconConstant=Integer.parseInt(mMainViewModel.getListOfStopMarkIcons());
+
+        switch (iconConstant){
+
+            case 1:
+                stopLogo = BitmapFactory.decodeResource(getResources(), R.drawable.stop_banner_hand);//stop_banner_hand
+                break;
+            case 2:
+                stopLogo = BitmapFactory.decodeResource(getResources(), R.drawable.stop_banner_red);//stop_banner_red
+                break;
+            case 3:
+                stopLogo = BitmapFactory.decodeResource(getResources(), R.drawable.stop_red_circle);//stop_red_circle
+             break;
+
+            default:
+                stopLogo = BitmapFactory.decodeResource(getResources(), R.drawable.stop_banner_hand);
+        }
+        return generateSmallIcon(stopLogo);
+    }
+
     private Bitmap generateSmallIcon(Bitmap icon){
         return Bitmap.createScaledBitmap(icon, 64, 64, false);
     }
