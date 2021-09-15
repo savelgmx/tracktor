@@ -3,6 +3,7 @@ package com.elegion.tracktor.ui.map;
 import android.Manifest;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -161,7 +163,19 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
     }
 
     private void addMarker(LatLng position, String text) {
-        mMap.addMarker(new MarkerOptions().position(position).title(text));
+
+
+
+        Bitmap startLogo = BitmapFactory.decodeResource(getResources(), R.drawable.start_banner_1);
+
+
+        mMap.addMarker(new MarkerOptions().position(position).title(text).icon(BitmapDescriptorFactory.fromBitmap(generateSmallIcon(startLogo))) );
+
+
+    }
+
+    private Bitmap generateSmallIcon(Bitmap icon){
+        return Bitmap.createScaledBitmap(icon, 64, 64, false);
     }
 
     private void takeMapScreenshot(List<LatLng> route, GoogleMap.SnapshotReadyCallback snapshotCallback) {
