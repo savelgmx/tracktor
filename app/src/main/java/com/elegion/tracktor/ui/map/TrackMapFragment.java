@@ -207,7 +207,7 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
     private Bitmap getStopLogo(){
         Bitmap stopLogo;
 
-        int iconConstant=1;//Integer.parseInt(mMainViewModel.getListOfStopMarkIcons());
+        int iconConstant=Integer.parseInt(mMainViewModel.getListOfStopMarkIcons());
 
         switch (iconConstant){
 

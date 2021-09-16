@@ -86,7 +86,8 @@ public class ReadUserPreferences implements UserRepository{
 
     @Override
     public String getListOfStopMarkIcons(Context context) {
-        return null;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getString("icon_stop","R.drawable.start_banner_hand.png");
     }
 
     //хранит значение выбора вида активности (бег,ходьба,велосипед) на экране результатов
