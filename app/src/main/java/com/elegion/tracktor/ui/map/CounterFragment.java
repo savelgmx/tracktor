@@ -96,38 +96,4 @@ public class CounterFragment extends Fragment {
         super.onDestroy();
     }
 
-/*
-    void getStartButtonIcon(){
-
-        int iconConstant=Integer.parseInt(viewModel.getListOfStartMarkIcons());
-
-        switch (iconConstant){
-            case 1:
-                buttonStart.setImageResource(R.drawable.start_green);
-                break;
-            case 2:
-                buttonStart.setImageResource(R.drawable.start_green_slim);
-                break;
-            case 3:
-                buttonStart.setImageResource(R.drawable.start_green_circle);
-                break;
-            case 4:
-                buttonStart.setImageResource( R.drawable.start_red);
-                break;
-            case 5:
-                buttonStart.setImageResource(R.drawable.start_banner_1);
-                break;
-            case 6:
-                buttonStart.setImageResource(R.drawable.start_black_slim);
-                break;
-
-            default:
-                buttonStart.setImageResource(R.drawable.start_green_slim);
-                break;
-        }
-
-
-    }
-*/
-
 }

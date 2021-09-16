@@ -43,9 +43,6 @@ import toothpick.Toothpick;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-/**
- * @author Azret Magometov
- */
 public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCallback,
         GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener {
@@ -91,7 +88,6 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-      //  Toothpick.inject(this, App.getAppScope());
     }
 
 
@@ -152,9 +148,6 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
             addMarker(route.get(route.size() - 1), getString(R.string.end));
 
             takeMapScreenshot(route, bitmap -> {
-
-               // String base64image = ScreenshotMaker.toBase64(bitmap);
-
                 String base64image = ScreenshotMaker.toBase64(bitmap, Bitmap.CompressFormat.PNG,getCompressionRatioValue());
                 long resultId = mMainViewModel.saveResults(base64image);
                 ResultsActivity.start(getContext(), resultId);
@@ -165,12 +158,16 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
     private void addMarker(LatLng position, String text) {
 
 
+        if ( text.equals(getString(R.string.start)) ){
 
-        Bitmap startLogo = BitmapFactory.decodeResource(getResources(), R.drawable.start_banner_1);
+            mMap.addMarker(new MarkerOptions().position(position).title(text).icon(BitmapDescriptorFactory.fromBitmap(getStartLogo())) );
 
+        }
+        if(text.equals(getString(R.string.end)) ){
 
-        mMap.addMarker(new MarkerOptions().position(position).title(text).icon(BitmapDescriptorFactory.fromBitmap(generateSmallIcon(startLogo))) );
-
+            mMap.addMarker(new MarkerOptions().position(position).title(text).icon(BitmapDescriptorFactory.fromBitmap(getStopLogo())) );
+            //  mMap.addMarker(new MarkerOptions().position(position).title(text));
+        }
 
     }
 
@@ -210,7 +207,7 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
     private Bitmap getStopLogo(){
         Bitmap stopLogo;
 
-        int iconConstant=Integer.parseInt(mMainViewModel.getListOfStopMarkIcons());
+        int iconConstant=1;//Integer.parseInt(mMainViewModel.getListOfStopMarkIcons());
 
         switch (iconConstant){
 
@@ -222,7 +219,7 @@ public class TrackMapFragment extends SupportMapFragment implements OnMapReadyCa
                 break;
             case 3:
                 stopLogo = BitmapFactory.decodeResource(getResources(), R.drawable.stop_red_circle);//stop_red_circle
-             break;
+                break;
 
             default:
                 stopLogo = BitmapFactory.decodeResource(getResources(), R.drawable.stop_banner_hand);
