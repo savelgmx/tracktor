@@ -52,7 +52,9 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-
+/*
+Настройка клиента, колбека и реквеста остаются в сервисе. Отправка и ловля эвентов - тоже.
+ */
 public class CounterService extends Service {
 
     public static final String CHANNEL_ID = "counter_service";
