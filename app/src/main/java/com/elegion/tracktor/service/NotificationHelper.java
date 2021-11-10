@@ -38,14 +38,14 @@ public abstract class NotificationHelper extends Service {
     private NotificationCompat.Builder mNotificationBuilder;
     private static NotificationManager mNotificationManager; // менеджер уведомлений
 
-    // метод инциализации данного хелпера
+ /*   // метод инциализации данного хелпера
     public static void init(Context context){
         if(mNotificationManager ==null){
             appContext = context.getApplicationContext(); // на случай инициализации Base Context-ом
             mNotificationManager = (NotificationManager) appContext.getSystemService(Context.NOTIFICATION_SERVICE);
         }
     }
-
+*/
 
 
 
