@@ -126,16 +126,6 @@ public class CounterService extends Service {
 
             notificationHelper = new NotificationHelper();
 
-/*
-            mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                createNotificationChannel();
-            }
-
-            Notification notification = buildNotification();
-            startForeground(NOTIFICATION_ID, notification);
-*/
             notificationHelper.createNotification(this);
 
             final LocationRequest locationRequest = new LocationRequest()
@@ -171,9 +161,6 @@ public class CounterService extends Service {
 
         notificationHelper.onTimerUpdateNotifiaction(totalSeconds,mDistance);
 
- /*       Notification notification = buildNotification(StringUtil.getTimeText(totalSeconds), StringUtil.getDistanceText(mDistance));
-        mNotificationManager.notify(NOTIFICATION_ID, notification);
-*/
         if (mShutDownDuration != -1 && totalSeconds == mShutDownDuration) {
             EventBus.getDefault().post(new StopBtnClickedEvent());
             //configure btns state
@@ -191,7 +178,7 @@ public class CounterService extends Service {
 
        // stopForeground(true);
 
-        notificationHelper.destroyNotification();
+        notificationHelper.destroyNotification(); //stopForeground
 
         EventBus.getDefault().unregister(this);
     }
@@ -202,54 +189,6 @@ public class CounterService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
-/*
-    private Notification buildNotification() {
-        return buildNotification("", "");
-    }
-
-    private Notification buildNotification(String time, String distance) {
-        if (mNotificationBuilder == null) {
-            configureNotificationBuilder();
-        }
-
-        String message = getString(R.string.notify_info, time, distance);
-
-        return mNotificationBuilder
-                .setContentText(message)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
-                .build();
-
-    }
-
-    private void configureNotificationBuilder() {
-        Intent notificationIntent = new Intent(this, MainActivity.class);
-        notificationIntent.setAction(Intent.ACTION_MAIN);
-        notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
-                | Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent contentIntent = PendingIntent.getActivity(
-                this, REQUEST_CODE_LAUNCH, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        mNotificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentIntent(contentIntent)
-                .setOngoing(true)
-                .setSmallIcon(R.drawable.ic_my_location_white_24dp)
-                .setWhen(System.currentTimeMillis())
-                .setContentTitle(getString(R.string.route_active))
-                .setVibrate(new long[]{0})
-                .setColor(ContextCompat.getColor(this, R.color.colorAccent));
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private void createNotificationChannel() {
-        if (mNotificationManager != null && mNotificationManager.getNotificationChannel(CHANNEL_ID) == null) {
-            NotificationChannel chan = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_NONE);
-            chan.setLightColor(Color.BLUE);
-            chan.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
-            mNotificationManager.createNotificationChannel(chan);
-        }
-    }
-*/
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onGetRoute(GetRouteEvent event) {
