@@ -55,6 +55,8 @@ public class NotificationHelper extends Service {
     public void createNotification(Context context){
         //создаем все необходимое для нотификации
 
+        mNotificationManager=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel();
         }
