@@ -75,6 +75,8 @@ public class CounterService extends Service {
     private NotificationCompat.Builder mNotificationBuilder;
     private long mShutDownDuration;
 
+    public NotificationHelper notificationHelper;
+
     private FusedLocationProviderClient mFusedLocationClient;
     private NotificationManager mNotificationManager;
     private LocationCallback mLocationCallback = new LocationCallback() {
@@ -122,6 +124,9 @@ public class CounterService extends Service {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PERMISSION_GRANTED) {
 
+            notificationHelper = new NotificationHelper();
+
+/*
             mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -130,6 +135,8 @@ public class CounterService extends Service {
 
             Notification notification = buildNotification();
             startForeground(NOTIFICATION_ID, notification);
+*/
+            notificationHelper.createNotification(this);
 
             final LocationRequest locationRequest = new LocationRequest()
                     .setInterval(UPDATE_INTERVAL)
@@ -162,10 +169,11 @@ public class CounterService extends Service {
         EventBus.getDefault().post(new UpdateTimerEvent(totalSeconds, mDistance));
 
 
+        notificationHelper.onTimerUpdateNotifiaction(totalSeconds,mDistance);
 
-        Notification notification = buildNotification(StringUtil.getTimeText(totalSeconds), StringUtil.getDistanceText(mDistance));
+ /*       Notification notification = buildNotification(StringUtil.getTimeText(totalSeconds), StringUtil.getDistanceText(mDistance));
         mNotificationManager.notify(NOTIFICATION_ID, notification);
-
+*/
         if (mShutDownDuration != -1 && totalSeconds == mShutDownDuration) {
             EventBus.getDefault().post(new StopBtnClickedEvent());
             //configure btns state
@@ -181,17 +189,20 @@ public class CounterService extends Service {
         mFusedLocationClient.removeLocationUpdates(mLocationCallback);
         mTimerDisposable.dispose();
 
-        stopForeground(true);
+       // stopForeground(true);
+
+        notificationHelper.destroyNotification();
 
         EventBus.getDefault().unregister(this);
     }
+
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
-
+/*
     private Notification buildNotification() {
         return buildNotification("", "");
     }
@@ -238,6 +249,7 @@ public class CounterService extends Service {
             mNotificationManager.createNotificationChannel(chan);
         }
     }
+*/
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onGetRoute(GetRouteEvent event) {

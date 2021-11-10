@@ -14,14 +14,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 
 import com.elegion.tracktor.R;
 import com.elegion.tracktor.ui.map.MainActivity;
+import com.elegion.tracktor.util.StringUtil;
 
-public abstract class NotificationHelper extends Service {
+public class NotificationHelper extends Service {
 
     //https://www.google.com/search?q=notification+helper+android+%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80&rlz=1C1GCEU_ruRU836RU837&sxsrf=AOaemvJjTqdcasvKMGq3seoWaE9ppPQclg%3A1632111730671&ei=cgxIYeGuKObKrgT0j6TADQ&oq=notification+helper+android+ghbvth&gs_lcp=Cgdnd3Mtd2l6EAEYADIHCCEQChCgAToHCAAQRxCwAzoGCAAQFhAeOgUIIRCgAUoECEEYAFCoMFi8YmDnamgBcAJ4AIABuAGIAbkJkgEDMC43mAEAoAEByAEIwAEB&sclient=gws-wiz
     //https://habr.com/ru/post/244423/
@@ -49,7 +52,7 @@ public abstract class NotificationHelper extends Service {
 
 
 
-    public void createNotification(){
+    public void createNotification(Context context){
         //создаем все необходимое для нотификации
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -106,6 +109,22 @@ public abstract class NotificationHelper extends Service {
             chan.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
             mNotificationManager.createNotificationChannel(chan);
         }
+    }
+
+    public void destroyNotification(){
+        stopForeground(true);
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    public void onTimerUpdateNotifiaction(long totalSeconds, double mDistance){
+        Notification notification = buildNotification(StringUtil.getTimeText(totalSeconds), StringUtil.getDistanceText(mDistance));
+        mNotificationManager.notify(NOTIFICATION_ID, notification);
+
     }
 
 
