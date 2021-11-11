@@ -77,7 +77,7 @@ public class NotificationHelper extends Service {
             configureNotificationBuilder();
         }
 
-        String message = getString(R.string.notify_info, time, distance);
+        String message = appContext.getString(R.string.notify_info, time, distance);
 
         return mNotificationBuilder
                 .setContentText(message)
@@ -100,9 +100,9 @@ public class NotificationHelper extends Service {
                 .setOngoing(true)
                 .setSmallIcon(R.drawable.ic_my_location_white_24dp)
                 .setWhen(System.currentTimeMillis())
-                .setContentTitle(getString(R.string.route_active))
+                .setContentTitle(appContext.getString(R.string.route_active))
                 .setVibrate(new long[]{0})
-                .setColor(ContextCompat.getColor(this, R.color.colorAccent));
+                .setColor(ContextCompat.getColor(appContext, R.color.colorAccent));
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
