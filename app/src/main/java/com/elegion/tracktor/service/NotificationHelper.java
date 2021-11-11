@@ -55,6 +55,8 @@ public class NotificationHelper extends Service {
     public void createNotification(Context context){
         //создаем все необходимое для нотификации
 
+        appContext = context;
+
         mNotificationManager=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -85,15 +87,15 @@ public class NotificationHelper extends Service {
     }
 
     private void configureNotificationBuilder() {
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(appContext, MainActivity.class);
         notificationIntent.setAction(Intent.ACTION_MAIN);
         notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
                 | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent contentIntent = PendingIntent.getActivity(
-                this, REQUEST_CODE_LAUNCH, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                appContext, REQUEST_CODE_LAUNCH, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        mNotificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+        mNotificationBuilder = new NotificationCompat.Builder(appContext, CHANNEL_ID)
                 .setContentIntent(contentIntent)
                 .setOngoing(true)
                 .setSmallIcon(R.drawable.ic_my_location_white_24dp)
