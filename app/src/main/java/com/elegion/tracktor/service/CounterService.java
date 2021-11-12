@@ -126,7 +126,9 @@ public class CounterService extends Service {
 
             notificationHelper = new NotificationHelper();
 
-            notificationHelper.createNotification(this);
+            //notificationHelper.createNotification(this);
+
+            startForeground(NOTIFICATION_ID, notificationHelper.createNotification(this));
 
             final LocationRequest locationRequest = new LocationRequest()
                     .setInterval(UPDATE_INTERVAL)
@@ -176,9 +178,9 @@ public class CounterService extends Service {
         mFusedLocationClient.removeLocationUpdates(mLocationCallback);
         mTimerDisposable.dispose();
 
-       // stopForeground(true);
+        stopForeground(true);
 
-        notificationHelper.destroyNotification(); //stopForeground
+       // notificationHelper.destroyNotification(); //stopForeground
 
         EventBus.getDefault().unregister(this);
     }
@@ -194,6 +196,17 @@ public class CounterService extends Service {
     public void onGetRoute(GetRouteEvent event) {
         EventBus.getDefault().post(new UpdateRouteEvent(mRoute, mDistance));
     }
+    @Subscribe(threadMode =ThreadMode.MAIN)
+    public void onStartTrack(StartTrackEvent event){
+        EventBus.getDefault().post(new StartTrackEvent(mLastPosition));
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onAddPositionToRoute(AddPositionToRouteEvent event){
+//        EventBus.getDefault().post(new AddPositionToRouteEvent(prevPosition, newPosition, mDistance));
+
+    }
+
+
 
     public boolean isFirstPoint() {
         return mRoute.size() == 0 && mLastLocation == null && mLastPosition == null;
