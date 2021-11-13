@@ -125,9 +125,6 @@ public class CounterService extends Service {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PERMISSION_GRANTED) {
 
             notificationHelper = new NotificationHelper();
-
-            //notificationHelper.createNotification(this);
-
             startForeground(NOTIFICATION_ID, notificationHelper.createNotification(this));
 
             final LocationRequest locationRequest = new LocationRequest()
@@ -179,9 +176,6 @@ public class CounterService extends Service {
         mTimerDisposable.dispose();
 
         stopForeground(true);
-
-       // notificationHelper.destroyNotification(); //stopForeground
-
         EventBus.getDefault().unregister(this);
     }
 
@@ -196,16 +190,6 @@ public class CounterService extends Service {
     public void onGetRoute(GetRouteEvent event) {
         EventBus.getDefault().post(new UpdateRouteEvent(mRoute, mDistance));
     }
-    @Subscribe(threadMode =ThreadMode.MAIN)
-    public void onStartTrack(StartTrackEvent event){
-        EventBus.getDefault().post(new StartTrackEvent(mLastPosition));
-    }
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onAddPositionToRoute(AddPositionToRouteEvent event){
-//        EventBus.getDefault().post(new AddPositionToRouteEvent(prevPosition, newPosition, mDistance));
-
-    }
-
 
 
     public boolean isFirstPoint() {
