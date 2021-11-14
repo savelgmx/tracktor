@@ -75,7 +75,8 @@ public class CounterService extends Service {
     private NotificationCompat.Builder mNotificationBuilder;
     private long mShutDownDuration;
 
-    public NotificationHelper notificationHelper;
+    private NotificationHelper notificationHelper;
+
 
     private FusedLocationProviderClient mFusedLocationClient;
     private NotificationManager mNotificationManager;
