@@ -28,7 +28,7 @@ public class TrackHelper {
         return mLastLocation.getLongitude() != newPosition.longitude || mLastLocation.getLatitude() != newPosition.latitude;
     }
 
-    private void addPointToRoute(Location lastLocation) {
+    public void addPointToRoute(Location lastLocation) {
         mLastLocation = lastLocation;
         mLastPosition = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         mRoute.add(mLastPosition);

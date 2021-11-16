@@ -76,6 +76,7 @@ public class CounterService extends Service {
     private long mShutDownDuration;
 
     private NotificationHelper notificationHelper;
+    private TrackHelper trackHelper;
 
 
     private FusedLocationProviderClient mFusedLocationClient;
@@ -85,8 +86,10 @@ public class CounterService extends Service {
         public void onLocationResult(LocationResult locationResult) {
             if (locationResult != null) {
 
-                if (isFirstPoint()) {
-                    addPointToRoute(locationResult.getLastLocation());
+               // trackHelper.isFirstPoint();
+
+                if (trackHelper.isFirstPoint()) {
+                    trackHelper.addPointToRoute(locationResult.getLastLocation());
                     EventBus.getDefault().post(new StartTrackEvent(mLastPosition));
 
                 } else {
@@ -128,6 +131,8 @@ public class CounterService extends Service {
             notificationHelper = new NotificationHelper();
             startForeground(NOTIFICATION_ID, notificationHelper.createNotification(this));
 
+
+            trackHelper = new TrackHelper();
             final LocationRequest locationRequest = new LocationRequest()
                     .setInterval(UPDATE_INTERVAL)
                     .setFastestInterval(UPDATE_FASTEST_INTERVAL)
