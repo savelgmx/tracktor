@@ -1,7 +1,14 @@
 package com.elegion.tracktor.service;
 
 import android.location.Location;
+
+import com.elegion.tracktor.event.AddPositionToRouteEvent;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.SphericalUtil;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 import io.reactivex.disposables.Disposable;
@@ -24,6 +31,25 @@ public class TrackHelper {
 
 
 
+    public Position getPosition(LocationResult locationResult,List<LatLng>mRoute,Location mLastLocation){
+
+        Location newLocation = locationResult.getLastLocation();
+        LatLng newPosition = new LatLng(newLocation.getLatitude(), newLocation.getLongitude());
+        LatLng prevPosition=new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+
+        if (positionChanged(newPosition)) {
+            mRoute.add(newPosition);
+            prevPosition = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            mDistance += SphericalUtil.computeDistanceBetween(prevPosition, newPosition);
+         }
+
+
+        return new Position(prevPosition, newPosition,mDistance);
+    }
+
+
+
+
     private boolean positionChanged(LatLng newPosition) {
         return mLastLocation.getLongitude() != newPosition.longitude || mLastLocation.getLatitude() != newPosition.latitude;
     }
@@ -40,7 +66,20 @@ public class TrackHelper {
     }
 
 
+   final class Position{
+        LatLng prevPosition;
+        LatLng newPosition;
+        double mDistance;
 
+       public Position(LatLng prevPosition, LatLng newPosition, double mDistance) {
+
+           this.prevPosition = prevPosition;
+           this.newPosition = newPosition;
+           this.mDistance = mDistance;
+
+       }
+
+   }
 
 
 }

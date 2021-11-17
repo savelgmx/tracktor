@@ -94,6 +94,7 @@ public class CounterService extends Service {
 
                 } else {
 
+/*
                     Location newLocation = locationResult.getLastLocation();
                     LatLng newPosition = new LatLng(newLocation.getLatitude(), newLocation.getLongitude());
 
@@ -103,6 +104,13 @@ public class CounterService extends Service {
                         mDistance += SphericalUtil.computeDistanceBetween(prevPosition, newPosition);
                         EventBus.getDefault().post(new AddPositionToRouteEvent(prevPosition, newPosition, mDistance));
                     }
+*/
+
+                    TrackHelper.Position trackHelperPosition= trackHelper.getPosition(locationResult,mRoute,mLastLocation);
+                    EventBus.getDefault().post(new AddPositionToRouteEvent(trackHelperPosition.prevPosition,
+                            trackHelperPosition.newPosition,trackHelperPosition.mDistance));
+
+                    Location newLocation = locationResult.getLastLocation();
 
                     mLastLocation = newLocation;
                     mLastPosition = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
