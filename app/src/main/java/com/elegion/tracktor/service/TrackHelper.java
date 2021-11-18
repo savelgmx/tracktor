@@ -26,12 +26,12 @@ public class TrackHelper {
     private Disposable mTimerDisposable;
     private List<LatLng> mRoute = new ArrayList<>();
 
-    private Location mLastLocation;
-    private LatLng mLastPosition;
+    public Location mLastLocation;
+    public LatLng mLastPosition;
 
 
 
-    public Position getPosition(LocationResult locationResult,List<LatLng>mRoute,Location mLastLocation){
+    public Position getPosition(LocationResult locationResult,List<LatLng>mRoute,Location LastLocation){
 
         Location newLocation = locationResult.getLastLocation();
         LatLng newPosition = new LatLng(newLocation.getLatitude(), newLocation.getLongitude());
