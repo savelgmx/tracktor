@@ -169,10 +169,13 @@ public class CounterService extends Service {
     }
 
     private void onTimerUpdate(long totalSeconds) {
-        EventBus.getDefault().post(new UpdateTimerEvent(totalSeconds, mDistance));
 
 
-        notificationHelper.onTimerUpdateNotifiaction(totalSeconds,mDistance);
+
+        EventBus.getDefault().post(new UpdateTimerEvent(totalSeconds, trackHelper.mDistance));
+
+
+        notificationHelper.onTimerUpdateNotifiaction(totalSeconds,trackHelper.mDistance);
 
         if (mShutDownDuration != -1 && totalSeconds == mShutDownDuration) {
             EventBus.getDefault().post(new StopBtnClickedEvent());

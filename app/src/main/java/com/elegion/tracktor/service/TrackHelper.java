@@ -22,7 +22,7 @@ public class TrackHelper {
     public static final int UPDATE_INTERVAL = 15_000;
     public static final int UPDATE_FASTEST_INTERVAL = 5_000;
     public static final int UPDATE_MIN_DISTANCE = 20;
-    private double mDistance;
+    public double mDistance;
     private Disposable mTimerDisposable;
     private List<LatLng> mRoute = new ArrayList<>();
 
