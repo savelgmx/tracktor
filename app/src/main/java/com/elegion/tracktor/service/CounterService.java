@@ -86,25 +86,11 @@ public class CounterService extends Service {
         public void onLocationResult(LocationResult locationResult) {
             if (locationResult != null) {
 
-               // trackHelper.isFirstPoint();
-
                 if (trackHelper.isFirstPoint()) {
                     trackHelper.addPointToRoute(locationResult.getLastLocation());
                     EventBus.getDefault().post(new StartTrackEvent(mLastPosition));
 
                 } else {
-
-/*
-                    Location newLocation = locationResult.getLastLocation();
-                    LatLng newPosition = new LatLng(newLocation.getLatitude(), newLocation.getLongitude());
-
-                    if (positionChanged(newPosition)) {
-                        mRoute.add(newPosition);
-                        LatLng prevPosition = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-                        mDistance += SphericalUtil.computeDistanceBetween(prevPosition, newPosition);
-                        EventBus.getDefault().post(new AddPositionToRouteEvent(prevPosition, newPosition, mDistance));
-                    }
-*/
 
                     TrackHelper.Position trackHelperPosition= trackHelper.getPosition(locationResult,mRoute,mLastLocation);
                     EventBus.getDefault().post(new AddPositionToRouteEvent(trackHelperPosition.prevPosition,
@@ -119,15 +105,6 @@ public class CounterService extends Service {
         }
     };
 
-    private boolean positionChanged(LatLng newPosition) {
-        return mLastLocation.getLongitude() != newPosition.longitude || mLastLocation.getLatitude() != newPosition.latitude;
-    }
-
-    private void addPointToRoute(Location lastLocation) {
-        mLastLocation = lastLocation;
-        mLastPosition = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-        mRoute.add(mLastPosition);
-    }
 
     @Override
     public void onCreate() {
@@ -208,9 +185,5 @@ public class CounterService extends Service {
         EventBus.getDefault().post(new UpdateRouteEvent(mRoute, mDistance));
     }
 
-
-    public boolean isFirstPoint() {
-        return mRoute.size() == 0 && mLastLocation == null && mLastPosition == null;
-    }
 
 }
