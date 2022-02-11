@@ -24,6 +24,9 @@ public class DistanceConverterTest {
    // @Mock
     private Double distance=1000.00;
 
+    @Mock
+    private StringUtil mStringUtil; //класс где используется distanceConverter
+
 
     @Rule
     public ExpectedException exception = ExpectedException.none();//    тестирование исключений
