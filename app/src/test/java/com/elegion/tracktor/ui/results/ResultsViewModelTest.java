@@ -40,8 +40,10 @@ public class ResultsViewModelTest {
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
+/*
     @Rule
     public TestRule rule = new InstantTaskExecutorRule();
+*/
 
     private List<Track> mTracks;
 

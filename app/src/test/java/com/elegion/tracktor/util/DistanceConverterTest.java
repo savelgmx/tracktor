@@ -24,7 +24,7 @@ public class DistanceConverterTest {
    // @Mock
     private Double distance=1000.00;
 
-    @Mock
+ //   @Mock
     private StringUtil mStringUtil; //класс где используется distanceConverter
 
 
